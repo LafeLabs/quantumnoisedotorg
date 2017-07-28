@@ -563,7 +563,6 @@ function doTheThing(localCommand){
 }
 
 fullCube = false;
-
 currentTable = []; 
 for(var index = 0;index < 01777;index ++){
     currentTable.push("");
@@ -608,9 +607,7 @@ y0 = innerHeight/2;
 unit = x0/8;//16 wm span total screen size
 side = unit;
 
-
 viewGlyph = "";
-
 
 x0 = 5;
 y0 = 55;
@@ -622,90 +619,90 @@ function redraw(){
 }
 
 
+
+
 </script>
 </head>
 <body>
-
-
 <!-- Image Layer: Z = -2 [hand-colored user drawn map goes here]-->
-<div id = "div0600">
+<!-- Mask Layer:  Z = -1 [mask out user map as needed for aesthetics and size here] -->
+<!-- Main Canvas Background Layer:  Z = 0 [map lives here] -->
+<!-- Word Arrow Layer: Z = +1 -->
+<!-- Word Box Layer: Z = +2-->
+<!-- graph Canvas, diagram canvas,  TextIO Layer: Z = +3-->
+<!-- : Z = +4   tables, calculators -->
+<!-- control button layer: Z = +5-->
+<div id = "div0600" class = "page controllayer">
+	<h2>Quantum Noise [dot] org</h2>
+	<ul class = "navselector">
+		<li>
+			About
+		</li>
+		<li>
+			Art
+		</li>
+		<li>
+			Documents
+		</li>
+		<li>
+			Calculators
+		</li>
+	</ul>
 </div>
 <script id = "script0700">
 </script>
 <style id = "style0500">
     html{
-        background-color:white;
+        background-color:black;
     }
     body{
         overflow:hidden;
         font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
-        color:black;
+        color:#00ff00;
         font-size:22px;
     }
+	.navselector ul{
+	}
+	.navselector li{
+		font-family:courier;
+		font-size:2em;
+		list-style:none;
+		cursor:pointer;
+	}
+	.navselector li:hover{
+		background-color:#003000;
+	}
+	.navselector li:active{
+		background-color:#005050;
+	}
+	.imagelayer{
+		z-index:-2;
+	}
+	.masklayer{
+		z-index:-1;
+	}
+	.maincanvaslayer{
+		z-index:0;
+	}
+	.wordarrowlayer{
+		z-index:1;
+	}	
+	.wordboxlayer{
+		z-index:2;
+	}
+	.calculatorlayer{
+		z-index:3;
+	}
+	.controllayer{
+		z-index:3;
+	}
+	#div0600{
+		text-align:center;
+		width:100%;
+	}
 </style>
-<!-- Mask Layer:  Z = -1 [mask out user map as needed for aesthetics and size here] -->
-<!-- Main Canvas Background Layer:  Z = 0 [map lives here] -->
-<div id = "div0602">
-</div>
-<script id = "script0702">
 
- 
-</script>
-<style id = "style0502">
 
-</style>
-<!-- Word Arrow Layer: Z = +1 -->
-<div id = "div0603">
-</div>
-<script id = "script0703">
-</script>
-<style id = "style0503">
-</style>
-<!-- Word Box Layer: Z = +2-->
-<div id = "div0604">
-    <div id = "aboutbox">
-        Quantum Noise Dot Org
-    </div>
-</div>
-<script id  = "script0704">
-</script>
-<style id = "style0504">
-#div0604{
-    z-index:2;
-}
-#aboutbox{
-    position:absolute;
-    left:10px;
-    top:10px;
-    border:solid;
-    border-color:black;
-    border-radius:15px;
-    padding:15px 15px 15px 15px; 
-}
-</style>
-<!-- graph Canvas, diagram canvas,  TextIO Layer: Z = +3-->
-<div id = "div0605">
-</div>
-<script id = "script0705">
-</script>
-<style id = "style0505">
-</style>
-<!-- : Z = +4   tables, calculators -->
-<div id = "div0606">
-</div>
-<script id = "script0706">
-</script>
-<style id = "style0506">
-</style>
-<!-- control button layer: Z = +5-->
-<div id = "div0607">
-</div>
-<script id = "script0707">
-    
-</script>
-<style id = "style0507">
-
-</style>
 
 </body>
 </html>
