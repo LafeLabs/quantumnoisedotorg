@@ -2,7 +2,19 @@
 <html>
 <head>
 <!-- PUBLIC DOMAIN, NO COPYRIGHTS, NO PATENTS, NO PROPERTY NO MONEY NO MINING-->
-    <title>Quantumnoise.org</title>
+	<title>Quantumnoise.org</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+</script>
+
 <script id = "bytecodeScript">
 /*
 01012:0333,0200,0336,0332,0330,0336,0333,0330,0335,0335,0201,0201,0335,0201,0201,0335,0335,0350,0334,0342,0335,0335,0342,0334,0334,0334,0304,0332,0331,0337,0337,0333,
@@ -618,8 +630,16 @@ function redraw(){
     //draw everything here with the viewglyph, this can live in its own layer
 }
 
+function showSlide(slideNumber){
+	var pages = document.getElementsByClassName("page");
+	for(var index = 0;index < pages.length;index++){
+		pages[index].style.display = "none";
+	}
 
-
+	var divid = "div0" + (slideNumber + 0200).toString(8);
+	document.getElementById(divid).style.display = "block";
+	console.log(divid);
+}
 
 </script>
 </head>
@@ -635,7 +655,7 @@ function redraw(){
 <div id = "div0600" class = "page controllayer">
 	<h2>Quantum Noise [dot] org</h2>
 	<ul class = "navselector">
-		<li>
+		<li onclick = "showSlide(0401)">
 			About
 		</li>
 		<li>
@@ -648,8 +668,14 @@ function redraw(){
 			Calculators
 		</li>
 	</ul>
+
+	<div class = "footnote">
+		Quantum noise, definition 1: fluctuation phenomena of a quantum nature.<p>
+		Quantum noise, Definition 2: the noise made by researchers in the quantum information field.<p>
+	</div>
 </div>
 <script id = "script0700">
+	document.getElementById("div0600").style.width = (0.98*innerWidth).toString() + "px";
 </script>
 <style id = "style0500">
     html{
@@ -659,15 +685,18 @@ function redraw(){
         overflow:hidden;
         font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
         color:#00ff00;
-        font-size:22px;
+        font-size:24px;
     }
-	.navselector ul{
+	div{		
+		text-align:center;
 	}
 	.navselector li{
+		text-align:center;
 		font-family:courier;
 		font-size:2em;
 		list-style:none;
 		cursor:pointer;
+		margin-left:-1em;
 	}
 	.navselector li:hover{
 		background-color:#003000;
@@ -697,12 +726,129 @@ function redraw(){
 		z-index:3;
 	}
 	#div0600{
+		position:absolute;
 		text-align:center;
+		overflow:hidden;
+	}
+	.page{
+		height:100%;
 		width:100%;
 	}
+	.footnote{
+		position:absolute;
+		bottom:5px;
+		font-size:14px;
+		font-family:courier;
+		text-align:left;
+	}
 </style>
+<div id = "div0601" class = "page">
+		<div class = "navbutton controllayer" id = "backbutton0601" onclick = "showSlide(0400)">BACK</div>
+	<h2 class = "title">About</h2>
+	<div class = "textscroll" id = "aboutscroll">
+		Where do computers come from?  
+		<p>
+		Art.
+		<p>
+		This sounds like a goofy answer to an obvious or trivial question but it is not.  Before every new machine of any kind is put into production, be
+		it a single prototype or mass production someone must <em>decide</em> to allocate the resources to build that machine instead of some other competing machine idea.
+		<p>
+		The artistic process by which a new machine is created usually progresses something like this:
+		<ol>
+			<li>People discuss the concept with each other by writing on a whiteboard, sketching out diagrams to describe the idea</li>
+			<li>After that art makes sense, it is put into a slide-based presentation for a "pitch" to the people with the money to allocate, 
+				be it program managers for academic research, investors for a startup, or senior management in a large company</li>
+			<li>Engineers do the artwork required to make a pattern in silicon, niobium, aluminum or whatever which will embody the actual machine.  While
+				this will be a mundane task for updates to an existing machine, for a new machine it is much closer to art than pure engineering, and it is 
+				every bit as much as a graphics project as any other artwork would be. 
+			</li>
+			<li>
+				When the technology is first built, if it's a commercial product, its further replication depends on sales, which depends on the artwork 
+				created by the marketing team.  This is treated as non-fundamental in computer science. However, an objective examination of technology history
+				shows that this is indeed fundamental.  The technology which is not replicated dies, and replication is based on large numbers of people 
+				making a buying decision, which is almost always strongly influenced by graphic arts.  
+			</li>
+			<li>
+				In order for the technology to compete in the marketplace of ideas and replicate in the larger world outside the creating lab/company, 
+				the creators must communicate their ideas clearly, which will generally involve significant streamlining of the earlier graphics to make
+				art that both communicates the ideas to colleagues who can replicate it and casts a wider net in technology, making it clear to non-specialists 
+				whose fields intersect with that of the machine in question.  
+			</li>
+		</ol>
+		The premise of quantum noise dot org is that quantum computers are like every other technology: they are created and reproduce by art made on a classical computer.  
+		Furthermore, if we are using a computer simply to communicate art to another human, the figure of merit is how many people we can reach, not the "computing" power. 
+		For this purpose it makes to replace the word "computer" with something like "art engine" to make it clear what the purpose of the machine is. 
+		<p>
+		As an art engine, the modern web, based on html5, css3, and JavaScript is the most powerful by several orders of magnitude.  With just a few lines
+		of fairly simple code, it is possible to make a document now that uses animation, graphics, sound, $\LaTeX$ typesetting of math, links to every other document of the same time, 
+		and numerous other features, and all those can be readable instantly by several <em>billion</em> people!  
+		<p>
+		The codification of all information in this format has made more and more of society move at the speed of Twitter(for bettter or worse), while in applied science we still
+		use an art stack that moves at the ponderous pace of the pre-web era.  I define the "art stack" as the set of programs and systems we use to spread our
+		art around in creation of technology.  Right now a typical quantum computing art stack might consist of the following:
+		<ul>
+			<li>Dry erase board, scrap paper, lab notebook, napkins</li>
+			<li>Powerpoint, projector</li>
+			<li>Adobe Illustrator and photoshop</li>
+			<li>matlab, python, igor, mathematica, origin, or other similar graphing programs</li>
+			<li>The various software that interprets $\LaTeX$</li>
+			<li>CAD layout software for fabrication such as XIC, Cadence or DesignCAD</li>
+		</ul>
+		All of these tools are built for a maximally general audience, and none of them are developed for use in a totally web-based environment.  
+		I believe that by building a language of graphical art tools that are <em>specific</em> to the quantum information community .  
+	</div>
+</div>
+<script id = "script0501">
+	var thistitle = document.getElementById("div0601").getElementsByClassName("title")[0];
+	thistitle.style.fontSize = (innerHeight*0.05).toString() + "px";
+	thistitle.style.top = (innerHeight*0.005).toString() + "px";
+	document.getElementById("backbutton0601").style.fontSize= (innerHeight*0.05).toString() + "px";
 
+</script>
 
-
+<style id = "style0501">
+	#div0601{
+		display:none;
+	}
+	.textscroll{
+		font-family:century-schoolbook;
+		text-align:justify;
+		margin:1em 1em 1em 1em;
+		padding:1em 1em 1em 1em;
+		overflow:scroll;
+		position:absolute;
+		left:4%;
+		right:4%;
+		bottom:4%;
+		top:10%;
+		border:solid;
+		border-color:#00ff00;
+		border-radius:20px;
+	}
+	.title{
+		position:absolute;
+		width:100%;
+		text-align:center;
+	}
+	.navbutton{
+		text-align:center;
+		font-family:courier;
+		font-size:2em;
+		cursor:pointer;
+	}
+	.navbutton:hover{
+		background-color:#003000;
+	}
+	.navbutton:active{
+		background-color:#005050;
+	}
+	#backbutton0601{
+		position:absolute;
+		left:5px;
+		top:5px;
+		border:solid;
+		padding:5px 5px 5px 5px;
+	}
+</style>
 </body>
 </html>
