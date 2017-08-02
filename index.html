@@ -658,10 +658,10 @@ function showSlide(slideNumber){
 		<li onclick = "showSlide(0401)">
 			About
 		</li>
-		<li>
+		<li onclick = "showSlide(0402)">
 			Art
 		</li>
-		<li>
+		<li onclick = "showSlide(0403)">
 			Documents
 		</li>
 		<li>
@@ -798,7 +798,7 @@ function showSlide(slideNumber){
 		I believe that by building a language of graphical art tools that are <em>specific</em> to the quantum information community .  
 	</div>
 </div>
-<script id = "script0501">
+<script id = "script0701">
 	var thistitle = document.getElementById("div0601").getElementsByClassName("title")[0];
 	thistitle.style.fontSize = (innerHeight*0.05).toString() + "px";
 	thistitle.style.top = (innerHeight*0.005).toString() + "px";
@@ -850,5 +850,64 @@ function showSlide(slideNumber){
 		padding:5px 5px 5px 5px;
 	}
 </style>
+<div id = "div0602" class = "page">
+	<div class = "navbutton controllayer" id = "backbutton0602" onclick = "showSlide(0400)">BACK</div>
+	<h2>Art</h2>
+	<ul class = "navselector">
+		<li>
+			Circuit Schematic builder
+		</li>
+		<li>
+			Quantum Gate Builder
+		</li>
+		<li>
+			Function Plot Builder
+		</li>
+		<li>
+			Microfab Layout
+		</li>
+		<li>
+			Annotaded Images
+		</li>		
+	</ul>	
+</div>
+<style>
+	#div0602{
+		display:none;
+	}
+</style>
+<div id = "div0603" class = "page">
+	<div class = "navbutton controllayer" id = "backbutton0603" onclick = "showSlide(0400)">BACK</div>
+	<h2>Documents</h2>
+	<ul class = "navselector">
+		<li>
+			Noise Calibration with a Tunnel Junction Source(paper)
+		</li>
+		<li>
+			Funding Proposal for quantum art stack
+		</li>
+		<li>
+			Conceptual Map of Field
+		</li>
+		<li>
+			Physical Map of APL Campus and Environs
+		</li>
+		<li>
+			Slide presentation builder
+		</li>		
+		<li>
+			Paper builder
+		</li>		
+		<li>
+			Bibliography
+		</li>		
+	</ul>	
+</div>
+<style>
+	#div0603{
+		display:none;
+	}
+</style>
+
 </body>
 </html>
