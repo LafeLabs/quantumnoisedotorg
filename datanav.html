@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            processEscapes: true
+          }
+        });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+    
+</head>
+<body>
+<canvas id = "mainCanvas"></canvas>
+
+<table id = "mainControl">
+  <tr>
+    <td><input id = "keyaction"></td>
+  </tr>
+  <tr>
+    <td class = "dtd">300</td><td></td><td class = "dtd">30</td>
+  </tr>
+</table>
+
+<div style = "display:none" id = "datadiv">
+  <action>
+    Y = variables.A*Math.sin(variables.omega*(X + variables.phi))*Math.exp(-X/variables.tau);        
+  </action>
+  <variables>
+    {
+      "A":2.1,
+      "omega":2,
+      "phi":0,
+      "tau":10
+    }
+  </variables>
+</div>
+<script>
+
+mainCanvas = document.getElementById("mainCanvas");
+mainCanvas.width = innerWidth;
+mainCanvas.height = innerHeight;
+ctx = mainCanvas.getContext("2d");
+
+ctx.lineWidth = 2;
+ctx.strokeStyle="#00ff00";
+
+plot();
+function plot(){
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+}
+
+dtds = document.getElementsByClassName("dtd");
+
+
+
+document.getElementById("keyaction").onkeyup = function(){
+  foo = this.value;
+  if(foo == "a"){
+    T = parseFloat(dtds[0].innerHTML);
+    deltaT = parseFloat(dtds[1].innerHTML);
+    T = T + deltaT;
+    dtds[0].innerHTML = T.toString();
+  }
+  if(foo == "s"){
+    T = parseFloat(dtds[0].innerHTML);
+    deltaT = parseFloat(dtds[1].innerHTML);
+    T = T - deltaT;
+    dtds[0].innerHTML = T.toString();
+  }
+  if(foo == "j"){
+    deltaT = parseFloat(dtds[1].innerHTML);
+    deltaT /= 2;
+    dtds[1].innerHTML = deltaT.toString();
+  }
+  if(foo == "k"){
+    deltaT = parseFloat(dtds[1].innerHTML);
+    deltaT *= 2;
+    dtds[1].innerHTML = deltaT.toString();
+  }
+
+
+ this.value = "";
+
+}
+
+</script>
+<style>
+
+#mainCanvas{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:0;
+    background-color:black;
+}
+#mainControl{
+  position:absolute;
+  left:1em;
+  top:1em;
+  z-index: 2;
+  border-color:#00ff00;
+  background-color:black;
+  color:#00ff00;
+  font-family:courier;
+}
+input{
+  border-color:#00ff00;
+  background-color:black;
+  color:#00ff00;
+  width:2em;
+  height:20px;  
+}
+</style>
+</body>
+</html>

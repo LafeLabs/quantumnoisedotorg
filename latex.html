@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- PUBLIC DOMAIN, NO COPYRIGHTS, NO PATENTS.
+LAWS OF GEOMETRON:
+    NO PROPERTY 
+    NO MONEY
+    NO MINING
+    EVERYTHING IS RECURSIVE
+    EVERYTHING IS FRACTAL
+    EVERYTHING IS PHYSICAL
+[EGO DEATH]:
+    LOOK TO THE FUNGI
+    LOOK TO THE INSECTS
+    LANGUAGE IS THE TOOL THE MIND USES TO PARSE REALITY
+    
+calculator
+
+http://www.lafelabs.org/calculator/index.html
+
+-->
+<title>/calculator/</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    }
+});//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+</head>
+<body> 
+<button id = "backbutton" class = "navbutton">&#x25C5</button>
+<button id = "fwdbutton" class = "navbutton">&#x25BB</button>         
+<button id = "prevdeck" class = "navbutton">&#x25B3</button>
+<button id = "nextdeck" class = "navbutton">&#x25BD</button> 
+
+<div style = "width:100%;text-align:center;" id = "foo">
+</div>
+<textarea id = "mainEdit"></textarea>
+<div style = "display:none;" id = "data">\frac{-\hbar^2}{2m}\nabla^2\Psi + V\Psi = i\hbar\frac{\partial\Psi}{\partial t}
+E=mc^2
+x = \frac{-b\pm\sqrt{b^2 - 4ac}}{2a}
+S_I = 2eI\coth\left(\frac{eV}{2k_BT}\right)</div>
+<script>
+if(innerWidth< innerHeight){
+    side = innerWidth;
+}
+else{
+    side = innerHeight;
+}
+document.getElementById("mainEdit").style.width = side.toString() + "px";
+document.getElementById("mainEdit").style.left = (0.5*innerWidth - 0.5*side).toString() + "px";
+data = document.getElementById("data").innerHTML.split("\n");
+
+eqindex = 0;
+
+document.getElementById("mainEdit").value = data[eqindex];
+document.getElementById("foo").innerHTML = "$" +  data[eqindex] + "$";
+MathJax.Hub.Typeset();//tell Mathjax to update the math
+
+function redraw(){
+    document.getElementById("mainEdit").value = data[eqindex];
+    document.getElementById("foo").innerHTML = "$" +  data[eqindex] + "$";
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
+
+}
+
+document.getElementById("backbutton").onclick = function(){
+    eqindex--;
+    if(eqindex < 0 ){
+        eqindex = data.length - 1;
+    }
+    redraw();
+}
+
+document.getElementById("fwdbutton").onclick = function(){
+    eqindex++;
+    if(eqindex > data.length - 1){
+        eqindex = 0;
+    }
+    redraw();
+}
+
+
+</script>
+<style>
+    #mainEdit{
+        position:absolute;
+        top:80px;
+        font-family:courier;
+        font-size:1em;
+        border:solid;
+        padding:1em 1em 1em 1em ;
+        height:30%;
+        border-radius:1em;
+    }
+body{
+    font-family:courier;
+}
+#backbutton{
+    left:0px;
+}
+#fwdbutton{
+    right:0px;
+}
+#prevdeck{
+    left:60px;
+}
+#nextdeck{
+    right:60px;
+}
+.navbutton{
+    top:0px;
+    width:50px;
+    height:50px;
+    position:absolute;
+    font-size:40px;    
+    cursor:pointer;
+    z-index:4;
+}
+</style>
+</body>
+</html>        
