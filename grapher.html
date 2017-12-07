@@ -22,7 +22,10 @@
 
 <button id = "importButton">IMPORT</button>
 
+<textarea id = "svgIO"></textarea>
+
 <textarea id = "textIO"></textarea>
+
 <div style = "display:none" id = "datadiv">
   <deck>
     <equation>
@@ -119,11 +122,14 @@ y = y0;
 ctx.lineWidth = 2;
 ctx.strokeStyle="#00ff00";
 
+currentStroke = "blue";
+
 
 document.getElementById("textIO").value = document.getElementById("datadiv").innerHTML;
 
 plot();
 function plot(){
+
   xmldata = document.getElementById("textIO").value;
   parser = new DOMParser();
   xmlDoc = parser.parseFromString(xmldata,"text/xml");
@@ -147,8 +153,21 @@ function plot(){
 
   x = x0 - 0.5*plotparams.w;
   y = y0 + 0.5*plotparams.h - (Y - plotparams.ymin)*plotparams.h/(plotparams.ymax - plotparams.ymin);
+  
+
+  currentSVG = "<svg width=\"" + side.toString() + "\" height=\"" + side.toString() + "\" viewbox = \"0 0 " + side.toString() + " " + side.toString() + "\"  xmlns=\"http://www.w3.org/2000/svg\">\n";
+  currentSVG += "\n<!--\n<xml>\n" + xmldata + "\n</xml>\n-->\n";
+
+  
+  currentSVG += "	<path d = \"M";
+  
+
   ctx.beginPath();
   ctx.moveTo(x,y);
+  
+  currentSVG += Math.round(x).toString() + " ";
+  currentSVG += Math.round(y).toString() + " ";
+  
   for(var index = 1;index < plotparams.w;index++){ 
     X = plotparams.xmin + index*(plotparams.xmax - plotparams.xmin)/plotparams.w;
     eval(xmlDoc.getElementsByTagName("action")[0].innerHTML);
@@ -156,7 +175,13 @@ function plot(){
     y = y0 + 0.5*plotparams.h - (Y - plotparams.ymin)*plotparams.h/(plotparams.ymax - plotparams.ymin);
     ctx.lineTo(x,y);
     ctx.stroke();		
+
+    currentSVG += "L" + Math.round(x).toString() + " " + Math.round(y).toString() + " ";
+
   }
+
+  currentSVG +=  "\" fill = \"none\" stroke = \"" + currentStroke + "\" stroke-width = \"2\" />\n";
+
 
   if(graticule.on){
     ctx.lineWidth = graticule.lineWidth;
@@ -280,6 +305,11 @@ function plot(){
 
   document.getElementById("ylabel").innerHTML = xmlDoc.getElementsByTagName("ylabel")[0].innerHTML;
 
+
+  currentSVG += "</svg>";
+
+  document.getElementById("svgIO").value = currentSVG;
+
 }
 
 
@@ -344,6 +374,13 @@ background-color:yellow;
   bottom:10px;
   width:200px;
   height:200px;
+}
+#svgIO{
+  position:absolute;
+  right:10px;
+  bottom:220px;
+  width:200px;
+  height:50px;
 }
 .label{
   position:absolute;

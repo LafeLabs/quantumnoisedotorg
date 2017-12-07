@@ -21,22 +21,26 @@
   </tr>
 </table>
 
-
 <div style = "display:none" id = "datadiv">
 <deck>
   <action>
-    t = X*variables.deltat;
-    omega = 2*Math.PI*variables.f;
-    Y = variables.y0 + variables.A*Math.sin(omega*t + variables.phi)*Math.exp(-t/variables.tau);
+    t = X;
+    V = -variables.Vmax + t*(2*variables.Vmax/(innerWidth-2*margin));
+    if(V ==0){
+      P = variables.G*(variables.TN + variables.T);
+    }
+    else{
+      var zeep = 1.6021766e-19*V/(variables.T*2*1.38065e-23); 
+      P = variables.G*(variables.TN + variables.T*zeep/Math.tanh(zeep));      
+    }
+    Y = P;
   </action>
   <variables>
     {
-      "y0":0.1,
-      "A":200,
-      "f":2,
-      "phi":1.5,
-      "tau":1,
-      "deltat":0.01
+      "Vmax":0.1,
+      "T":77,
+      "TN":50,
+      "G":0.4
     }
   </variables>
   </div>
@@ -93,14 +97,14 @@ function plot(){
   X = 0;
   x = margin; 
   eval(action);
-  y = y0 - Y;
+  y = innerHeight - margin - Y;
   ctx.beginPath();
   ctx.moveTo(x,y);
 
   for(x = margin + 1;x < innerWidth - margin;x++){
     X = x - margin; 
     eval(action);
-    y = y0 - Y;
+    y = innerHeight - margin - Y;
     ctx.lineTo(x,y);
     ctx.stroke();		
   }

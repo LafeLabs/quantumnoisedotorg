@@ -34,51 +34,120 @@ MathJax.Hub.Config({
 <body> 
 <button id = "backbutton" class = "navbutton">&#x25C5</button>
 <button id = "fwdbutton" class = "navbutton">&#x25BB</button>         
-<button id = "prevdeck" class = "navbutton">&#x25B3</button>
-<button id = "nextdeck" class = "navbutton">&#x25BD</button> 
 
 <div style = "width:100%;text-align:center;" id = "foo">
 </div>
 <textarea id = "mainEdit"></textarea>
-<div style = "display:none;" id = "data">\frac{-\hbar^2}{2m}\nabla^2\Psi + V\Psi = i\hbar\frac{\partial\Psi}{\partial t}
-E=mc^2
-x = \frac{-b\pm\sqrt{b^2 - 4ac}}{2a}
-S_I = 2eI\coth\left(\frac{eV}{2k_BT}\right)</div>
+<ul style = "display:none;" id = "equations">
+    <li>
+            P = G\left[T_N + \frac{1}{2}\frac{eV + hf}{2k_BT}\coth{\frac{eV + hf}{2k_BT}} +  \frac{1}{2}\frac{eV - hf}{2k_BT}\coth{\frac{eV -  hf}{2k_BT}}\right]    
+    </li>
+    <li>
+            S_I = 2eI\coth\left(\frac{eV}{2k_BT}\right)                
+    </li>
+    <li>
+            n(\omega,T)=\frac{1}{2}coth{\left(\frac{\hbar\omega}{2kT}\right)}
+    </li>
+    <li>
+            T_N = \frac{P}{2kG}
+    </li>
+    <li>
+            NF = 10 \log_{10}{\left(1 + \frac{T_N}{290}\right)}
+    </li>
+    <li>
+            n\geq \frac{1}{2}\left|1 - \frac{1}{G}\right|
+    </li>
+    <li>
+            \delta T = \frac{T + T_n}{\sqrt{B\tau}}
+    </li>
+    <li>
+            n_{att} = \left(\frac{1}{G} - 1\right)\frac{1}{2}\coth{\frac{\hbar\omega}{2kT}}
+    </li>
+    <li>
+            T_n = \left(\frac{T_2 - T_1}{P_2 - P_1}\right)P_1 - T_1
+    </li>
+    <li>
+            n = \left(\frac{\frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_2}\right)} - \frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_1}\right)}}{2(P_2 - P_1)}\right)P_1 - \frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_1}\right)}
+    </li>
+    <li>
+            P = T_N + \frac{1}{2}T\left[   \left(\frac{V+F}{2T}\right) \coth{\left(\frac{V+F}{2T}\right)} + \left(\frac{V-F}{2T}\right) \coth{\left(\frac{V-F}{2T}\right)}    \right]
+    </li>
+    <li>
+            n_{SNTJ} = \frac{1}{4}\left( u + 1\right)\coth{\left(\frac{u+1}{2t}\right)} + \frac{1}{4}\left( u - 1 \right)\coth{\left(\frac{u-1}{2t}\right)}
+    </li>
+    <li>
+            n_{SNTJ} = \frac{1}{2}u\coth{\left(\frac{u}{2t}\right)} = \frac{eV}{2\hbar\omega}\coth{\left(\frac{eV}{2kT}\right)}
+    </li>
+    <li>
+            T_{SNTJ} = \frac{eV}{2k}\coth{\left(\frac{eV}{2kT}\right)}            
+    </li>
+    <li>
+            n = G(n_{amp} + n_{SNTJ})
+    </li>
+    <li>
+            n_{SNTJ} =  \frac{1}{2}u
+    </li>
+    <li>
+            T_{SNTJ} = \frac{eV}{2k},            
+    </li>
+    <li>
+            n_{system} = \frac{u_2 -  u_1}{n_2 - n_1}n_2 - \frac{1}{2},            
+    </li>
+    <li>
+            T_{system} = \frac{eV_2 - eV_1}{2kT_2 - 2kT_1}T_2 - \frac{\hbar\omega}{2k}.            
+    </li>
+</ul>
+
+<div id = "eqscroll">
+
+</div>
 <script>
+
+eqElements = document.getElementById("equations").getElementsByTagName("li");
+
+equations = [];
+for(var index = 0;index < eqElements.length;index++){
+    equations.push(eqElements[index].innerHTML);
+    document.getElementById("eqscroll").innerHTML += "$$" + equations[index] + "$$\n";
+
+}
+
 if(innerWidth< innerHeight){
     side = innerWidth;
 }
 else{
     side = innerHeight;
 }
+
 document.getElementById("mainEdit").style.width = side.toString() + "px";
 document.getElementById("mainEdit").style.left = (0.5*innerWidth - 0.5*side).toString() + "px";
-data = document.getElementById("data").innerHTML.split("\n");
 
 eqindex = 0;
 
-document.getElementById("mainEdit").value = data[eqindex];
-document.getElementById("foo").innerHTML = "$" +  data[eqindex] + "$";
+document.getElementById("mainEdit").value = equations[eqindex];
+document.getElementById("foo").innerHTML = "$" +  equations[eqindex] + "$";
+
+
 MathJax.Hub.Typeset();//tell Mathjax to update the math
 
-function redraw(){
-    document.getElementById("mainEdit").value = data[eqindex];
-    document.getElementById("foo").innerHTML = "$" +  data[eqindex] + "$";
-    MathJax.Hub.Typeset();//tell Mathjax to update the math
 
+function redraw(){
+    document.getElementById("mainEdit").value = equations[eqindex];
+    document.getElementById("foo").innerHTML = "$" +  equations[eqindex] + "$";
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
 }
 
 document.getElementById("backbutton").onclick = function(){
     eqindex--;
     if(eqindex < 0 ){
-        eqindex = data.length - 1;
+        eqindex = equations.length - 1;
     }
     redraw();
 }
 
 document.getElementById("fwdbutton").onclick = function(){
     eqindex++;
-    if(eqindex > data.length - 1){
+    if(eqindex > equations.length - 1){
         eqindex = 0;
     }
     redraw();
@@ -87,18 +156,19 @@ document.getElementById("fwdbutton").onclick = function(){
 
 </script>
 <style>
-    #mainEdit{
-        position:absolute;
-        top:80px;
-        font-family:courier;
-        font-size:1em;
-        border:solid;
-        padding:1em 1em 1em 1em ;
-        height:30%;
-        border-radius:1em;
-    }
+#mainEdit{
+    position:absolute;
+    top:80px;
+    font-family:courier;
+    font-size:1em;
+    border:solid;
+    padding:1em 1em 1em 1em ;
+    height:25%;
+    border-radius:1em;
+}
 body{
     font-family:courier;
+    font-size:1.5em;
 }
 #backbutton{
     left:0px;
@@ -120,6 +190,17 @@ body{
     font-size:40px;    
     cursor:pointer;
     z-index:4;
+}
+#eqscroll{
+    position:absolute;
+    border:solid;
+    left:10%;
+    right:10%;
+    bottom:2%;
+    height:40%;
+    overflow:scroll;
+    padding:1em 1em 1em 1em;
+    border-radius:1em;
 }
 </style>
 </body>

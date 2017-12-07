@@ -10,7 +10,16 @@
           }
         });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
         </script>
-    
+<script>
+    function gauss(){
+	var u1 = Math.random();
+	var u2 = Math.random();
+	var z1 = Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+	var z2 = Math.sqrt(-2*Math.log(u1))*Math.sin(2*Math.PI*u2);
+	return z1;
+}
+</script>
+
 </head>
 <body>
 <canvas id = "mainCanvas"></canvas>
@@ -20,24 +29,46 @@
       <th>NAME</th><th>VALUE</th><th>STEP</th>
   </tr>
 </table>
-
-
+<textarea id = "jsonIO"></textarea>
+<textarea id = "textIO"></textarea>
 <div style = "display:none" id = "datadiv">
 <deck>
   <action>
-    t = X*variables.deltat;
-    omega = 2*Math.PI*variables.f;
-    Y = variables.y0 + variables.A*Math.sin(omega*t + variables.phi)*Math.exp(-t/variables.tau);
+    t = X;
+    
+    V = -variables.Vmax + t*(2*variables.Vmax/(variables.n));
+    zeep = (1.6021766e-19*V + 6.63e-34*variables.fGHz*1e9)/(variables.T*2*1.38065e-23); 
+    bleep = (1.6021766e-19*V - 6.63e-34*variables.fGHz*1e9)/(variables.T*2*1.38065e-23); 
+    
+    if(zeep == 0){
+      P1 = variables.Graw*variables.G*(variables.sigma*gauss() + variables.TN + variables.T);            
+    }
+    else{
+      P1 = variables.Graw*variables.G*(variables.sigma*gauss() + variables.TN + variables.T*zeep/Math.tanh(zeep));            
+    }
+
+    if(bleep == 0){
+      P2 = variables.Graw*variables.G*(variables.sigma*gauss() + variables.TN + variables.T);            
+    }
+    else{
+      P2 = variables.Graw*variables.G*(variables.sigma*gauss() + variables.TN + variables.T*bleep/Math.tanh(bleep));            
+    }
+
+    P  = P1+P2;
+    Y = P;
   </action>
   <variables>
     {
-      "y0":0.1,
-      "A":200,
-      "f":2,
-      "phi":1.5,
-      "tau":1,
-      "deltat":0.01
-    }
+      "Vmax": 0.0000295625,
+      "T": 0.011999999999999962,
+      "TN": 0.25000000000000006,
+      "G": 1568000000,
+      "Graw": 1e-7,
+      "sigma": 0.004499999999999994,
+      "n": 230,
+      "fGHz": 10,
+      "markerw": 3.200000000000001
+  }
   </variables>
   </div>
 </deck>
@@ -51,7 +82,6 @@ x0 = innerWidth/2;
 y0 = innerHeight/2;
 margin = 100;
 
-
 ctx = mainCanvas.getContext("2d");
 ctx.lineWidth = 2;
 ctx.strokeStyle="#00ff00";
@@ -61,8 +91,6 @@ parser = new DOMParser();
 xmlDoc = parser.parseFromString(xmldata,"text/xml");
 variables = JSON.parse(xmlDoc.getElementsByTagName("variables")[0].innerHTML);
 action = xmlDoc.getElementsByTagName("action")[0].innerHTML
-
-
 
 for(localVar in variables){
   var newtr = document.createElement("TR");
@@ -89,20 +117,34 @@ for(localVar in variables){
 
 plot();
 function plot(){
+  markerSize = 8;
+  markerSize = variables.markerw;
+  deltax = innerWidth/variables.n;
   ctx.clearRect(0,0,innerWidth,innerHeight);
-  X = 0;
-  x = margin; 
+  x = x0 - deltax*0.5*variables.n;
+  X = x - x0 + 0.5*variables.n;
   eval(action);
-  y = y0 - Y;
-  ctx.beginPath();
-  ctx.moveTo(x,y);
-
-  for(x = margin + 1;x < innerWidth - margin;x++){
-    X = x - margin; 
+  y = innerHeight - margin - Y;
+//  ctx.beginPath();
+  //ctx.moveTo(x,y);
+  document.getElementById("textIO").value = "";
+  document.getElementById("jsonIO").value = JSON.stringify(variables,null,"    ");
+  for(x = x0 - deltax*0.5*variables.n;x < x0 + deltax*0.5*variables.n;x+=deltax){
+    X = x - x0 + 0.5*variables.n; 
     eval(action);
-    y = y0 - Y;
-    ctx.lineTo(x,y);
-    ctx.stroke();		
+    y = innerHeight - margin - Y;
+    //ctx.lineTo(x,y);
+    //ctx.stroke();		
+    ctx.beginPath();
+    ctx.moveTo(x,y - markerSize);
+    ctx.lineTo(x,y + markerSize);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x - markerSize,y);
+    ctx.lineTo(x + markerSize,y);
+    ctx.stroke();
+
+    document.getElementById("textIO").value += P + ",\n";
   }
 
 }
@@ -168,7 +210,6 @@ document.getElementById("actionInput").onkeyup = function(){
 
 </script>
 <style>
-
 #mainCanvas{
     position:absolute;
     left:0px;
@@ -186,8 +227,6 @@ document.getElementById("actionInput").onkeyup = function(){
   color:#00ff00;
   font-family:courier;
 }
-
-
 #actionInput{
   position:absolute;
   border-color:#00ff00;
@@ -200,7 +239,6 @@ document.getElementById("actionInput").onkeyup = function(){
   width:2em;
   height:2em;  
   z-index: 2;
-
 }
 #mainTable{
   position:absolute;
@@ -216,6 +254,30 @@ document.getElementById("actionInput").onkeyup = function(){
   width:6em;
   border-width:1px;
   text-align:center;
+}
+#textIO{
+    position:absolute;
+    z-index: 2;
+    right:25px;
+    bottom:25px;
+    width:100px;
+    height:50px;
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    border-color:#00ff00;
+}
+#jsonIO{
+    position:absolute;
+    z-index: 2;
+    right:25px;
+    bottom:100px;
+    width:100px;
+    height:50px;
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    border-color:#00ff00;    
 }
 </style>
 </body>

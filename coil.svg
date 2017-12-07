@@ -1,0 +1,170 @@
+<svg width="600" height="350" viewbox = "0 0 600 350"  xmlns="http://www.w3.org/2000/svg">
+
+<!--
+<json>
+{
+"shapes":[
+    "0220:0336,0336,0336,0336,0201,0330,0201,0330,0201,0330,0201,0330,0201,0330,0201,0330,0201,0330,0201,0330,0337,0337,0337,0337,",
+    "0221:0336,0336,0366,0332,0332,0332,0332,0330,0335,0335,0367,0335,0335,0333,0333,0333,0333,0331,0366,0330,0333,0333,0333,0333,0335,0335,0367,0335,0335,0331,0332,0332,0332,0332,0337,0337,",
+    "0222:0336,0336,0336,0336,0336,0330,0333,0341,0333,0333,0341,0333,0333,0341,0333,0333,0341,0333,0333,0341,0333,0333,0341,0333,0333,0341,0333,0333,0341,0330,0333,0337,0337,0337,0332,0332,0337,0337,",
+    "0223:0222,0222,0222,0222,0222,0222,0222,0222,",
+    "0260:0220,0331,0332,0332,0336,0336,0330,0337,0337,0336,0336,0332,0337,0337,0223,0333,0333,0336,0336,0333,0330,0337,0337,0332,0335,0335,0336,0336,0331,0337,0337,0221,0332,0332,0221,0335,0335,0331,0336,0333,0336,0333,0337,0337,0223,0336,0331,0331,0336,0333,0330,0336,0330,0337,0221,0331,0336,0330,0332,0336,0333,0331,0337,0330,0336,0331,0337,0141,0365,0337,0337,0330,0333,0336,0336,0334,0337,0221,0335,0336,0333,0331,0336,0330,0332,0337,0141,0365,0330,0330,0330,0330,0330,0330,0337,0330,0337,0332,0332,0332,0336,0331,0336,0330,0332,0337,0162,0336,0333,0365,0330,0330,0332,0332,0332,0332,0332,0331,0332,0332,0332,0332,0332,0331,0332,0332,0332,0332,0332,0332,0332,0333,0162,0365,0330,0330,0337,0330,0337,0333,0336,0330,0103,0117,0111,0114,0336,0333,0337,0365,"
+],
+"glyph":"0220,0331,0332,0332,0336,0336,0330,0337,0337,0336,0336,0332,0337,0337,0223,0333,0333,0336,0336,0333,0330,0337,0337,0332,0335,0335,0336,0336,0331,0337,0337,0221,0332,0332,0221,0335,0335,0331,0336,0333,0336,0333,0337,0337,0223,0336,0331,0331,0336,0333,0330,0336,0330,0337,0221,0331,0336,0330,0332,0336,0333,0331,0337,0330,0336,0331,0337,0141,0365,0337,0337,0330,0333,0336,0336,0334,0337,0221,0335,0336,0333,0331,0336,0330,0332,0337,0141,0365,0330,0330,0330,0330,0330,0330,0337,0330,0337,0332,0332,0332,0336,0331,0336,0330,0332,0337,0162,0336,0333,0365,0330,0330,0332,0332,0332,0332,0332,0331,0332,0332,0332,0332,0332,0331,0332,0332,0332,0332,0332,0332,0332,0333,0162,0365,0330,0330,0337,0330,0337,0333,0336,0330,0103,0117,0111,0114,0336,0333,0337,0365,",
+"w":600,
+"h":350,
+"x0":300,
+"y0":275,
+"x0rel":-3.4818181818181815,
+"y0rel":-0.5545454545454545,
+"unit":110.00000000000001,
+"imgurl":"",
+"imgw":2,
+"imgleft":-1,
+"imgtop":-1
+}
+
+</json>
+-->
+    <line x1="300" y1="275" x2="300" y2="268" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="261" x2="300" y2="254" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="248" x2="300" y2="241" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="234" x2="300" y2="227" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="220" x2="300" y2="213" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="206" x2="300" y2="199" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="193" x2="300" y2="186" style="stroke:black;stroke-width:2" />
+    <line x1="300" y1="179" x2="300" y2="172" style="stroke:black;stroke-width:2" />
+    <circle cx="56" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="56" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="63" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="70" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="77" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="83" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="90" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="97" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="104" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+<path    d = "M190,138 C190,165 300,138 300,165" fill = "none" stroke-width = "2" stroke = "black" /><path    d = "M190,138 C190,165 80,138 80,165" fill = "none" stroke-width = "2" stroke = "black" /><path    d = "M410,137 C410,165 520,137 520,165" fill = "none" stroke-width = "2" stroke = "black" /><path    d = "M410,137 C410,165 300,137 300,165" fill = "none" stroke-width = "2" stroke = "black" />    <circle cx="496" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "244" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "237" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "230" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "223" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "217" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "210" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "203" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="496" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="503" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="510" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="517" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="523" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="530" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="537" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+    <circle cx="544" cy = "196" r = "3.4375000000000004" stroke = "black" stroke-width = "2" fill = "none" />
+<path    d = "M520,261 C520,254 492,261 492,254" fill = "none" stroke-width = "2" stroke = "black" /><path    d = "M520,261 C520,254 547,261 547,254" fill = "none" stroke-width = "2" stroke = "black" />    <text x="513" y = "275" fill = "black" font-size = "13.750000000000002px" font-family = "futura">a</text>
+<path    d = "M568,220 C561,220 568,248 561,248" fill = "none" stroke-width = "2" stroke = "black" /><path    d = "M568,220 C561,220 568,193 561,193" fill = "none" stroke-width = "2" stroke = "black" />    <text x="575" y = "227" fill = "black" font-size = "13.750000000000002px" font-family = "futura">a</text>
+    <text x="410" y = "131" fill = "black" font-size = "13.750000000000002px" font-family = "futura">r</text>
+    <text x="190" y = "131" fill = "black" font-size = "13.750000000000002px" font-family = "futura">r</text>
+    <text x="259" y = "48" fill = "black" font-size = "27.500000000000004px" font-family = "futura">COIL</text>
+</svg>
