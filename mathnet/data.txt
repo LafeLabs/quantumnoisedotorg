@@ -1,0 +1,59 @@
+
+        <li>
+                P = G\left[T_N   \frac{1}{2}\frac{eV   hf}{2k_BT}\coth{\frac{eV   hf}{2k_BT}}    \frac{1}{2}\frac{eV - hf}{2k_BT}\coth{\frac{eV -  hf}{2k_BT}}\right]    
+        </li>
+        <li>
+                S_I = 2eI\coth\left(\frac{eV}{2k_BT}\right)                
+        </li>
+        <li>
+                n(\omega,T)=\frac{1}{2}coth{\left(\frac{\hbar\omega}{2kT}\right)}
+        </li>
+        <li>
+                T_N = \frac{P}{2kG}
+        </li>
+        <li>
+                NF = 10 \log_{10}{\left(1   \frac{T_N}{290}\right)}
+        </li>
+        <li>
+                n\geq \frac{1}{2}\left|1 - \frac{1}{G}\right|
+        </li>
+        <li>
+                \delta T = \frac{T   T_n}{\sqrt{B\tau}}
+        </li>
+        <li>
+                n_{att} = \left(\frac{1}{G} - 1\right)\frac{1}{2}\coth{\frac{\hbar\omega}{2kT}}
+        </li>
+        <li>
+                T_n = \left(\frac{T_2 - T_1}{P_2 - P_1}\right)P_1 - T_1
+        </li>
+        <li>
+                n = \left(\frac{\frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_2}\right)} - \frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_1}\right)}}{2(P_2 - P_1)}\right)P_1 - \frac{1}{2}\coth{\left(\frac{\hbar\omega}{2kT_1}\right)}
+        </li>
+        <li>
+                P = T_N   \frac{1}{2}T\left[   \left(\frac{V F}{2T}\right) \coth{\left(\frac{V F}{2T}\right)}   \left(\frac{V-F}{2T}\right) \coth{\left(\frac{V-F}{2T}\right)}    \right]
+        </li>
+        <li>
+                n_{SNTJ} = \frac{1}{4}\left( u   1\right)\coth{\left(\frac{u 1}{2t}\right)}   \frac{1}{4}\left( u - 1 \right)\coth{\left(\frac{u-1}{2t}\right)}
+        </li>
+        <li>
+                n_{SNTJ} = \frac{1}{2}u\coth{\left(\frac{u}{2t}\right)} = \frac{eV}{2\hbar\omega}\coth{\left(\frac{eV}{2kT}\right)}
+        </li>
+        <li>
+                T_{SNTJ} = \frac{eV}{2k}\coth{\left(\frac{eV}{2kT}\right)}            
+        </li>
+        <li>
+                n = G(n_{amp}   n_{SNTJ})
+        </li>
+        <li>
+                n_{SNTJ} =  \frac{1}{2}u
+        </li>
+        <li>
+                T_{SNTJ} = \frac{eV}{2k},            
+        </li>
+        <li>
+                n_{system} = \frac{u_2 -  u_1}{n_2 - n_1}n_2 - \frac{1}{2},            
+        </li>
+        <li>
+                T_{system} = \frac{eV_2 - eV_1}{2kT_2 - 2kT_1}T_2 - \frac{\hbar\omega}{2k}.            
+        </li>
+    <li>E=mc^2</li><li>E=h\nu</li><li>\frac{-\hbar^2}{2m}\nabla^2\Psi   V\Psi = i\hbar\frac{\partial\Psi}{\partial t}</li>

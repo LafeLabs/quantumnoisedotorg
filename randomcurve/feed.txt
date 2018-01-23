@@ -1,0 +1,8 @@
+{
+                "sigma": 20,
+                "height": 300,
+                "width": 400,
+                "N": 200,
+                "lineWidth":2,
+                "color":"black"
+}

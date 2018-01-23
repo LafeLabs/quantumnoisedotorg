@@ -64,7 +64,7 @@
       "TN": 0.25000000000000006,
       "G": 1568000000,
       "Graw": 1e-7,
-      "sigma": 0.004499999999999994,
+      "sigma": 0.04499999999999994,
       "n": 230,
       "fGHz": 10,
       "markerw": 3.200000000000001
@@ -127,12 +127,14 @@ function plot(){
   y = innerHeight - margin - Y;
 //  ctx.beginPath();
   //ctx.moveTo(x,y);
+  yarray = [];
   document.getElementById("textIO").value = "";
   document.getElementById("jsonIO").value = JSON.stringify(variables,null,"    ");
   for(x = x0 - deltax*0.5*variables.n;x < x0 + deltax*0.5*variables.n;x+=deltax){
     X = x - x0 + 0.5*variables.n; 
     eval(action);
     y = innerHeight - margin - Y;
+    yarray.push(y);
     //ctx.lineTo(x,y);
     //ctx.stroke();		
     ctx.beginPath();
@@ -143,10 +145,43 @@ function plot(){
     ctx.moveTo(x - markerSize,y);
     ctx.lineTo(x + markerSize,y);
     ctx.stroke();
-
     document.getElementById("textIO").value += P + ",\n";
   }
 
+
+  ctx.beginPath();
+  tempsigma = variables.sigma;
+  variables.sigma = 0;
+
+  derpIndex = 0;
+  residuals = [];
+  for(x = x0 - deltax*0.5*variables.n;x < x0 + deltax*0.5*variables.n;x+=deltax){
+    X = x - x0 + 0.5*variables.n; 
+    ctx.moveTo(x-deltax,y);
+    eval(action);
+    y = innerHeight - margin - Y;
+    //ctx.lineTo(x,y);
+    //ctx.stroke();		
+    ctx.lineTo(x,y);
+    ctx.stroke();
+    residuals.push(yarray[derpIndex] - y);    
+    derpIndex++;
+  }
+
+  derpIndex = 0;
+  for(x = x0 - deltax*0.5*variables.n;x < x0 + deltax*0.5*variables.n;x+=deltax){
+    X = x - x0 + 0.5*variables.n; 
+    y = innerHeight - 100 + residuals[derpIndex];
+    ctx.moveTo(x-deltax,y);
+    y = innerHeight - 100 + residuals[derpIndex+1];
+    ctx.lineTo(x,y);
+    ctx.stroke();
+    derpIndex++;
+
+  }
+  
+
+  variables.sigma = tempsigma;
 }
 
 scaleFactor = 2;

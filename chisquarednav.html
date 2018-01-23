@@ -1,0 +1,593 @@
+<!doctype html>
+<html>
+<head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            processEscapes: true
+          }
+        });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+
+
+
+</head>
+<body>
+<canvas id = "mainCanvas"></canvas>
+<div id = "chidiv">$\chi^2 = $<span id = "chival"></span></div>
+<input id = "actionInput">
+<table id = "mainTable">
+  <tr>
+      <th>NAME</th><th>VALUE</th><th>STEP</th>
+  </tr>
+</table>
+<textarea id = "jsonIO"></textarea>
+<textarea id = "textIO"></textarea>
+<div style = "display:none" id = "datadiv">
+<deck>
+  <action>
+    t = X;
+    
+    V = -variables.Vmax + t*(2*variables.Vmax/(numpoints));
+    zeep = (1.6021766e-19*V + 6.63e-34*variables.fGHz*1e9)/(variables.T*2*1.38065e-23); 
+    bleep = (1.6021766e-19*V - 6.63e-34*variables.fGHz*1e9)/(variables.T*2*1.38065e-23); 
+    
+    if(zeep == 0){
+      P1 = variables.G*(variables.TN + variables.T);            
+    }
+    else{
+      P1 = variables.G*(variables.TN + variables.T*zeep/Math.tanh(zeep));            
+    }
+
+    if(bleep == 0){
+      P2 = variables.G*(variables.TN + variables.T);            
+    }
+    else{
+      P2 = variables.G*(variables.TN + variables.T*bleep/Math.tanh(bleep));            
+    }
+
+    P  = P1+P2;
+    Y = P;
+  </action>
+  <variables>
+    {
+      "Vmax": 0.0000295625,
+      "T": 0.011999999999999962,
+      "TN": 0.25000000000000006,
+      "G": 200,
+      "fGHz": 10,
+      "markerw": 3.200000000000001,
+      "plotgain":1  
+    }
+  </variables>
+  <data>396.99743110699467,
+    393.2506750496498,
+    395.4871525362221,
+    388.777176382896,
+    389.81571479331683,
+    384.2500377247716,
+    380.61849730601904,
+    374.3494414528942,
+    378.5313595308089,
+    369.2604393096914,
+    371.1245961873614,
+    368.2985137683281,
+    364.81287238480996,
+    361.4849292198179,
+    356.3970401831292,
+    354.96918256235904,
+    354.6472592847656,
+    348.9740548152251,
+    348.7915421050544,
+    344.32220379777226,
+    342.4761238861705,
+    340.23202379178474,
+    338.9084314651548,
+    329.97735042217084,
+    331.5343085902945,
+    331.5213588067228,
+    327.2873440706577,
+    327.3535840896899,
+    322.4477681777071,
+    315.53674785259966,
+    317.6607738721842,
+    306.63354026515117,
+    307.78823101332085,
+    303.4828056318464,
+    303.8514082128521,
+    296.6868835773049,
+    298.7316148388046,
+    295.5451685971424,
+    294.5881156688495,
+    288.68853747615356,
+    281.58338526266755,
+    290.3459530206422,
+    282.3231600494175,
+    280.0536356735735,
+    275.84835619678296,
+    272.79837099223516,
+    269.6996999108155,
+    271.884955759314,
+    266.2342880713469,
+    261.69264940111884,
+    261.3802528793135,
+    252.18435974888774,
+    255.96019062635855,
+    250.96401399640413,
+    247.74519322037884,
+    242.81029568720038,
+    240.88137365025355,
+    240.58293806620858,
+    236.09277100294588,
+    234.6102985921584,
+    232.17387492282919,
+    229.96996203777388,
+    223.51934844054705,
+    224.03179575212027,
+    218.7323664541551,
+    214.59587597692774,
+    213.6782052953933,
+    208.61896241871125,
+    210.55097871866099,
+    207.59359124883812,
+    202.3972172982713,
+    201.81302023151065,
+    197.22176724100996,
+    193.21704689563612,
+    191.61929894243775,
+    190.0654342300396,
+    186.92198116155075,
+    185.583002362066,
+    181.14172083081144,
+    182.4902388349559,
+    180.22712659267313,
+    176.66626167797784,
+    170.74990067059238,
+    168.69485938186943,
+    163.80367564704665,
+    163.81972988222145,
+    161.31672028089605,
+    160.5837333782007,
+    157.31421022032947,
+    156.58414177916595,
+    151.33130752387643,
+    152.79080314427398,
+    147.273031645208,
+    145.33248032684173,
+    138.30282610215846,
+    142.62453321665802,
+    140.2251430497665,
+    134.5619052165713,
+    134.84905725818723,
+    135.36261676155425,
+    133.09912511499851,
+    127.99028990545297,
+    130.18583907908075,
+    125.69206962328485,
+    123.55445918484985,
+    120.27687544910225,
+    123.47824576653174,
+    121.59426953275968,
+    120.1363724361741,
+    119.61466470827136,
+    119.78434249224695,
+    116.46900000490106,
+    115.89549806254608,
+    123.69889293992122,
+    115.24260789280306,
+    119.90364982133198,
+    117.87199406648372,
+    119.15901362654364,
+    118.50090814676841,
+    117.67356276785986,
+    117.00834024220943,
+    117.27819000475492,
+    120.00691229651932,
+    120.07341288360661,
+    123.01816315230536,
+    128.7578044741742,
+    126.18434606182988,
+    125.49796119432976,
+    131.93543480676698,
+    130.3007907550216,
+    130.43683268464187,
+    130.65589715010566,
+    137.9734963464661,
+    139.66645350760143,
+    138.72081813812372,
+    143.0114479683466,
+    145.8917666194585,
+    142.36200001220323,
+    147.09059676980394,
+    145.30433716355296,
+    147.15427382656497,
+    154.24236608641982,
+    154.8023291071485,
+    159.15514356950342,
+    161.15229143122474,
+    161.9123329020474,
+    165.66982160153094,
+    167.95466702171268,
+    167.04709230221073,
+    178.69402769502582,
+    176.91930441440616,
+    176.9720428165847,
+    181.37246859173968,
+    186.9409740617455,
+    190.19923243476828,
+    190.6359782623183,
+    192.64987917014088,
+    196.93434496494592,
+    201.28100058147794,
+    199.77948152838863,
+    206.64806790272212,
+    206.43977694423273,
+    211.75770815683055,
+    213.22822983554,
+    215.91641253947645,
+    218.52402404090134,
+    219.87663261406254,
+    223.9547506535996,
+    227.2373193616284,
+    229.40908906256846,
+    232.25556840973556,
+    235.05827273392345,
+    232.44839728963737,
+    239.79172634546524,
+    242.10475801238474,
+    242.90475902388903,
+    245.89921768433925,
+    250.96851766771294,
+    249.2057924968895,
+    253.93719668504403,
+    261.18486712320566,
+    262.5990403680105,
+    261.0211849141514,
+    265.986528453883,
+    266.9889059611996,
+    271.17057078421976,
+    278.7362276169504,
+    278.3058263697152,
+    281.80931151510583,
+    286.48253639387497,
+    285.87356355093027,
+    288.61238634820427,
+    297.0273842609024,
+    294.0894198530505,
+    297.2555357124134,
+    299.89366759163795,
+    303.8998334245845,
+    306.49181487719443,
+    311.83639878260635,
+    310.05559963531664,
+    314.1791621488151,
+    316.33006527474754,
+    315.6439684546564,
+    321.17038634157353,
+    326.49568865411413,
+    326.14615208978165,
+    334.16750192552047,
+    334.08423348915653,
+    338.2325567273714,
+    342.8451013701483,
+    340.87046219979953,
+    343.84948483138373,
+    344.2010864488323,
+    347.31023423393515,
+    352.36230128588636,
+    356.1247856676441,
+    358.45912607476646,
+    363.6560208543936,
+    367.0846705885709,
+    365.45586382238724,
+    370.8554502802875,
+    375.37078159543455,
+    375.5997482297729,
+    379.6363790498458,
+    380.79586081995603,
+    382.68420492923366,
+    391.19815063301706,
+    388.8615860978056,
+    390.66059821658814,
+    391.12040257617923,
+    399.23786663319027,</data>
+  </div>
+</deck>
+<script>
+
+chiarray = [];
+
+mainCanvas = document.getElementById("mainCanvas");
+mainCanvas.width = innerWidth;
+mainCanvas.height = innerHeight;
+
+x0 = innerWidth/2;
+y0 = innerHeight/2;
+margin = 100;
+
+ctx = mainCanvas.getContext("2d");
+ctx.lineWidth = 2;
+ctx.strokeStyle="#00ff00";
+
+xmldata = document.getElementById("datadiv").innerHTML;
+parser = new DOMParser();
+xmlDoc = parser.parseFromString(xmldata,"text/xml");
+variables = JSON.parse(xmlDoc.getElementsByTagName("variables")[0].innerHTML);
+action = xmlDoc.getElementsByTagName("action")[0].innerHTML
+
+document.getElementById("textIO").value =  xmlDoc.getElementsByTagName("data")[0].innerHTML;
+datastrings = xmlDoc.getElementsByTagName("data")[0].innerHTML.split(",");
+dataarray = [];
+
+for(var index = 0;index < datastrings.length;index++){
+    if(parseFloat(datastrings[index]) != NaN &&datastrings[index].length>0){
+        dataarray.push(parseFloat(datastrings[index]));
+    }
+}
+
+numpoints = dataarray.length;
+
+for(localVar in variables){
+  var newtr = document.createElement("TR");
+
+  var newtd = document.createElement("TD");
+  newtd.className = "nametd";
+  newtd.innerHTML = localVar;
+  newtr.appendChild(newtd);
+
+  var newtd = document.createElement("TD");
+  newtd.className = "valuetd";
+  newtd.innerHTML = variables[localVar];
+  newtr.appendChild(newtd);
+
+  var newtd = document.createElement("TD");
+  newtd.className = "steptd";
+  newtd.innerHTML = (0.1*parseFloat(variables[localVar])).toString();
+  newtr.appendChild(newtd);
+  newtr.className = "dataRow";
+
+  document.getElementById("mainTable").appendChild(newtr);  
+}
+
+
+plot();
+function plot(){
+    
+datastrings = document.getElementById("textIO").value.split(",");
+dataarray = [];
+for(var index = 0;index < datastrings.length;index++){
+    if(parseFloat(datastrings[index]) != NaN &&datastrings[index].length>0){
+        dataarray.push(parseFloat(datastrings[index]));
+    }
+}
+numpoints = dataarray.length;
+
+
+
+  markerSize = variables.markerw;
+  deltax = innerWidth/numpoints;
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  x = x0 - deltax*0.5*numpoints;
+  X = x - x0 + 0.5*numpoints;
+  eval(action);
+  y = innerHeight - margin - Y;
+//  ctx.beginPath();
+  //ctx.moveTo(x,y);
+  yarray = [];
+  document.getElementById("jsonIO").value = JSON.stringify(variables,null,"    ");
+
+  x = 0;
+  for(index = 0;index < dataarray.length;index++){
+    x+=deltax;
+    y = innerHeight - margin - dataarray[index];
+    //ctx.lineTo(x,y);
+    //ctx.stroke();		
+    ctx.beginPath();
+    ctx.moveTo(x,y - markerSize);
+    ctx.lineTo(x,y + markerSize);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x - markerSize,y);
+    ctx.lineTo(x + markerSize,y);
+    ctx.stroke();
+    //document.getElementById("textIO").value += P + ",\n";
+  }
+
+
+  ctx.beginPath();
+
+  derpIndex = 0;
+  residuals = [];
+  for(x = x0 - deltax*0.5*numpoints;x < x0 + deltax*0.5*numpoints;x+=deltax){
+    X = x - x0 + 0.5*numpoints; 
+    ctx.moveTo(x-deltax,y);
+    eval(action);
+    y = innerHeight - margin - Y;
+    //ctx.lineTo(x,y);
+    //ctx.stroke();		
+    ctx.lineTo(x,y);
+    ctx.stroke();
+    residuals.push(innerHeight - margin - dataarray[derpIndex] - y);    
+    derpIndex++;
+  }
+
+  derpIndex = 0;
+  for(x = x0 - deltax*0.5*numpoints;x < x0 + deltax*0.5*numpoints;x+=deltax){
+    X = x - x0 + 0.5*numpoints; 
+    y = innerHeight - 100 + residuals[derpIndex];
+    ctx.moveTo(x-deltax,y);
+    y = innerHeight - 100 + residuals[derpIndex+1];
+    ctx.lineTo(x,y);
+    ctx.stroke();
+    derpIndex++;
+  }
+
+  chisquared = 0;
+  for(var index = 0;index < residuals.length-1;index++){
+        chisquared += residuals[index]*residuals[index];
+  }
+  chisquared /= (residuals.length-2);
+  chiarray.push(100*Math.log10(chisquared));
+  document.getElementById("chival").innerHTML = chisquared.toString();
+
+
+
+
+  for(x = 0;x < chiarray.length-1;x++){
+
+    y = innerHeight - chiarray[x];
+    ctx.moveTo(x,y);
+    y = innerHeight - chiarray[x+1];
+    ctx.lineTo(x+1,y);
+    ctx.stroke();
+    derpIndex++;
+  }
+
+}
+
+scaleFactor = 2;
+rowIndex = 0;
+rows = document.getElementsByClassName("dataRow");
+rows[rowIndex].style.backgroundColor = "#007000";
+
+
+document.getElementById("actionInput").onkeyup = function(){
+  foo = this.value;
+  if(foo == "d"){
+    rows[rowIndex].style.backgroundColor = "black";
+    rowIndex--;
+    if(rowIndex < 0){
+      rowIndex = rows.length - 1;
+    }
+    rows[rowIndex].style.backgroundColor = "#007000";
+  }
+  if(foo == "f"){
+    rows[rowIndex].style.backgroundColor = "black";
+    rowIndex++;
+    if(rowIndex > rows.length - 1){
+      rowIndex = 0;
+    }
+    rows[rowIndex].style.backgroundColor = "#007000";
+  }
+
+  if(foo == "a"){
+    value = parseFloat(rows[rowIndex].getElementsByClassName("valuetd")[0].innerHTML);
+    step = parseFloat(rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML);
+    value += step;
+    rows[rowIndex].getElementsByClassName("valuetd")[0].innerHTML = value.toString();    
+    name = rows[rowIndex].getElementsByClassName("nametd")[0].innerHTML;
+    variables[name] = value;
+    plot();
+  }
+  if(foo == "s"){
+    value = parseFloat(rows[rowIndex].getElementsByClassName("valuetd")[0].innerHTML);
+    step = parseFloat(rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML);
+    value -= step;
+    rows[rowIndex].getElementsByClassName("valuetd")[0].innerHTML = value.toString();    
+    name = rows[rowIndex].getElementsByClassName("nametd")[0].innerHTML;
+    variables[name] = value;
+    plot();
+  }
+
+  if(foo == "j"){
+    step = parseFloat(rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML);
+    step /= scaleFactor;
+    rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML = step.toString();    
+  }
+  if(foo == "k"){
+    step = parseFloat(rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML);
+    step *= scaleFactor;
+    rows[rowIndex].getElementsByClassName("steptd")[0].innerHTML = step.toString();    
+  }
+
+ this.value = "";
+}
+
+</script>
+<style>
+#mainCanvas{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:0;
+    background-color:black;
+}
+#mainControl{
+  position:absolute;
+  left:1em;
+  top:1em;
+  z-index: 2;
+  border-color:#00ff00;
+  background-color:black;
+  color:#00ff00;
+  font-family:courier;
+}
+#actionInput{
+  position:absolute;
+  border-color:#00ff00;
+  border:solid;
+  left:1em;
+  top:1em;
+  border-width:5px;
+  background-color:black;
+  color:#00ff00;
+  width:2em;
+  height:2em;  
+  z-index: 2;
+}
+#chidiv{
+    position:absolute;
+    font-family:courier;
+    font-size:36px;
+    z-index:1;
+    right:30%;
+    top:15%;
+    color:#00ff00;
+}
+#chidiv span{
+    color:#00ff00;
+}
+#mainTable{
+  position:absolute;
+  border-collapse:collapse;
+  left:1em;
+  top:4em;
+  font-family:courier;
+  font-size:1em;
+  color:#00ff00;
+}
+#mainTable td,th{
+  border:solid;
+  width:6em;
+  border-width:1px;
+  text-align:center;
+}
+#textIO{
+    position:absolute;
+    z-index: 2;
+    right:25px;
+    bottom:25px;
+    width:100px;
+    height:50px;
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    border-color:#00ff00;
+}
+#jsonIO{
+    position:absolute;
+    z-index: 2;
+    right:25px;
+    bottom:100px;
+    width:100px;
+    height:50px;
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    border-color:#00ff00;    
+}
+</style>
+</body>
+</html>

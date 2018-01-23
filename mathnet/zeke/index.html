@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    }
+});//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+</script>
+<script>
+    function string2byteCode(localString){
+    var localByteCode = "";
+    for(var stringIndex = 0;stringIndex < localString.length;stringIndex++){
+        var tempCharCode = localString.charCodeAt(stringIndex);
+        if(tempCharCode != 0){
+            localByteCode += "0";
+            localByteCode += tempCharCode.toString(8);
+            localByteCode += ",";
+        }
+    }
+    return localByteCode;
+}
+        
+function byteCode2string(localByteCode){
+    var localString = "";
+    var stringArray = localByteCode.split(",");
+    for(var index = 0;index < stringArray.length;index++){
+        var myCharCode = String.fromCharCode(parseInt(stringArray[index],8));
+        if(parseInt(stringArray[index],8) >= 040 && parseInt(stringArray[index],8) < 0177 ){
+            localString += myCharCode;
+        }
+        if(parseInt(stringArray[index],8) == 012){//newline
+            localString += myCharCode;
+        }
+        if(parseInt(stringArray[index],8) == 011){//vertical tab
+            localString += myCharCode;
+        }		
+        if(parseInt(stringArray[index],8) >= 0400 && parseInt(stringArray[index],8) <= 0777){
+            if(currentTable[parseInt(stringArray[index],8)].length > 0){
+                localString += byteCode2string(currentTable[parseInt(stringArray[index],8)]);
+            }
+        }		
+        
+    }
+    return localString;
+}
+</script>
+</head>
+<body>
+<ul style = "display:none" id = "outfeeddata"><li></li>
+</ul>            
+<h2>Zekes's Math Feed</h2>
+<div id = "centerdiv">
+    <div id = "mathdisplay"></div>
+    <textarea id = "matheditor"></textarea>        
+    <div class = "butt"  id = "savebutton">SAVE</div>
+    <div class = "butt" id = "loadbutton">LOAD</div>
+    <div class = "butt" id = "prevbutton">PREV</div>
+    <div class = "butt" id = "nextbutton">NEXT</div>
+    <div class = "butt" id = "pushbutton">PUSH</div>
+</div>
+<ul id = "infeed"></ul>
+<ul id = "outfeed"></ul>
+
+<script>
+
+document.getElementById("matheditor").onkeyup = function(){
+    document.getElementById("mathdisplay").innerHTML = "$" + this.value + "$";
+    outfeed[eqindex].innerHTML = "$" + this.value + "$";
+    eqarray[eqindex] = this.value;
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
+}
+
+currentURL = "http://www.quantumnoise.org/mathnet/zeke/outfeed.txt";
+feed  = "outfeed";
+document.getElementById("loadbutton").onclick = function(){
+    loadurl();
+}
+loadurl();
+
+currentURL2 = "http://www.quantumnoise.org/mathnet/moe/outfeed.txt";
+loadurl2();
+
+function loadurl(){
+    var httpc = new XMLHttpRequest();
+    httpc.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            var moedata = this.responseText;
+            var moedataarray = moedata.split("\n");
+            eqarray = [];
+            for(var index = 0;index < moedataarray.length;index++){
+                if(moedataarray[index].length>1){
+                    eqarray.push(byteCode2string(moedataarray[index]));
+                    document.getElementById("outfeed").innerHTML += "<li>$" + byteCode2string(moedataarray[index]) + "$</li>";
+                }
+            }
+            eqindex = 0;
+            document.getElementById("matheditor").value = eqarray[eqindex];
+            document.getElementById("mathdisplay").innerHTML = "$" + eqarray[eqindex] + "$";
+            outfeed = document.getElementById("outfeed").getElementsByTagName("li");
+            outfeed[eqindex].style.backgroundColor = "#c0c0c0";
+            MathJax.Hub.Typeset();//tell Mathjax to update the math
+        }
+    };
+    httpc.open("GET", "loader.php?url=" + currentURL, true);
+    httpc.send();
+}
+
+function loadurl2(){
+    var httpc = new XMLHttpRequest();
+    httpc.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            var moedata = this.responseText;
+            var moedataarray = moedata.split("\n");
+            for(var index = 0;index < moedataarray.length;index++){
+                if(moedataarray[index].length>1){
+                    document.getElementById("infeed").innerHTML += "<li>$" + byteCode2string(moedataarray[index]) + "$</li>";
+                }
+            }
+            MathJax.Hub.Typeset();//tell Mathjax to update the math
+        }
+    };
+    httpc.open("GET", "loader.php?url=" + currentURL2, true);
+    httpc.send();
+}
+
+
+
+document.getElementById("savebutton").onclick = function(){
+    var httpc = new XMLHttpRequest();
+    var url = "saver.php";        
+
+    var foo = "";
+    for(var index = 0;index < eqarray.length;index++){
+        foo +=  string2byteCode(eqarray[index]) + "\n";
+    }
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+foo);//send text to saver.php
+}
+
+
+document.getElementById("nextbutton").onclick = function(){
+    outfeed[eqindex].style.backgroundColor = "white";
+    eqindex++;
+    if(eqindex>outfeed.length -1){
+        eqindex = 0;
+    }
+    outfeed[eqindex].style.backgroundColor = "#c0c0c0";
+    document.getElementById("matheditor").value = eqarray[eqindex];    
+    document.getElementById("mathdisplay").innerHTML = "$" + eqarray[eqindex] + "$";
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
+}
+document.getElementById("prevbutton").onclick = function(){
+    outfeed[eqindex].style.backgroundColor = "white";
+    eqindex--;
+    if(eqindex <0){
+        eqindex = outfeed.length -1;
+    }
+    outfeed[eqindex].style.backgroundColor = "#c0c0c0";
+    document.getElementById("matheditor").value = eqarray[eqindex];    
+    document.getElementById("mathdisplay").innerHTML = "$" + eqarray[eqindex] + "$";
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
+}
+document.getElementById("pushbutton").onclick = function(){
+    eqarray.push(" ");
+    outfeed[eqindex].style.backgroundColor = "white";
+    newli = document.createElement("LI");
+    newli.innerHTML = "$$";
+    document.getElementById("outfeed").appendChild(newli);
+    outfeed = document.getElementById("outfeed").getElementsByTagName("LI");
+    eqindex = outfeed.length-1;
+    outfeed[eqindex].style.backgroundColor = "#c0c0c0";
+    document.getElementById("matheditor").value = eqarray[eqindex];
+    document.getElementById("mathdisplay").innerHTML = "$" + eqarray[eqindex] + "$";
+    MathJax.Hub.Typeset();//tell Mathjax to update the math
+}
+
+</script>
+
+<style>
+html{
+    font-family:courier;
+}
+textarea{
+    font-family:courier;
+    font-size:18px;
+}
+h2{
+    width:100%;
+    text-align: center;
+}
+#centerdiv{
+    position:absolute;
+    left:35%;
+    width:30%;
+    text-align: center;
+}
+#mathdisplay{
+    width:90%;
+    height:3em;
+    margin:auto;
+    font-size:26px;
+    padding-top:1em;
+}
+#matheditor{
+    margin-top:0.5em;
+    width:90%;
+    height:5em;
+    font-size:20px;
+}
+
+#outfeed{
+    position:absolute;
+    overflow:scroll;
+    top:15em;
+    bottom:1em;
+    left:1em;
+    width:30%;
+    border:solid;
+    border-radius:1em;
+    padding:1em 1em 1em 1em;
+    list-style-type: none;
+}
+#infeed{
+    border-radius:1em;
+    padding:1em 1em 1em 1em;
+    position:absolute;
+    overflow:scroll;
+    top:15em;
+    bottom:1em;
+    right:1em;
+    width:30%;
+    border:solid;
+    list-style-type: none;
+}
+li{
+    margin-top:1em;
+}
+.butt{
+    cursor:pointer;
+}
+.butt:hover{
+    background-color:green;
+}
+.butt:active{
+    background-color:yellow;
+}
+</style>
+
+</body>
