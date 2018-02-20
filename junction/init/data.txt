@@ -1,0 +1,3 @@
+ data = JSON.parse(document.getElementById("datadiv").innerHTML);
+ inputs = document.getElementById("mainTable").getElementsByTagName("INPUT");
+ buttons = document.getElementsByClassName("button");

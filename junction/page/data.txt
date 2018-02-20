@@ -1,0 +1,127 @@
+<h2>Tunnel Junction</h2>
+ <table id="mainTable">
+     <tbody><tr>
+         <td>Normal Resistance [$\Omega$]</td>
+         <td>
+             $R_N$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+    <tr>
+        <td>
+            Junction Capacitance[F]
+        </td>
+         <td>
+             $C$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     <tr>
+         <td>Area [$\mu m^2$]</td>
+         <td>
+             $A$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             RC time [s]
+         </td>
+         <td>
+             $\tau_{RC}$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             RA product[$\Omega-\mu^2$]
+         </td>
+         <td>
+             RA
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             Critical current[$\mu A$]
+         </td>
+         <td>
+             $I_C$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             Josephson Inductance[pH]
+         </td>
+         <td>
+             $L_J$
+         </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+     
+          <tr>
+         <td>
+             Barrier thickness[nm]
+         </td>
+         <td>
+            t
+        </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+          <tr>
+         <td>
+             Plasma Frequency[GHz]
+         </td>
+         <td>
+            $f_p$
+        </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+          <tr>
+         <td>
+             Superconducting Gap[$\mu$eV]
+         </td>
+         <td>
+            $\Delta/e$
+        </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+          <tr>
+         <td>
+             Current Density [A/cm$^2$]
+         </td>
+         <td>
+            $J_C$
+        </td>
+         <td>
+             <input>
+         </td>
+     </tr>
+
+ </tbody></table>
+<div class="button">$$I_C = \frac{\pi\Delta}{2eR_n}$$</div>
+<div class="button">$$L_J = \frac{\Phi_0}{2\pi I_C}$$</div>
+<div class="button">$$C = 9.1\epsilon_0 A/t$$</div>
+<div class="button">$$f_p = \frac{1}{2\pi}\sqrt{\frac{1}{L_JC}}$$</div>
+<div class = "button">PUBLISH</div>

@@ -1,0 +1,78 @@
+ inputs[0].onchange = function(){
+     data.RN = parseFloat(this.value);
+ }
+ inputs[1].onchange = function(){
+     data.C = parseFloat(this.value);
+ }
+ inputs[2].onchange = function(){
+     data.A = parseFloat(this.value);
+ }
+ inputs[3].onchange = function(){
+     data.tau = parseFloat(this.value);
+ }
+ inputs[4].onchange = function(){
+     data.RA = parseFloat(this.value);
+ }
+ inputs[5].onchange = function(){
+     data.Ic = parseFloat(this.value);
+ }
+ inputs[6].onchange = function(){
+     data.LJ = parseFloat(this.value);
+ }
+ inputs[7].onchange = function(){
+     data.t = parseFloat(this.value);
+ }
+ inputs[8].onchange = function(){
+     data.fp = parseFloat(this.value);
+ }
+ inputs[9].onchange = function(){
+     data.Delta = parseFloat(this.value);
+ }
+ inputs[10].onchange = function(){
+     data.JC = parseFloat(this.value);
+ }
+
+buttons[0].onclick = function(){
+    var Delta = data.Delta*1e-6;
+    var Rn = data.Rn;
+    var Ic = Math.PI*Delta/(Rn);
+    Ic *= 1e6;//covert to microamps
+    data.Ic = Ic;
+    console.log(Ic);
+    redraw();
+}
+buttons[1].onclick = function(){
+    var Ic = parseFloat(inputs[5].value);
+    Phi0 = 2.07e-15;
+    Ic *= 1e-6;
+    var LJ = Phi0/(2*Math.PI*Ic);
+    LJ *= 1e12;
+    data.LJ = LJ;
+    redraw();
+}
+buttons[2].onclick  = function(){
+    var A = parseFloat(inputs[2].value);
+    var t = parseFloat(inputs[7].value);
+    t *= 1e-9;
+    A *= 1e-12;
+    var C = 9.1*8.85e-12*A/t;
+    data.C = C;
+    redraw();
+}
+buttons[3].onclick = function(){
+    var C = parseFloat(inputs[1].value);
+    var LJ = parseFloat(inputs[6].value);
+    LJ *= 1e-12;
+    var fp = (1/(2*Math.PI))*Math.sqrt(1/(C*LJ));
+    fp *= 1e-9;
+    data.fp = fp;
+    redraw();
+}
+buttons[4].onclick  = function(){
+    datastring = JSON.stringify(data,null,"    ");
+    var httpc = new XMLHttpRequest();
+    var url = "feed/saver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data=" + datastring);//send text to saver.php
+}

@@ -1,0 +1,8 @@
+{
+    "page":"page/data.txt",
+    "pageevents":"pageevents/data.txt",
+    "init":"init/data.txt",
+    "redraw":"redraw/data.txt",
+    "style":"style/data.txt",
+    "junctions":"junctions/data.txt"
+}

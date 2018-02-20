@@ -1,0 +1,28 @@
+ body{
+     font-family:courier;
+ }
+ h2{
+     width:100%;
+     text-align:center;
+ }
+ table{
+     border-collapse:collapse;
+     float:left;
+ }
+ td{
+     border:solid;
+ }
+ .button{
+     cursor:pointer;
+     float:left;
+     border:solid;
+     padding:10px 10px 10px 10px;
+     margin:10px 10px 10px 10px;
+     border-radius:10px;
+ }
+ .button:hover{
+     background-color:green;
+ }
+ .button:active{
+     background-color:yellow;
+ }
