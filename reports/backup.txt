@@ -1,0 +1,56 @@
+<h2>Howto Guide to Tunnel Junction Noise Metrology</h2>
+
+<h4> I. Fabrication </h4>
+
+<p>
+This guide mostly assumes you already have a good tunnel junction, since it is a somewhat involved process to get good fab working from scratch. By far the easiest and most reliable way to get a good device is to have Joe Aumentado at NIST send you one.  Given the resources for fab available at NIST, Joe's experience with the fab, and the small number of people who will ever want or need these devices, this is a good system for supply for the time being.  Should Joe ever retire from NIST this capability will hopefully be passed on to future NIST staff, or if not to other national metrology lab staff in another country, since it is effectively a reference material even if it's not yet classified as such.    
+</p>
+<p>
+    Future generations of this document will eventually have full fabrication details and get merged with internal NIST documentation to make a coherent information structure but for now, a pointer to Joe's lab at NIST is the best option.
+</p>
+
+<h4>II. Installation in Fridge</h4>
+
+<h4>Pre-Cooldown and during-cooldown Checklist</h4>
+
+<img  src ="http://www.quantumnoise.org/diagrammers/cryobuild/svg/svg1519861628.svg"/>
+
+<ol>
+    <li>
+        Test that your method of doing an IV curve works on a resistor first.  To do this, put a 50 ohm resistor(or 100 ohm if that's more convenient, but it should be near 50) and put it in the fridge, warm, exactly where the shot noise device will go.  To do this you need two DC lines connecting to the DC side of your bias tee, and they should both have bias resistors which can go cold.  Now sweep the voltage on one of the two DC lines and measure the voltage on the other.  You should be able to calculate a resistance which makes sense based on knowing your bias resistors.  Also important here is to establish that your bias scheme will keep the voltage on the device to at or below about 100 mV so that you know you won't blow the device, which happens somewhere between 100 mV and 500 mV generally, but 100 mV is a good solid safety margin.  Generally what you want is to have the triangle wave output of your audio function generator be several volts peak to peak but with enough voltage division so that even at the maximum voltage you are safe or at least close to the safe zone.
+    </li>
+    <li>
+        After you know you can trust your IV curve bias system, power down the system, short anything to ground that you can, and connect the dc line back to your tunnel junction device.  Now ramp up the voltage on your bias system and see the IV curve on the oscilloscope and check that you get a value that makes sense.  The NIST devices are generally pretty close to 50 Ohms, where "pretty close" is usually in the 10% range or better.  Resistances change a few percent on cooling so don't worry about being closer than that.  You want to be able to convince yourself that the resistance is between 40 and 60 Ohms at this stage.  20-100 works, but again if you're using NIST devices that is outside what you expect because those are pretty accurate to the 50 Ohm target.
+    </li>
+    <li>
+        When you're sure you have a live device, you want to test your RF chain.  Start by computing the total gain in the chain, including all HEMTs.  With a 40 dB cold HEMT and another 20-40 dB of warm gain, a 4 K input noise should translate to at least hundreds of thousands of kelvin at the output, which is enough to get over the noise floor of your spectrum analyzer.  If this is a new setup, test the full chain with a network analzyer, putting enough attenuation on the input to make sure you don't saturate the amps.  If you put attenuation equal to estimated gain, the whole thing should have insertion loss around 0 dB and you should not have problems doing a simple network analyzer measurement.  Check that this makes sense, then disconnect the network analyzer, put the junction back in, and check the spectrum analzyer as you power the amps down and back up and see that the noise level on the spectrum analzyer rises and falls as you expect.  This is again just a sanity check and does not have to be accurate(it won't be).  You want, qualitatively, to see that the noise rises enough to swamp existing noise level as you first power up the warm amp, then the cold amp.  When you're sure the RF noise makes sense and RF insertion loss of the whole system makes sense, make sure the shot noise junction is connected.
+    </li>
+    <li>
+        Test that the shot noise device can boost noise warm.  Now you put together the above tests, and power up both "cold" and warm amps, then increase the bias on the junction to 100 mV and see that this shifts the noise in a noticeable way.  With room temprature kT/e being about 25 mV this is about 4 kT/e, so it should be clearly visible, although if you look at a curve of the noise at this point it is mostly parabolic and won't be useful for metrology yet. 
+    </li>
+    <li>
+        If you know your device makes shot noise that you can measure. 
+    </li>
+    <li>
+        
+    </li>
+    <li>
+        
+    </li>
+    <li>
+        
+    </li>
+    <li>
+        
+    </li>
+
+</ol>
+
+
+<h4>Checklist for testing when cold</h4>
+
+<h4>Amplifier Metrology</h4>
+
+<h4>Troubleshooting</h4>
+
+<h4>Future Work</h4>

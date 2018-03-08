@@ -7,15 +7,7 @@
 <body>
 <canvas style = "border:solid;" id = "plotCanvas"></canvas>
 
-<table id = "mainTable">
-		<tr>
-			<th>NAME</th><th>VALUE</th><th>STEP</th>
-		</tr>
-	  </table>
-	  <textarea id = "jsonIO"></textarea>
-	  <textarea id = "textIO"></textarea>
 	  
-
 <script>
 	plotCanvas = document.getElementById("plotCanvas");
 	plotCanvas.width = innerWidth;
@@ -97,58 +89,7 @@ html {
 	left:0px;
 	top:0px;
 }
-#actionInput{
-  position:absolute;
-  border-color:#00ff00;
-  border:solid;
-  left:1em;
-  top:1em;
-  border-width:5px;
-  background-color:black;
-  color:#00ff00;
-  width:2em;
-  height:2em;  
-  z-index: 2;
-}
-#mainTable{
-  position:absolute;
-  border-collapse:collapse;
-  left:1em;
-  top:4em;
-  font-family:courier;
-  font-size:1em;
-  color:#00ff00;
-}
-#mainTable td,th{
-  border:solid;
-  width:6em;
-  border-width:1px;
-  text-align:center;
-}
-#textIO{
-    position:absolute;
-    z-index: 2;
-    right:25px;
-    bottom:25px;
-    width:100px;
-    height:50px;
-    background-color:black;
-    color:#00ff00;
-    font-family:courier;
-    border-color:#00ff00;
-}
-#jsonIO{
-    position:absolute;
-    z-index: 2;
-    right:25px;
-    bottom:100px;
-    width:100px;
-    height:50px;
-    background-color:black;
-    color:#00ff00;
-    font-family:courier;
-    border-color:#00ff00;    
-}
+
 </style>
 </center>
 </body>
