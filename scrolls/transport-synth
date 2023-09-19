@@ -1,0 +1,16 @@
+
+## [HOME](scrolls/home)
+
+# transport-synth
+ 
+Let us consider the synthesizer module as a possible model for general probe stations.  In this scenario, we have an audio signal in, an audio signal out, and the response is analyzed in software to get what we want from a probe.  
+
+We can have a recorded sound that is played into the probe, which is a hours long file that plays the amplitude sweep of the 1 KHz sine wave.  By default the sweep time is exactly 1 second. Then we can control the amplitude using whatever volume knob is on the machine which plays the swept tone.
+
+A standard is built with a resistor and zener diode which calibrates the system each time we set it up.  If we record a signal with the cal standard and then, while changing nothing, switch to the device under test, we can have one file which has all the information required to get what we want later from the signal.  
+
+Everything will be driven by p5js to make real time responses, as well as Jupyter to make the control signals and do more involved analysis after the fact.  That said, we want the whole system to be as real time as possible and to build up a library of free and open p5js sketches which can turn signals into physics information.  This kind of transport measurement can be done for next to zero dollars. 
+
+What do I need in order to build the thing? 
+
+I need an aux in and aux out. I need a capacitor in and a bias resistor and a probe. Then we can use this to probe tunnel junctions and see the response.  That is enough to make something interesting.  This would be a quantum tunneling synth that is not measuring noise yet, that will be the next step.

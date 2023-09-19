@@ -1,0 +1,17 @@
+{
+    "server": "https://quantumnoise.org/",
+    "scrolls": [
+        "capsule",
+        "equations",
+        "fab",
+        "freeqns",
+        "funding",
+        "home",
+        "metrology",
+        "network",
+        "outputbox",
+        "snt",
+        "transport-synth",
+        "voice"
+    ]
+}
