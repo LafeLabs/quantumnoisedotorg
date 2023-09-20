@@ -1,13 +1,24 @@
 
 ## [HOME](scrolls/home)
 
-# outputbox
- 
-signal comes in through a SMA bulkhead into a aluminum enclosure.  A SMA cable inside connects to a pcb on standoffs on the base of the box which has SMA edge connectors in and out and which has a mechanically tuned series LC resonator at the input of a surface mount RF amp. The output of that amp can go directly to the power meter with no cable in between.  The output of the power meter has a SMA edge connector which we solder wires to which then solder to the board that is a audio amp, which has a capacitor in series with it to reject DC.  
+# Parts and assembly for output box
 
- - [short SMA cables](https://www.digikey.com/en/products/detail/crystek-corporation/CCSMA-MM-086-3/2433482)
- - [SMA edge connector from digikey](https://www.digikey.com/en/products/detail/taoglas-limited/EMPCB-SMAFSTJ-B-HT/3522337)
- - [microwave amp smt chip from minicircuits CMA-83LN+](https://www.minicircuits.com/pdfs/CMA-83LN+.pdf)
- - [microwave power detector from minicircuits, ZX47-60-S+](https://www.minicircuits.com/WebStore/dashboard.html?model=ZX47-60-S%2B)
- - [SMA edge connector from digikey of opposite gender for output of power detector](https://www.digikey.com/en/products/detail/taoglas-limited/EMPCB-SMAMSTP-NI/15998685)
- - [stereo audio amplifier from DFRobot by way of digikey](https://www.digikey.com/en/products/detail/dfrobot/DFR0119/6588490)
+Signal goes from warm amp at top of fridge to this box by way of an SMA cable.  A bulkhead SMA feedthrough with SMA on both sides goes through the wall of an octagonal die cast aluminum box from Hammond.  A barrel inside changes genders and connects to a 20 dB LNA.  The output of the LNA goes to a bandpass filter and then into a power detector.  The output of the power detector goes into an audio amplifier, possibly with a blocking capacitor.  The audio amplifier has wires that go to the 3.5 mm aux output socket. Then a aux patch cable goes from there to speakers and or the computer and or other synth apparatus.  The RF amp, power sensor and audio amp all run on 5 volts, which is provided by a USB cable.  
+
+
+ - [octagonal box from Hammond](https://www.digikey.com/en/products/detail/hammond-manufacturing/1590STPCLG/2682387)
+ - [SMA feedthrough](https://www.digikey.com/en/products/detail/amphenol-sv-microwave/SF2990-6005/6201792)
+ - [drill to drill feedthrough for SMA(1/4")](https://www.mcmaster.com/8870A27/)
+ - [SMA nut barrel](https://www.digikey.com/en/products/detail/amphenol-rf/132168/1011917)
+ - [room temperature LNA](https://www.minicircuits.com/WebStore/dashboard.html?model=ZX60-83LN-S%2B)
+ - [Bandpass filter](https://www.minicircuits.com/WebStore/dashboard.html?model=VBF-7200%2B)
+ - [RF power detector](https://www.minicircuits.com/WebStore/dashboard.html?model=ZX47-60-S%2B)
+ - [SMA to solder](https://www.digikey.com/en/products/detail/taoglas-limited/EMPCB-SMAMSTP-NI/15998685)
+ - [solid core hookup wire](https://www.digikey.com/en/products/detail/sparkfun-electronics/PRT-11367/5956251)
+ - [Audio Amplifier board](https://www.digikey.com/en/products/detail/dfrobot/DFR0119/6588490)
+ - [3.5 mm Aux Audio socket](https://www.digikey.com/en/products/detail/tensility-international-corp/54-00080/7650215)
+ - [drill bit to drill hole for aux output(10 mm)](https://www.mcmaster.com/2951A145/)
+ - [3.5 mm audio patch cable, 6 feet](https://www.digikey.com/en/products/detail/cnc-tech/770-10040-00200/3064914)
+ - [barrel power connector feedthrough](https://www.digikey.com/en/products/detail/cui-devices/PJ-064B/2627222)
+ - [USB A to barrel](https://www.amazon.com/StarTech-com-USB-Type-Barrel-Cable/dp/B009C3CJG4)
+ - [USB wall wort to 5 volt](https://www.digikey.com/en/products/detail/qualtek/QFWC-05-05/9771105)
