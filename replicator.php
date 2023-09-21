@@ -15,6 +15,7 @@
     mkdir("php");
     mkdir("scrolls");
     mkdir("iconsymbols");
+    mkdir("trashmagic");
     
 
     copy("https://www.quantumnoise.org/php/replicator.txt","replicator.php");
