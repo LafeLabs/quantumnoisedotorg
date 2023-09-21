@@ -2,6 +2,16 @@
 ## [HOME](scrolls/home)
 
 # Fabrication
+
+As of now, some people make their own junctions, but the best junctions in the world are being made at NIST Boulder in Joe Aumentado's lab in the NIST clean room.  These are very high current density junctions with thick copper on top of them for added electrical and thermal conductance from the junction, and a careful design that matches to the incoming transmission on a microwave printed circuit board. 
+
+However these junctions require a permanent magnet to drive them from superconducting to normal at low temperatures, and need wire bonds to connect with the copper.  Ideally what we want for tunnel junctions in order to maximize their utility to the whole community is to use manganese doped aluminum which is always normal, and to add gold on top of the copper in the deposition, so that we can have a gold-gold contact in some kind of flip chip configuration in order to eliminate the wire bonds.
+
+The best way to do this is to buy a new machine dedicated specifically for this purpose.  The problem with using any existing deposition system is that any system used for qubit fabrication will tend to not allow the use of magnetic materials like manganese. Anyone outside the superconducting qubit community is unlikely to have done the optimization of the oxide barrier and angle tilt stage which are needed to make tunnel junctions with a single step using the angle evaporation "Dolan bridge" method.  
+
+Part of what is proposed in the present work here is the purchasing and configuration of a dedicated evaporator for this task in the CU Boulder EE clean room. This is a user facility, so once it is set up, it can be used for fabrication by the government, university professors, and private companies.  That clean room already has lithography capability, but it might be necessary to upgrade some of it in order to make this run smoothly.  We will propose putting all that together into a grant proposal along with both PI and technician time to set it all up.  
+
+List of things we want to do in the fab to improve on existing devices
  
  - Dope the aluminum with manganese
  - Keep the copper layer but add thick gold to the top 

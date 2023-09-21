@@ -1,0 +1,66 @@
+
+## [HOME](scrolls/home)
+
+# Background
+
+
+
+This story winds together several threads: thermal noise, quantum fluctuations, shot noise, and the physics of tunnel junctions.  Tunnel junctions are electrical devices in which two metal electrodes are separated by a insulating barrier so thin that electrons can tunnel quantum mechanically between the two electrodes.  A tunnel junction shows all three of these types of noise.  Depending on which parts of a system are well-understood, each of these can be used to calibrate the others.  
+
+Each of these three threads can be understood by looking at its limit.  The limit for thermal noise is that the photon energy is small compared to the energy of a thermal mode and the system is at zero bias. In this case, any linear resistor with resistance R in ohms at temperature T in kelvin, measured over a bandwidth  of B Hz will produce noise with power
+
+$$
+P = 4kTB,
+$$
+
+where $k$ is the Boltzmann constant of $1.38049\times10^{-23} J/K$ (fixed as of 2019 by the [quantum SI](https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf)). If we can do a calibrated measurement of this value, we can get temperature, and if we know temperature, we can calibrate a noise power measurement apparatus.  If we compute the power in a 100 MHz bandwidth at 1 kelvin using the classical formula we get about -113 dBm of power per kelvin of temperature.  
+
+To understand shot noise alone, we consider the case in which the voltage on a tunnel junction is large compared to both the photon energy in electron volts and the temperature in electron volts.  In this case, the noise power in watts emitted by a linear tunnel junction biased at voltage V in volts measured over a bandwidth of B in hertz is
+
+$$
+P = 2eVB,
+$$
+
+where "e" is the charge on the electron, fixed by the quantum SI to $1.602176634\times10^{−19} C$.  Pure shot noise can be used to calibrate thermal noise or amplifier noise, as well as the gain response of a measurement system.
+
+
+Finally, the pure quantum noise must be considered, where a linear resistor is at a temperature which is low compared to the quantum temperature of $hf/k$, the thermal noise power in watts integrated over some narrow band B in hertz generalizes to a power 
+
+$$
+P = 2hfB\coth{\left(\frac{hf}{2kT}\right)},
+$$
+
+or
+
+$$
+P = 4kTB\left(\frac{hf}{2kT}\right)\coth{\left(\frac{hf}{2kT}\right)},
+$$
+
+where h is the Planck constant equal to exactly $6.62607015\times10^{−34} J\cdot s$.  In the limit of zero temperature this becomes a noise signal entirely due to the vacuum, and is $2hfB$, and in the limit of zero frequency it reduces to the purely thermal case above.
+
+The noise power for zero frequency and finite voltage and temperature is 
+
+$$
+P = 2eVB\coth{\left(\frac{eV}{2kT}\right)},
+$$
+or
+
+$$
+P = 4kTB\left(\frac{eV}{2kT}\right)\coth{\left(\frac{eV}{2kT}\right)}
+$$
+
+The work considered here involves the general case at arbitrary frequency, temperature, and bias, which is
+
+$$
+P = 4kTB\left[\frac{1}{2}\left(\frac{eV +hf}{kT}\right)\coth{\left(\frac{eV +hf}{kT}\right)} + \frac{1}{2}\left(\frac{eV -hf}{kT}\right)\coth{\left(\frac{eV -hf}{kT}\right)}\right]
+$$
+
+This is the flat-bottomed plot shown at the top of this web page. Note that this curve has information about both temperature and frequency.  This physics has been used for both calibrating amplifiers and for measuring temperature. 
+
+ Measuring temperature using thermal noise has been around for more than 100 years.  Calibrating amplifiers using shot noise has also been around for many decades.  The method of using a 50 ohm load with shot noise to calibrate amplifiers and also measure temperature was explored by Rob Shoelkopf in his post doctoral studies of mesoscopic shot noise in Dan Probers lab in the late 1990s[Schoelkopf et. al. PRL, 1997](https://rsl.yale.edu/sites/default/files/physrevlett.78.pdf_frequency_dependence_of_shot_noise.pdf) at Yale.  Then, Lafe Spietz worked on the shot noise sources primarily as a form of temperature measurement in the Schoelkopf Lab, also at Yale.  
+
+The shot noise work was cited as part of Rob Schoelkopf's 2009 Keithley award[APS link](https://aps.org/programs/honors/prizes/prizerecipient.cfm?last_nm=Schoelkopf&first_nm=Robert&year=2009).  Dr. Spietz's Ph.D. dissertation, entitled "The Shot Noise Thermometer" was on the the use of a tunnel junction to do thermometry.  Spietz then took the work to NIST, using tunnel junctions to calibrate the noise at the input of SQUID amplifiers in Joe Aumentado's lab in Boulder, Colorado.  
+
+
+
+

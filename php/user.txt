@@ -375,6 +375,9 @@ document.getElementById("hidebutton").onclick = function(){
 pre{
   overflow:scroll;
 }
+.MathJax_Display{
+  overflow:scroll;
+}
 body{
     overflow:hidden;
     background-color:#F8F0E3;

@@ -15,7 +15,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>QUANTUM NOISE CURVE</title>
+        <title>Sweep Plots</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -44,28 +44,16 @@
 
 <div id = "feedscroll">
     
+    <a href = "index.html">HOME</a>
+    
+    <h1>Sweeper Graph</h1>
+    
         <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
         
-    <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
-    
-    
-    <table>
-        <tr>
-            <td>Height:</td>
-            <td>
-                <input id = "heightinput"/>
-            </td>
-        </tr>
-    </table>
-    
     <p>
         this page doesn't work on mobile. hit the letter "s" to post a square to the feed. move pointer around on square to change the paramters of the curve.
     </p>
-    <p>
-        $$
-        \left(\frac{v+f}{2}\right)\coth{\left(\frac{v+f}{2T}\right)} + \left(\frac{v-f}{2}\right)\coth{\left(\frac{v-f}{2T}\right)}
-        $$
-    </p>
+
 </div>
 
 <script>
@@ -83,6 +71,7 @@ let omega = 2*3.14*0.5;// 2 PI frequency of animation motion
 let time = 0;
 let framespersecond = 30;
 
+period = 20;
 
 
 if(innerWidth > innerHeight){
@@ -109,23 +98,30 @@ function setup() {
 
 function draw(){
 
-  frameRate(30);
   
-  T = pow(10,(2*mouseX/width)-2);
-  f = pow(10,(2*mouseY/height)-2);
-//  background(220);
+  
   background("#ffffff");
-
-  translate(width/2, 0.5*(height - margin));
-  translate(0, 0.5*(squaresize - height));
-
   noFill();
-  // plot hyperbolic tangent functions
   strokeWeight(8);
+  stroke("red");
   beginShape();
-  for (let v = -vmax; v <= vmax; v += 0.01)  {
-      let p = -(0.5*T*(v+f)/(2*T))/Math.tanh((v+f)/(2*T)) -(0.5*T*(v-f)/(2*T))/Math.tanh((v-f)/(2*T));
-      vertex(v * G, 2*p * G);
+  for (var x = 0; x < width; x++)  {
+      vertex(x, 0.2*height - 0.5*((Math.abs(x))%(width/3)));
+  }
+  endShape();
+
+  strokeWeight(4);
+  stroke("blue");
+  beginShape();
+  for (var x = 0; x < width; x++)  {
+      vertex(x, 0.8*height - 0.05*height*Math.sin(2*Math.PI*x/period));
+  }
+  endShape();
+
+  stroke("purple");
+  beginShape();
+  for (var x = 0; x < width; x++)  {
+      vertex(x, 0.5*height - (Math.abs(x))%(width/3)*0.001*height*Math.sin(2*Math.PI*x/period));
   }
   endShape();
 
@@ -142,10 +138,10 @@ function post(){
     var url = "pngsave.php";        
     httpc.open("POST", url, true);
     httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=trashmagic/square" + timestamp +  "-coth.png");//send text to filesaver.php
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=trashmagic/square" + timestamp +  "-sweep.png");//send text to filesaver.php
      //location.reload(); 
      
-    newfilename = "trashmagic/square" + timestamp +  "-coth.png";
+    newfilename = "trashmagic/square" + timestamp +  "-sweep.png";
     
     var newbox = document.createElement("DIV");
     newbox.classList.add("imagebox");         
@@ -199,7 +195,7 @@ var httpc9 = new XMLHttpRequest();
         upuploadImages = JSON.parse(this.responseText);
         for(var index = upuploadImages.length - 1;index >= 0;index--) {
             
-            if(upuploadImages[index].includes("-coth")){
+            if(upuploadImages[index].includes("-sweep")){
             
                 var newbox = document.createElement("DIV");
                 newbox.classList.add("imagebox");         

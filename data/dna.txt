@@ -25,6 +25,7 @@
         "scrolleditor.html",
         "scrollset.html",
         "set.html",
+        "sweepergraph.html",
         "textconvert.html",
         "trashbook.html",
         "trashmagic.html",
@@ -70,6 +71,8 @@
         "user.txt"
     ],
     "scrolls": [
+        "QNS",
+        "background",
         "capsule",
         "equations",
         "fab",

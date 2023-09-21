@@ -3,11 +3,11 @@
 
 ![theoretical quantum noise curve with no units](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/coth-frontpage.png)
 
-![Toto in front of a synth, looking hairy](https://upload.wikimedia.org/wikipedia/commons/3/3d/Steveporcaro_toto.jpg)
+![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)
 
- - Background
- - Introducing The QNS
- - Tunnel Junction Fabrication
+ - [Background](scrolls/background)
+ - [Introducing The QNS](scrolls/QNS)
+ - [Tunnel Junction Fabrication](scrolls/fab)
  - Filters
  - Junction Capsule
  - Applications
