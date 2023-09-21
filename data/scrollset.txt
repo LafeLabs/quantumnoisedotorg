@@ -10,6 +10,7 @@
         "metrology",
         "network",
         "outputbox",
+        "p5js",
         "snt",
         "transport-synth",
         "voice"

@@ -10,5 +10,9 @@ Which SMA to use?
  - [amazon link to 1/8 brass bar stock 1 inch wide](https://www.amazon.com/C360-Brass-Stock-Knife-Making/dp/B0BKPG464X/)
  - [digikey product search page](https://www.digikey.com/en/products/filter/coaxial-connector-rf-assemblies/437?s=N4IgjCBcoBwAwWiAxlAZgQwDYGcCmANCAPZQDaIALHAMwwCsNIAukQA4AuUIAyhwE4BLAHYBzEAF8JRAEzkQOALYYWEoA)
  - [good candidate from digikey](https://www.digikey.com/en/products/detail/taoglas-limited/EMPCB-SMAFSTJ-B-HT/3522337)
+ - [another possibility from digikey](https://www.taoglas.com/datasheets/ConnectorCatalogue.pdf)
 
+With this SMA we can cut and solder brass to hand assemble without machining an enclosure:
 ![](https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/3666/MFG_EMPCB.SMAFSTJ.B.HT.jpg)
+
+We can also create a custom gold plated OFHC copper enclosure, and we will use both depending on what people want.  

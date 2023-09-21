@@ -1,10 +1,18 @@
 # The Quantum Noise Synth
+## Lafe Spietz
 
- - [Noise Metrology and the Quantum Information Technology Industry](scrolls/metrology)
- - [History of the Shot Noise Thermometer](scrolls/snt)
- - [Limitations of the current Shot Noise Thermometer](scrolls/limitations)
- - [Introducing: The Quantum Noise Synth](scrolls/qns)
- - [The QNS Network](scrolls/network)
- - [Free QNS for all!](scrolls/freeqns)
- - [Sponsors of the QNS](scrolls/sponsors)
- - [The Voice of the Vacuum](scrolls/voice)
+![theoretical quantum noise curve with no units](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/coth-frontpage.png)
+
+![Toto in front of a synth, looking hairy](https://upload.wikimedia.org/wikipedia/commons/3/3d/Steveporcaro_toto.jpg)
+
+ - Background
+ - Introducing The QNS
+ - Tunnel Junction Fabrication
+ - Filters
+ - Junction Capsule
+ - Applications
+ - Users
+ - Funding Proposal
+ - [P5JS](scrolls/p5js)
+ - Trash Magic
+ - Geometron
