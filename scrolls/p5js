@@ -3,6 +3,13 @@
 
 # p5js
 
+What is p5js? 
+
+A free open source JavaScript library for doing art in a web browser.  What works for art can also work for science! We can bring real time science into the web browser, needing no native code to analyze our data!
+ 
+
+## Links
+
  - [code editor](webeditor.html)
  - [dnagenerator.php](dnagenerator.php)
  - [quantum coth](coth.html)

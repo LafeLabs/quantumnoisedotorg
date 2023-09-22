@@ -4,3 +4,5 @@
 # QNS
  
 The QNS or Quantum Noise Synth, is a method of measuring the noise power from a tunnel junction as a synthesizer module using an AC audio bias instead of a DC bias.   
+ 
+The AC bias will be a sine wave signal in the kHz frequency range which is ramped with a linear ramp on the order of a second ramp time from zero to some high amplitude.  

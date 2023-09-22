@@ -2,10 +2,12 @@
     "server": "https://quantumnoise.org/",
     "scrolls": [
         "QNS",
+        "applications",
         "background",
         "capsule",
         "equations",
         "fab",
+        "filters",
         "freeqns",
         "funding",
         "home",
@@ -15,6 +17,7 @@
         "p5js",
         "snt",
         "transport-synth",
+        "users",
         "voice"
     ]
 }

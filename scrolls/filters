@@ -1,0 +1,8 @@
+
+## [HOME](scrolls/home)
+
+# filters
+ 
+This project will construct a standard filter design for use with the AC audio bias lines that go down into a dilution refrigerator.  These will be lumped element RC line filters potted with ecosorb epoxy.  Designs will be open source and modular.   
+
+Filters will also serve as attenuators and heat sinks. There will be one filter at 4 kelvin, one at the still at a few hundred mK, and one integrated into the capsule which contains the tunnel junction. 

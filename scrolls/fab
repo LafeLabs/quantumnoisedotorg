@@ -20,4 +20,4 @@ List of things we want to do in the fab to improve on existing devices
  - Do the deposition in a machine we get bought for this exact purpose on a grant, installed at a university right by the lithography
  - Make a probe apparatus and protocol which works right after liftoff for rapid feedback
  - Open source the design in a modular way 
- - Optimize die size and shape for the flip chip probe design 
+ - Optimize die size and shape for the flip chip probe design and maximum yield

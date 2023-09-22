@@ -57,9 +57,16 @@ $$
 
 This is the flat-bottomed plot shown at the top of this web page. Note that this curve has information about both temperature and frequency.  This physics has been used for both calibrating amplifiers and for measuring temperature. 
 
- Measuring temperature using thermal noise has been around for more than 100 years.  Calibrating amplifiers using shot noise has also been around for many decades.  The method of using a 50 ohm load with shot noise to calibrate amplifiers and also measure temperature was explored by Rob Shoelkopf in his post doctoral studies of mesoscopic shot noise in Dan Probers lab in the late 1990s[Schoelkopf et. al. PRL, 1997](https://rsl.yale.edu/sites/default/files/physrevlett.78.pdf_frequency_dependence_of_shot_noise.pdf) at Yale.  Then, Lafe Spietz worked on the shot noise sources primarily as a form of temperature measurement in the Schoelkopf Lab, also at Yale.  
+ Measuring temperature using thermal noise has been around for more than 100 years.  Calibrating amplifiers using shot noise has also been around for many decades.  The method of using a 50 ohm load with shot noise to calibrate amplifiers and also measure temperature was explored by Rob Shoelkopf in his post doctoral studies of mesoscopic shot noise in Dan Probers lab in the late 1990s[[Schoelkopf et. al. PRL, 1997](https://rsl.yale.edu/sites/default/files/physrevlett.78.pdf_frequency_dependence_of_shot_noise.pdf)] at Yale.  Then, Lafe Spietz worked on the shot noise sources primarily as a form of temperature measurement in the Schoelkopf Lab, also at Yale.  
 
-The shot noise work was cited as part of Rob Schoelkopf's 2009 Keithley award[APS link](https://aps.org/programs/honors/prizes/prizerecipient.cfm?last_nm=Schoelkopf&first_nm=Robert&year=2009).  Dr. Spietz's Ph.D. dissertation, entitled "The Shot Noise Thermometer" was on the the use of a tunnel junction to do thermometry.  Spietz then took the work to NIST, using tunnel junctions to calibrate the noise at the input of SQUID amplifiers in Joe Aumentado's lab in Boulder, Colorado.  
+The shot noise work was cited as part of Rob Schoelkopf's 2009 Keithley award[[APS link](https://aps.org/programs/honors/prizes/prizerecipient.cfm?last_nm=Schoelkopf&first_nm=Robert&year=2009)].  Dr. Spietz's Ph.D. dissertation, entitled "[The Shot Noise Thermometer](https://lafelabs.github.io/sixbynine.pdf)" was on the the use of a tunnel junction to do thermometry.  Spietz then took the work to NIST, using tunnel junctions to calibrate the noise at the input of SQUID amplifiers in Joe Aumentado's lab in Boulder, Colorado.  The lab of Yonuk Chong at KRISS in Daejeon, South Korea also adopted the technology and built precision temperature measurement technology in the lab there using tunnel junctions.  The Aumentado lab has an ongoing effort to make and distribute junctions, and have distributed them to several labs.
+
+
+
+
+
+
+unnel junction 
 
 
 
