@@ -3,28 +3,61 @@
 
 # normalizations
  
-We define the normalized noise power to be 
+We define the normalized noise power in kelvin units to be 
 
 $$
-p = \frac{P}{4kTB},
+p = \frac{P}{4kB},
 $$
 
-where P is the power in watts over a bandwidth B in hertz, T is the temperature in kelvin, and k is the Boltzmann constant of $1.380649 \times 10^{-23} J/K$. 
+where P is the power in watts over a bandwidth B in hertz, and k is the Boltzmann constant which is defined to be the fixed value of $1.380649 \times 10^{-23} J/K$. 
 
-We define the normalized bias voltage to be 
+We define the normalized bias voltage in dimensionless units to be 
  
 $$
 v = \frac{eV}{kT},
 $$
 
-where e is the charge on an electron, or $1.602176634\times10^{−19} C$, and V is the voltage across the junction in volts.
+where e is the charge on an electron, which is defined to be the fixed value of $1.602176634\times10^{−19} C$, and V is the voltage across the junction in volts.
  
-The normalized frequency is defined as
+The normalized frequency in dimensionless units is defined as
 
 $$
-\phi = frac{hf}{kT},
+\phi = \frac{hf}{kT},
 $$
 
 where h is the Planck constant, equal to $6.62607015\times10^{−34}$ and f is the frequency in hertz.
+
+In these normalized units, the noise power at zero voltage and frequency is just 1.  The noise power at finite voltage is 
+
+$$
+p = T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
+$$
+
+At zero bias and finite voltage, the noise power is 
+
+$$
+p = T\left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
+$$
+
+And finally, the combined expression with finite voltage and frequency is 
+
+$$
+p = T\left[ \frac{1}{2}\left( \frac{v + \phi}{2}\right)\coth{\left( \frac{v + \phi}{2}\right)} +\frac{1}{2}\left( \frac{v - \phi}{2}\right)\coth{\left( \frac{v - \phi}{2}\right)}  \right]
+$$
+
+
+In these normalized units, we apply a voltage bias which ramps the amplitude of a sine wave from zero up to a normalized voltage of a few times the temperature in the classical case and a couple of times the frequency in the quantum case.  
+
+Typical values for a dilution refrigerator might be a temperature of 10 mK, a frequency of 8 GHz, which is about 0.4 kelvin, so that if we want to go to about double that, the amplitude of v ranges up to about 80, the equivalent of about 0.8 kelvin.  So we say that v ranges up to 80 and $\phi$ is 40.  
+
+The values for a junction run in a classical mode where there is no frequency dependence are typically about up to a bias amplitude of 8-10 in normalized units.  
+
+Finally, we create computer files with graphs of these responses width and height equal to some number of pixels called "graphsize".  So we need a function which maps the stimulus sweep as well as the noise power response onto this geometry.  
+
+The unit of all graphs we make on the computer with [p5js](scrolls/p5js) are pixels.  The final transformation of anything we want to plot must be to this unit. 
+
+Furthermore, we will define 
+
+
 
 
