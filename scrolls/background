@@ -13,7 +13,7 @@ $$
 P = 4kTB,
 $$
 
-where $k$ is the Boltzmann constant of $1.38049\times10^{-23} J/K$ (fixed as of 2019 by the [quantum SI](https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf)). If we can do a calibrated measurement of this value, we can get temperature, and if we know temperature, we can calibrate a noise power measurement apparatus.  If we compute the power in a 100 MHz bandwidth at 1 kelvin using the classical formula we get about -113 dBm of power per kelvin of temperature.  
+where $k$ is the Boltzmann constant of $1.380649\times10^{-23} J/K$ (fixed as of 2019 by the [quantum SI](https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf)). If we can do a calibrated measurement of this value, we can get temperature, and if we know temperature, we can calibrate a noise power measurement apparatus.  If we compute the power in a 100 MHz bandwidth at 1 kelvin using the classical formula we get about -113 dBm of power per kelvin of temperature.  
 
 To understand shot noise alone, we consider the case in which the voltage on a tunnel junction is large compared to both the photon energy in electron volts and the temperature in electron volts.  In this case, the noise power in watts emitted by a linear tunnel junction biased at voltage V in volts measured over a bandwidth of B in hertz is
 
@@ -52,7 +52,7 @@ $$
 The work considered here involves the general case at arbitrary frequency, temperature, and bias, which is
 
 $$
-P = 4kTB\left[\frac{1}{2}\left(\frac{eV +hf}{kT}\right)\coth{\left(\frac{eV +hf}{kT}\right)} + \frac{1}{2}\left(\frac{eV -hf}{kT}\right)\coth{\left(\frac{eV -hf}{kT}\right)}\right]
+P = 4kTB\left[\frac{1}{2}\left(\frac{eV +hf}{2kT}\right)\coth{\left(\frac{eV +hf}{2kT}\right)} + \frac{1}{2}\left(\frac{eV -hf}{2kT}\right)\coth{\left(\frac{eV -hf}{2kT}\right)}\right]
 $$
 
 This is the flat-bottomed plot shown at the top of this web page. Note that this curve has information about both temperature and frequency.  This physics has been used for both calibrating amplifiers and for measuring temperature. 

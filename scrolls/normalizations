@@ -1,0 +1,30 @@
+
+## [HOME](scrolls/home)
+
+# normalizations
+ 
+We define the normalized noise power to be 
+
+$$
+p = \frac{P}{4kTB},
+$$
+
+where P is the power in watts over a bandwidth B in hertz, T is the temperature in kelvin, and k is the Boltzmann constant of $1.380649 \times 10^{-23} J/K$. 
+
+We define the normalized bias voltage to be 
+ 
+$$
+v = \frac{eV}{kT},
+$$
+
+where e is the charge on an electron, or $1.602176634\times10^{−19} C$, and V is the voltage across the junction in volts.
+ 
+The normalized frequency is defined as
+
+$$
+\phi = frac{hf}{kT},
+$$
+
+where h is the Planck constant, equal to $6.62607015\times10^{−34}$ and f is the frequency in hertz.
+
+
