@@ -95,11 +95,12 @@ function setup() {
 function draw(){
 
 clear();
-  strokeWeight(4);
+  strokeWeight(6);
   noFill();
-  stroke("blue");
+  stroke("red");
   beginShape();
   period = mouseX/10;
+  period = 60;
   for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
       v = squaretime*Math.cos(2*Math.PI*squaretime/period);
       vertex(margin + squaretime, margin + 0.5*graphsize - 0.5*v);

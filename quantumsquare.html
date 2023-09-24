@@ -109,12 +109,14 @@ function setup() {
 function draw(){
 
 clear();
-  strokeWeight(4);
+  strokeWeight(6);
   noFill();
   stroke("blue");
   beginShape();
   period = mouseX/4;
+  period = 60;
   phi = (squaresize - margin - mouseY);
+  phi = (0.5*squaresize - margin);
   
   for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
       v = squaretime*Math.cos(2*Math.PI*squaretime/period);
