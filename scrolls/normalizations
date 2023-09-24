@@ -52,11 +52,19 @@ Typical values for a dilution refrigerator might be a temperature of 10 mK, a fr
 
 The values for a junction run in a classical mode where there is no frequency dependence are typically about up to a bias amplitude of 8-10 in normalized units.  
 
-Finally, we create computer files with graphs of these responses width and height equal to some number of pixels called "graphsize".  So we need a function which maps the stimulus sweep as well as the noise power response onto this geometry.  
+Finally, we create computer files with graphs of these responses width and height equal to some number of pixels called [graphsize].  So we need a function which maps the stimulus sweep as well as the noise power response onto this geometry.  This square sits in a larger square of size [squaresize], with a margin around the square graph with width equal to [margin]. 
+
 
 The unit of all graphs we make on the computer with [p5js](scrolls/p5js) are pixels.  The final transformation of anything we want to plot must be to this unit. 
 
-Furthermore, we will define 
+We must finally note that the y axis on a canvas in p5js sets zero at the top of the canvas rather than the bottom, and increasing "y" values go down the screen rather than up.  So if we want to plot a ramp bias which goes from 0 to vmax across a square, it will be a line of slope 1/2 starting at ([margin],[margin] + 0.5*[graphsize]) and going up to ([margin] + [graphsize],[margin]).  If we multiply this ramp by a cosine wave with period equal to "period" in units of pixels, we get a total bias of 
+
+$$
+v =  \frac{1}{2}x\cos{2\pi x/[period]},
+$$
+
+where x is the distance of a given point over from [margin] in the square.  As x goes up to a maximum value of [graphsize], this will go up to the top of the graph.  
+
 
 
 
