@@ -13,8 +13,49 @@ We are building as part of this system a set of filters for the audio signal, on
 
 The proposal is to estimate the total potential user base across the US initially for this technology, and then to raise funds to support building a lifetime supply for everyone in the world who might use such a thing, and use economies of scale to supply that whole demand for free as a research project.  This is a hybrid project: part commercialization, part government project, part academic collaboration and part art and music project.  We will find a government grant to build the microfabrication facility into an existing university user facility which already has optical and or e-beam lithography working.   This could be the University of Colorado, Boulder or the University of Central Florida for example, both of which have friendly faculty and existing fabrication user facilities.  With that facility in place, we can get a grant to support the time of Dr. Spietz and some labor for technicians to get trained on the process and work together to perfect it.  
 
+To analyze how signals are transformed by the QNS, we use a set of units normalized by fundamental constants and the system temperature, namely the normalized bias voltage indicated by a lowercase v, normalized frequency $\phi$ and normalized noise power in temperature units $p$:
+
+$$
+v \equiv \frac{eV}{kT}
+$$
+
+$$
+\phi \equiv \frac{hf}{kT}
+$$
+
+$$
+p \equiv \frac{P}{4kB},
+$$
+
+where k is the Boltzmann constant now fixed by the quantum SI to be $1.380649\times10^{-23} J/K$, e is the elementary charge, now fixed by the quantum SI to be $1.602176634 \times 10^{-19}C$, B is the effective bandwidth of the noise power measurement in hertz, f is the frequency in hertz at which noise is measured, T is the absolute temperature in kelvin, and P is the power in watts.  The normalized expression for the noise power response p as a function of v for fixed $\phi$ is as follows:
+
+$$
+p = T\left[ \frac{1}{2}\left( \frac{v + \phi}{2}\right)\coth{\left( \frac{v + \phi}{2}\right)} +\frac{1}{2}\left( \frac{v - \phi}{2}\right)\coth{\left( \frac{v - \phi}{2}\right)}  \right],
+$$
+
+which reduces to 
+
+$$
+p = T
+$$
+
+for $v = 0$ and $\phi = 0$ and 
+
+$$
+p = T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
+$$
+for $\phi = 0$, and 
+
+$$
+p = T\left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
+$$
+for $v = 0$.
+
+The full expression for p as a function of v with $\phi>>1$ shows the flat-bottomed v curve below:
 
 ![theoretical quantum noise curve with no units](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/coth-frontpage.png)
+
+The bias we apply to this is a linear ramped sine wave which looks like this:
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/stimulus.png)
 
@@ -27,8 +68,18 @@ The proposal is to estimate the total potential user base across the US initiall
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/response.png)
 
+The response to the ramped stimulus is shown above.  As long as the peak value of the AC bias wave is below the quantum knee at $v = \phi$, there is almost no response, then the response suddenly turns on as that threshold is reached. This calibrates the time axis of the response curves using the value of that quantum frequency, which can be known quite accurately, hence calibrating the time axis in units of temperature.  Since the slope of the shot noise response is known, this also calibrates the vertical axis in units of temperature, which is the desired result for both noise and temperature metrology.  This calibration process is for the both the audio bias and RF response *directly across the junction*, so it removes both the attenuation going down to the junction and the gain going back up.
+
+
+
+That is the magic of the QNS!  It takes audio signals as input, puts out audio signals as output, and calibrates out all of the various artifacts between the audio system and the quantum tunnel junction.  
+
+To get a nice curve like the one showed above for a system with about 7 GHz noise power center frequency and 10 millikelvin physical temperature, we get a value of $\phi \approx 30$ and so we aim for a max value of v of about 60.  This is a voltage in SI units of 50 microvolts. So for typical audio signals we might have hundreds of millivolts at the top of the fridge and so want to attenuate about about a factor of ten to the fourth.  This will attenuate power by a factor of ten to the eighth. 
+
+To play a tone into the system, go to the [playramp.html](playramp.html) p5js application.  You can set any frequency you want, as well as any sweep rate.  This can be played from any device: mobile phone, tablet, laptop, desk top.  Then that signal will want to get attenuated and filtered and applied to the tunnel junction, and you take the RF signal from the tunnel junction, amplify it, mix it down into an audio signal and play it into another machine running a web browser and read it into the [qns p5js app](qns.html).
+
+
  - [Background](scrolls/background)
- - [Introducing The QNS](scrolls/QNS)
  - [Tunnel Junction Fabrication](scrolls/fab)
  - [Filters](scrolls/filter)
  - Junction Capsule

@@ -8,4 +8,8 @@
 - Calibration of noise and gain in commercial superconducting quantum amplifiers 
 - Calibration of noise and gain in measurement systems for dark matter searches
 - Guitar pedal/synth module for creating experimental music projects
-- Analog quantum information processing
+- Analog quantum information processing based on interaction with complex quantum circuits
+- Classroom and street demonstration of quantum tunneling at room temperature with waste stream materials
+
+
+These applications all need different figures of merit to be optimized, and it makes sense to build different version of the QNS for the different applications.  
