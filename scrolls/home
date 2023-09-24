@@ -1,9 +1,31 @@
 # The Quantum Noise Synth
 ## Lafe Spietz
 
+![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)
+
+The Quantum Noise Synth is a way of reading out the noise from a normal metal tunnel junction in which the junction is biased with a ramped sine wave in the audio frequency range, with zero DC bias.  This acts like a module in a [modular synthesizer](https://en.wikipedia.org/wiki/Modular_synthesizer), taking an input signal in the audio range, and eventually converting it back into an audio output signal based on the mixed down noise from a microwave frequency.
+
+The advantages of this method of reading out the noise noise from a tunnel junction are that we can have no DC connection with the junction, which should make it less susceptible to electrostatic damage and also to low frequency noise(which can be filtered out).  By blocking all DC current coming into the junction, we can add a DC path to ground through a bias resistor, vastly improving the thermal anchoring to whatever is being measured. We will build the bias tee for this into a custom enclosure along with a filter and a set of contacts for a flip chip geometry, removing the need for wire bonds.  
+
+We further propose to build a dedicated fabrication facility for depositing the metals in normal metal tunnel junctions for this purpose. That machine will be a clone in capability to "JoeTek", the custom-built junction deposition system at NIST boult by Joe Aumentado, but with the ability to dope the aluminum with manganese to make it normal at all temperatures without the need for a permanent magnet.  
+
+We are building as part of this system a set of filters for the audio signal, one for use at 4 kelvin and one for use at the still in a dilution refrigerator.  A room temperature box will generate the audio AC bias signal and downconvert the RF noise coming out of the measurement channel of the dilution fridge into an audible range. Finally, this ramped white noise signal will be read into the web browser of any web enabled device(laptop, desktop, mobile, tablet, any operating system) which will convert that signal into the desired noise, gain and temperature metrology data needed by the quantum information technology community for both amplifier calibration and thermometry. 
+
+The proposal is to estimate the total potential user base across the US initially for this technology, and then to raise funds to support building a lifetime supply for everyone in the world who might use such a thing, and use economies of scale to supply that whole demand for free as a research project.  This is a hybrid project: part commercialization, part government project, part academic collaboration and part art and music project.  We will find a government grant to build the microfabrication facility into an existing university user facility which already has optical and or e-beam lithography working.   This could be the University of Colorado, Boulder or the University of Central Florida for example, both of which have friendly faculty and existing fabrication user facilities.  With that facility in place, we can get a grant to support the time of Dr. Spietz and some labor for technicians to get trained on the process and work together to perfect it.  
+
+
 ![theoretical quantum noise curve with no units](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/coth-frontpage.png)
 
-![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/stimulus.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/inarrow.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-out-capsule.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/outarrow.png)
+
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/response.png)
 
  - [Background](scrolls/background)
  - [Introducing The QNS](scrolls/QNS)
