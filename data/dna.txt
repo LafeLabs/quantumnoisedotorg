@@ -91,6 +91,7 @@
         "filters",
         "freeqns",
         "funding",
+        "geometron",
         "home",
         "links",
         "metrology",
@@ -100,6 +101,7 @@
         "p5js",
         "snt",
         "transport-synth",
+        "trashmagic",
         "users",
         "voice"
     ],

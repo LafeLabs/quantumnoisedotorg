@@ -24,7 +24,11 @@
     <META NAME="robots" CONTENT="noindex,nofollow">
 <!--geometron javascript library-->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+
+<!--
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+    -->
+    
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -55,20 +59,19 @@
 this is a sequence of n poles of a resistance R and then a capacitance to ground C.  We might or might not have an input capacitor Cin and an output resistor Rout.
 </p>
 
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rcline-schematic.svg"/>
+
 <p>
-$$    
-  ABCD \equiv
-  \left[ {\begin{array}{cc}
-    A & B \\
-    D & D \\
-  \end{array} } \right]
-$$
+    Each unit of the filter is like this:
 </p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-section-schematic.svg"/>
+
 <p>
 $$    
   \left[ {\begin{array}{cc}
     A & B \\
-    D & D \\
+    C & D \\
   \end{array} } \right]=
   \left[ {\begin{array}{cc}
     1+ i\omega R_{line}C_{line} & R_{line} \\
@@ -78,8 +81,77 @@ $$
 $$
 </p>
 
+<p>
+    The input capacitor looks like this:
+</p>
 
-<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rcline-schematic.svg"/>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-input-module.svg"/>
+
+<p>
+$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & \frac{-i}{\omega C_{in}} \\
+    0 & 1 \\
+  \end{array} } \right]
+ 
+$$
+</p>
+
+
+<p>
+    The output resistor looks like this:
+</p>
+
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-output-module.svg"/>
+
+<p>
+$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & 0 \\
+    \frac{1}{R_{out}} & 1 \\
+  \end{array} } \right]
+ 
+$$
+</p>
+
+<p>
+    $\omega = 2\pi f_{audio}$, and $f_{audio}$ is varied logarithmically from 1 Hz to  10 GHz.  If we are plotting across a square graph which is [graphsize] wide and offset by [margin] from the left of the p5js canvas, the frequency in Hz as a function of position x is:
+</p>
+
+<p>
+    $$
+    f = 10^{10*(x-margin)/graphsize}
+    $$
+</p>
+
+
+<p>The S parameter $S_{21}$ for a device with known ABCD matrix is</p>
+
+<p>
+    $$
+    S_{21} = \frac{2}{A + B/Z_0 + CZ_0 + D}
+    $$
+</p>
+
+<p>
+    We will want to display insertion loss in dB and have 0 be the top of the screen and the bottom be -100 dB, so that the y value associated with a given scattering parameter  
+</p>
+
+<p>
+    $$
+    y = [\textrm{margin}] - 20\left(\frac{[\textrm{graphsize}]}{100}\right)\log_{10}(|S_{21}|)
+    $$
+</p>
 
 <table>
     <tr>
@@ -126,9 +198,19 @@ v = 0;
 period = 50;
 graphsize = 100;
 
-Rline = 100;
-Cline = 1e-6;
+Rline = 1000;//ohms
+Cline = 0.01e-6;//farads
+Ccouple = 1e-6;//farads
+Z0 = 50;//ohms
+Rout = 50;//ohms
+f = 1;//Hz
+omega = 1;//radians/s
+nstages = 5;
 
+A = math.complex(0,0);
+B = math.complex(0,0);
+C = math.complex(0,0);
+D = math.complex(0,0);
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -155,31 +237,88 @@ function setup() {
 
 function draw(){
 
-clear();
+  clear();
   strokeWeight(6);
   noFill();
-  stroke("red");
+  stroke("blue");
   beginShape();
-  period = mouseX/10;
-  period = 60;
+      
+      
+
+    
+
   for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
-      v = squaretime*Math.cos(2*Math.PI*squaretime/period);
-      vertex(margin + squaretime, margin + 0.5*graphsize - 0.5*v);
+      
+      f = 10**(10*squaretime/graphsize);
+      omega = 2*Math.PI*f;
+    
+       A = math.complex(1,0);
+       B = math.complex(0,0);
+       C = math.complex(1/Rout,0);
+       D = math.complex(1,0);
+
+      
+
+      Arc = math.complex(1,omega*Rline*Cline);
+      Brc = math.complex(Rline,0);
+      Crc = math.complex(0,omega*Cline);
+      Drc = math.complex(1,0);
+
+    for(var stageindex = 0;stageindex < nstages;stageindex++){
+      Aout = math.add(math.multiply(Arc,A),math.multiply(Brc,C));
+      Bout = math.add(math.multiply(Arc,B),math.multiply(Brc,D));
+      Cout = math.add(math.multiply(A,Crc),math.multiply(C,Drc));
+      Dout = math.add(math.multiply(B,Crc),math.multiply(D,Drc));
+      A = Aout;
+      B = Bout;
+      C = Cout;
+      D = Dout;
+    }      
+
+
+       Ain = math.complex(1,0);
+       Bin = math.complex(0,-1/(omega*Ccouple));
+       Cin = math.complex(0,0);
+       Din = math.complex(1,0);
+
+      Aout = math.add(math.multiply(Ain,A),math.multiply(Bin,C));
+      Bout = math.add(math.multiply(Ain,B),math.multiply(Bin,D));
+      Cout = math.add(math.multiply(A,Cin),math.multiply(C,Din));
+      Dout = math.add(math.multiply(B,Cin),math.multiply(D,Din));
+
+      A = Aout;
+      B = Bout;
+      C = Cout;
+      D = Dout;
+
+
+      
+      denominator = math.add(A,math.multiply((1/Z0),B),math.multiply(Z0,C),D);
+      mags = math.abs(math.multiply(math.complex(1,0),denominator.inverse()));
+      y = margin - 20*(graphsize/100)*Math.log10(mags);
+      vertex(margin + squaretime,y);
   }
+  
   endShape();
+  
   stroke("black");
-
-
   rect(margin, margin,graphsize,graphsize);
   
 
   strokeWeight(1);
-    line(margin,margin + 0.5*graphsize,margin+graphsize,margin + 0.5*graphsize);
+  for(var gridindex = 0;gridindex < 10;gridindex++){
+      line(margin + gridindex*graphsize/10,margin,margin + gridindex*graphsize/10,margin+graphsize);
+      line(margin,margin + gridindex*graphsize/10,margin+graphsize,margin + gridindex*graphsize/10); 
+      
+  }
+
+//line(margin,margin + 0.5*graphsize,margin+graphsize,margin + 0.5*graphsize);
   textSize(32);
-  text("-V_max",margin-32,margin+graphsize+32);
-  text("0",margin-32,margin + 0.5*graphsize);
-  text("V_max",margin-32,margin-32);
-  text("sweep time",graphsize-32,margin+graphsize+32);
+
+//  text("-V_max",margin-32,margin+graphsize+32);
+//  text("0",margin-32,margin + 0.5*graphsize);
+//  text("V_max",margin-32,margin-32);
+//  text("sweep time",graphsize-32,margin+graphsize+32);
 
     
 }

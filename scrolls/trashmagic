@@ -1,0 +1,8 @@
+
+## [HOME](scrolls/home)
+
+# trashmagic
+ 
+Trash magic is a system of self-replicating documents which are copied from one web server to another via client side interaction.  We use this to create the media which make up this system. That includes this document, documents on how to copy all parts of the system, all the various applications which run in web browsers which make the project work, and the code which replicates all the other files.  
+
+All that is needed to copy a trash magic server is a machine that can run a web server and PHP.  The self-replicating PHP scripts copy the sets from server to server.  

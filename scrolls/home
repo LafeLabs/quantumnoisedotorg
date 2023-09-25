@@ -78,14 +78,13 @@ To get a nice curve like the one showed above for a system with about 7 GHz nois
 
 To play a tone into the system, go to the [playramp.html](playramp.html) p5js application.  You can set any frequency you want, as well as any sweep rate.  This can be played from any device: mobile phone, tablet, laptop, desk top.  Then that signal will want to get attenuated and filtered and applied to the tunnel junction, and you take the RF signal from the tunnel junction, amplify it, mix it down into an audio signal and play it into another machine running a web browser and read it into the [qns p5js app](qns.html).
 
-
  - [Background](scrolls/background)
  - [Tunnel Junction Fabrication](scrolls/fab)
- - [Filters](scrolls/filter)
- - Junction Capsule
+ - [Filters](scrolls/filters)
+ - [Junction Capsule](scrolls/capsule)
  - [Applications](scrolls/applications)
  - [Users](scrolls/users)
- - Funding Proposal
+ - [Proposal](scrolls/proposal)
  - [P5JS](scrolls/p5js)
- - Trash Magic
- - Geometron
+ - [Trash Magic](scrolls/trashmagic)
+ - [Geometron](scrolls/geometron)
