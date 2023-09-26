@@ -3,6 +3,9 @@
 
 # Fabrication
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/die-layout.svg)
+
+
 As of now, some people make their own junctions, but the best junctions in the world are being made at NIST Boulder in Joe Aumentado's lab in the NIST clean room.  These are very high current density junctions with thick copper on top of them for added electrical and thermal conductance from the junction, and a careful design that matches to the incoming transmission on a microwave printed circuit board. 
 
 However these junctions require a permanent magnet to drive them from superconducting to normal at low temperatures, and need wire bonds to connect with the copper.  Ideally what we want for tunnel junctions in order to maximize their utility to the whole community is to use manganese doped aluminum which is always normal, and to add gold on top of the copper in the deposition, so that we can have a gold-gold contact in some kind of flip chip configuration in order to eliminate the wire bonds.
@@ -21,3 +24,42 @@ List of things we want to do in the fab to improve on existing devices
  - Make a probe apparatus and protocol which works right after liftoff for rapid feedback
  - Open source the design in a modular way 
  - Optimize die size and shape for the flip chip probe design and maximum yield
+
+dicing for the super tiny dice should probably be outsourced, can be done at for example:
+
+[https://www.syagrussystems.com/wafer-dicing](https://www.syagrussystems.com/wafer-dicing)
+
+
+Also see the boulder shared instrumentation network:
+
+[https://www.colorado.edu/sharedinstrumentation/](https://www.colorado.edu/sharedinstrumentation/)
+
+and information about the incoming raith writer:
+
+[https://www.colorado.edu/engineering/2022/09/07/nsf-funds-new-electron-beam-lithography-system-quantum-engineering-nanofabrication](https://www.colorado.edu/engineering/2022/09/07/nsf-funds-new-electron-beam-lithography-system-quantum-engineering-nanofabrication)
+
+
+
+Steps:
+
+1. get low conductivity wafers and clean them, add oxide if needed, maybe use diamond or sapphire?
+2. undercut resist spin and bake
+3. top layer resist spin and bake
+4. lithography for whole wafer with Raith e-beam writer
+5. develop, inspect bridges
+6. load into specialized deposition system, run a plasma clean step
+7. deposit manganese doped aluminum at first angle
+8. timed exposure to oxygen to create oxide tunnel barrier
+9. deposit second angle of manganese doped aluminum
+10. third angle deposition of copper, thick
+11. probe test, feedback loop on development of process
+12. liftoff, clean wafer
+13. optical lithography for big pads(clean, spin, expose, develop)
+14. clean and deposit gold, thick layer
+15. probe, liftoff, spin on protection resist coating
+16. outsourced wafer dicing
+17. place dice in custom tunnel junction die storage containers
+18. remove photoresist
+19. place into packaging, which has already been soldered into PCB(with connectors in place)
+
+

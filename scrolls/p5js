@@ -12,6 +12,8 @@ A free open source JavaScript library for doing art in a web browser.  What work
 
 
  - [playramp.html](playramp.html)
+ - [fuzzcontrol.html](fuzzcontrol.html)
+ - [fuzzramp.html](fuzzramp.html)
  - [filter.html](filter.html)
  - [p5js.org](https://p5js.org)
  - [code editor](webeditor.html)
@@ -24,6 +26,5 @@ A free open source JavaScript library for doing art in a web browser.  What work
  - [fft spectrum](fft.html)
  - [2d noise plot](fft2d.html)
  - [Bias sweeper graphs](sweepergraph.html)
- - [Bias sweeper play sound](sweepertone.html)
  - [QNS Response plots](qns.html)
 
