@@ -6,6 +6,7 @@
         "classicalsquare.html",
         "coth.html",
         "distro.html",
+        "fermi.html",
         "fft.html",
         "fft2d.html",
         "filter.html",
