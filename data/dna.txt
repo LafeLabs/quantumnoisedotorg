@@ -1,5 +1,6 @@
 {
     "html": [
+        "QNS-spectra.html",
         "README.md",
         "board.html",
         "books.html",
