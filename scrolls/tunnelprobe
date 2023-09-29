@@ -1,0 +1,8 @@
+
+## [HOME](scrolls/home)
+
+# tunnelprobe
+ 
+Probing tunnel junctions will need to be fast and quasi automated.  We can do this with another version of the QNS which plays the amplitude swept sine wave into a probe into the tunnel junction, with some appropriate bias circuit which blocks DC and couples in AC with a resistor in parallel to the junction, and the relative effect of adding the junction combined with the harmonics due to junction nonlinearity will characterize the junction. This combination can also be used to get information about estimates of the tunnel barrier parameters.   
+
+What do we need in order to build this?  we need an audio output and audio input cable with connectors, capacitors, and resistors. We need an audio cable which can go into a mic input in the computer.  
