@@ -1,6 +1,8 @@
 # The Quantum Noise Synth
 ## Lafe Spietz
 
+## [p5js scroll](scrolls/p5js)
+
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/QNS-SCHEMATIC-SYMBOL.svg)
 
 
@@ -10,7 +12,6 @@
 <!--
 ![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)-->
 
-[p5js scroll](scrolls/p5js)
 
 The Quantum Noise Synth is a way of reading out the noise from a normal metal tunnel junction in which the junction is biased with a ramped sine wave in the audio frequency range, with zero DC bias.  This acts like a module in a [modular synthesizer](https://en.wikipedia.org/wiki/Modular_synthesizer), taking an input signal in the audio range, and eventually converting it back into an audio output signal based on the mixed down noise from a microwave frequency.
 

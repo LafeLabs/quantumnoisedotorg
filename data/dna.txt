@@ -38,6 +38,7 @@
         "scrolleditor.html",
         "scrollset.html",
         "set.html",
+        "slime.html",
         "squares.html",
         "sweepergraph.html",
         "sweepsquare.html",
@@ -126,6 +127,7 @@
         "trash_magic",
         "trash_magic_server",
         "trashmagic",
+        "tunnelprobe",
         "users",
         "voice",
         "voice_of_the_slime"
