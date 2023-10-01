@@ -1,0 +1,29 @@
+{
+    "server": "https://raw.githubusercontent.com/LafeLabs/pibrary/main/symbolset/",
+    "symbols": [
+        "QNS-SCHEMATIC-SYMBOL.svg",
+        "QNS-SYSTEM-SCHEMATIC.svg",
+        "board-in-box.svg",
+        "box-dimensions.svg",
+        "box-sideview.svg",
+        "box-topview1.svg",
+        "capsule-schematic.svg",
+        "chip-board.svg",
+        "chip-pad-ground.svg",
+        "chip-pad-rf.svg",
+        "cold-box-schematic.svg",
+        "cold-sma-box.svg",
+        "die-layout.svg",
+        "filter-input-module.svg",
+        "filter-output-module.svg",
+        "filter-schematic.svg",
+        "filter-section-schematic.svg",
+        "in-out-capsule.svg",
+        "in-red-arrow.svg",
+        "mixer.svg",
+        "out-blue-arrow.svg",
+        "qtj-pcb.svg",
+        "quantum-trash.svg",
+        "rcline-schematic.svg"
+    ]
+}

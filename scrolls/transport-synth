@@ -5,6 +5,8 @@
  
 Let us consider the synthesizer module as a possible model for general probe stations.  In this scenario, we have an audio signal in, an audio signal out, and the response is analyzed in software to get what we want from a probe.  
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-trash.svg)
+
 We can have a recorded sound that is played into the probe, which is a hours long file that plays the amplitude sweep of the 1 KHz sine wave.  By default the sweep time is exactly 1 second. Then we can control the amplitude using whatever volume knob is on the machine which plays the swept tone.
 
 A standard is built with a resistor and zener diode which calibrates the system each time we set it up.  If we record a signal with the cal standard and then, while changing nothing, switch to the device under test, we can have one file which has all the information required to get what we want later from the signal.  

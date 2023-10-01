@@ -1,5 +1,8 @@
 # The Quantum Noise Synth
-## Lafe Spietz
+
+ - Everything is a guitar pedal
+ - Everything is Public Domain
+ - Everything lives in a Web Browser
 
 ## [p5js scroll](scrolls/p5js)
 
@@ -8,6 +11,7 @@
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/QNS-SYSTEM-SCHEMATIC.svg)
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-trash.svg)
 
 <!--
 ![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)-->
