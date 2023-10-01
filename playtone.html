@@ -44,11 +44,13 @@
 
 <div id = "feedscroll">
     
-    <h1>PLAY RAMP!</h1>
+    <h1>PLAY TONE!</h1>
     
-        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
-        
     <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
+    
+    <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+        
+    
     
     
     <table>
@@ -64,13 +66,10 @@
                 <input id = "frequencyinput"/>
             </td>
         </tr>
-        <tr>
-            <td id = "startbutton" class = "button">START/STOP SWEEP</td><td></td>
-        </tr>
     </table>
     
     <p>
-click on the screen to start the tone
+click anywhere on the screen to start and stop the tone. starts automatically on mobile.  Works poorly on mobile with Chrome. Stop using Chrome.
     </p>
     <p>
 
@@ -81,14 +80,17 @@ click on the screen to start the tone
 <script>
 
 
+oscon = false;
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
     document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+
 }
 else{
     squaresize = innerWidth - 50;
-    
+    oscon = true;
+
     document.getElementById("feedscroll").style.right =  "0px";    
     document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
 }
@@ -96,9 +98,8 @@ else{
 let osc, fft;
 
 freq = 666;//frequency of sine wave in Hz
-maxv = 0.5;//max amplitude
+amp = 0.5;//max amplitude
 sweepframes = 30;
-oscon = false;
 sweepindex = 0;
 
 function setup() {
@@ -107,13 +108,12 @@ function setup() {
    strokeWeight(6);  
    background("#F8F0E3");
    osc = new p5.SinOsc(); // set frequency and type
-  osc.amp(maxv);
+  osc.amp(amp);
 
   fft = new p5.FFT();
   osc.start();
 
-  
-
+ 
 
 }
 
@@ -135,10 +135,17 @@ function draw(){
 
   osc.freq(freq);
 
-  let amp = map(mouseY, 0, height, 1, 0.01);
+  if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+      amp = map(mouseY, 0, height, 1, 0.01);    
+  }
+  else{
+      amp = parseFloat(document.getElementById("ampinput").value);
+  }
+  
   osc.amp(amp);
 
 }
+
 
 function mouseClicked() {
   
@@ -153,7 +160,9 @@ function mouseClicked() {
 }
 
 
-document.getElementById("ampinput").value = sweepframes.toString();
+
+
+document.getElementById("ampinput").value = amp.toString();
 document.getElementById("frequencyinput").value = freq.toString();
 
 document.getElementById("ampinput").onchange = function(){
@@ -239,9 +248,6 @@ a{
 }
 .button:active{
     background-color:yellow;
-}
-#startbutton{
-    border:solid;
 }
 .data{
     display:none;

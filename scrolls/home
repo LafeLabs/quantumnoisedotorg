@@ -1,10 +1,23 @@
 # The Quantum Noise Synth
 
- - Everything is a guitar pedal
- - Everything is Public Domain
- - Everything lives in a Web Browser
 
-## [p5js scroll](scrolls/p5js)
+ 1. Everything is a [guitar pedal](https://en.wikipedia.org/wiki/Effects_unit)
+ 2. Everything is [Public Domain](https://en.wikipedia.org/wiki/Public_domain)
+ 3. Everything lives in a [Web Browser](https://en.wikipedia.org/wiki/Web_browser)
+
+## Signal Path
+
+The signal path starts with sounds generated in a web browser using the p5js JavaScript library.  
+
+1. [Simple tone generator](playtone.html)
+2. [Amplitude ramp generator](playramp.html)
+3. [Frequency sweep generator](playsweep.html)
+
+
+This signal can be fed to either a room temperature noise test probe or a into the dilution refrigerator measurement chain. The latter starts with a box that takes in a 3.5 mm aux cable, breaks ground, attenuates power, filters out high frequency signals, and feeds into the top of the fridge by way of an SMA cable.  
+
+
+
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/QNS-SCHEMATIC-SYMBOL.svg)
 
