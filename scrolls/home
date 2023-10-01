@@ -16,18 +16,46 @@ The signal path starts with sounds generated in a web browser using the p5js Jav
 
 This signal can be fed to either a room temperature noise test probe or a into the dilution refrigerator measurement chain. The latter starts with a box that takes in a 3.5 mm aux cable, breaks ground, attenuates power, filters out high frequency signals, and feeds into the top of the fridge by way of an SMA cable.  
 
+In all there are three filter boxes, one at room temperature, one at 4k and one at the still.  
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/cold-box-schematic.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/amp-chain.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
 
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/mixer.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/QNS-SCHEMATIC-SYMBOL.svg)
 
+After going through the whole RF chain, we finally get out an audio signal, making the WHOLE system into a guitar pedal.  This can then be read out into another web browser which turns the sound into a heat map of noise power as a function of temperature and frequency.
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/QNS-SYSTEM-SCHEMATIC.svg)
-
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-trash.svg)
-
-<!--
-![a picture of a modular synth](https://upload.wikimedia.org/wikipedia/commons/6/66/Doepfer_A-100.jpg)-->
 
 
 The Quantum Noise Synth is a way of reading out the noise from a normal metal tunnel junction in which the junction is biased with a ramped sine wave in the audio frequency range, with zero DC bias.  This acts like a module in a [modular synthesizer](https://en.wikipedia.org/wiki/Modular_synthesizer), taking an input signal in the audio range, and eventually converting it back into an audio output signal based on the mixed down noise from a microwave frequency.
