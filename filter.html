@@ -54,6 +54,35 @@
     <h1>Filter</h1>
     
         <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+   <table>
+       
+    <tr>
+        <td>C_line [nF]:</td>
+        <td>
+            <input id = "clineinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>R_line [ohms]:</td>
+        <td>
+            <input id = "rlineinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>C_in [uF]:</td>
+        <td>
+            <input id = "ccoupleinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>R_out [ohms]:</td>
+        <td>
+            <input id = "routinput"/>
+        </td>
+    </tr>
+
+
+</table>
         
 <p>
 this is a sequence of n poles of a resistance R and then a capacitance to ground C.  We might or might not have an input capacitor Cin and an output resistor Rout.
@@ -153,40 +182,7 @@ $$
     $$
 </p>
 
-<table>
-    <tr>
-        <td>number of RC stages:</td>
-        <td>
-            <input id = "ninput"/>
-        </td>
-    </tr>
-    <tr>
-        <td>C_line:</td>
-        <td>
-            <input id = "clineinput"/>
-        </td>
-    </tr>
-    <tr>
-        <td>R_line:</td>
-        <td>
-            <input id = "rlineinput"/>
-        </td>
-    </tr>
-    <tr>
-        <td>C_in:</td>
-        <td>
-            <input id = "rininput"/>
-        </td>
-    </tr>
-    <tr>
-        <td>R_out:</td>
-        <td>
-            <input id = "rininput"/>
-        </td>
-    </tr>
 
-
-</table>
 
 </div>
 
@@ -198,14 +194,34 @@ v = 0;
 period = 50;
 graphsize = 100;
 
-Rline = 10;//ohms
-Cline = 0.1e-6;//farads
-Ccouple = 10e-6;//farads
+Rline = 35;//ohms
+Cline = 0.05e-6;//farads
+Ccouple = 5e-6;//farads
 Z0 = 50;//ohms
 Rout = 50;//ohms
 f = 1;//Hz
 omega = 1;//radians/s
 nstages = 5;
+
+document.getElementById("clineinput").value = (Cline*1e9).toString();
+document.getElementById("rlineinput").value = Rline.toString();
+document.getElementById("ccoupleinput").value = (Ccouple*1e6).toString();
+document.getElementById("routinput").value = Rout.toString();
+
+document.getElementById("clineinput").onchange = function(){
+    Cline = 1e-9*parseFloat(this.value);
+}
+document.getElementById("rlineinput").onchange = function(){
+    Rline = parseFloat(this.value);
+}
+document.getElementById("ccoupleinput").onchange = function(){
+    Ccouple = 1e-6*parseFloat(this.value);
+}
+document.getElementById("routinput").onchange = function(){
+    Rout = parseFloat(this.value);
+}
+
+
 
 A = math.complex(0,0);
 B = math.complex(0,0);
@@ -330,8 +346,13 @@ line(margin + 9*graphsize/10,margin,margin + 9*graphsize/10,margin+graphsize);
 strokeWeight(1);
 text("1 GHz",margin-32 + 9*graphsize/10,margin+graphsize+32);
 
-  stroke("black");
-  
+stroke("black");
+text("Cline = " + (1e9*Cline).toString() + " nF",margin,32);
+text("Rline = " + (Rline).toString() + " ohms",margin,64);
+
+text("Ccouple = " + (1e6*Ccouple).toString() + " uF",margin + 0.5*graphsize,32);
+text("Rout = " + (Rout).toString() + " ohms",margin + 0.5*graphsize,64);
+
 
 //line(margin,margin + 0.5*graphsize,margin+graphsize,margin + 0.5*graphsize);
  

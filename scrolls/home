@@ -12,9 +12,11 @@ The signal path starts with sounds generated in a web browser using the p5js Jav
 1. [Simple tone generator](playtone.html)
 2. [Amplitude ramp generator](playramp.html)
 3. [Frequency sweep generator](playsweep.html)
-
+4. [Read the response spectra](https://quantumnoise.org/QNS-spectra.html)
 
 This signal can be fed to either a room temperature noise test probe or a into the dilution refrigerator measurement chain. The latter starts with a box that takes in a 3.5 mm aux cable, breaks ground, attenuates power, filters out high frequency signals, and feeds into the top of the fridge by way of an SMA cable.  
+
+[link to p5js scroll](scrolls/p5js)
 
 In all there are three filter boxes, one at room temperature, one at 4k and one at the still.  
 
