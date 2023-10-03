@@ -4,7 +4,6 @@
 # Background
 
 
-
 This story winds together several threads: thermal noise, quantum fluctuations, shot noise, and the physics of tunnel junctions.  Tunnel junctions are electrical devices in which two metal electrodes are separated by a insulating barrier so thin that electrons can tunnel quantum mechanically between the two electrodes.  A tunnel junction shows all three of these types of noise.  Depending on which parts of a system are well-understood, each of these can be used to calibrate the others.  
 
 Each of these three threads can be understood by looking at its limit.  The limit for thermal noise is that the photon energy is small compared to the energy of a thermal mode and the system is at zero bias. In this case, any linear resistor with resistance R in ohms at temperature T in kelvin, measured over a bandwidth  of B Hz will produce noise with power
