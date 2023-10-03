@@ -1,5 +1,6 @@
-# The Quantum Noise Synth
+# The Quantum Noise Synth(QNS)
 
+Rules of QNS:
 
  1. Everything is a [guitar pedal](https://en.wikipedia.org/wiki/Effects_unit)
  2. Everything is [Public Domain](https://en.wikipedia.org/wiki/Public_domain)
@@ -7,68 +8,76 @@
 
 ## Signal Path
 
-The signal path starts with sounds generated in a web browser using the p5js JavaScript library.  
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/whole-system-schematic.svg)
+
+Audio signal goes through a series of filters down into a dilution refrigerator, and then biases a tunnel junction, which produces RF noise, which gets amplified, filtered, mixed back down into the audio, and filtered again, then out via an SMA which is converted to audio cables.
+
+## Audio tone generation
+
+We can generate tones from any web enabled device by using the [p5js JavaScript Library](https://p5js.org).  This is a library designed for artists, which has built in libraries for making and analyzing sounds which we will use in the QNS system.
 
 1. [Simple tone generator](playtone.html)
 2. [Amplitude ramp generator](playramp.html)
 3. [Frequency sweep generator](playsweep.html)
 4. [Read the response spectra](https://quantumnoise.org/QNS-spectra.html)
+5. [link to p5js scroll](scrolls/p5js)
 
-This signal can be fed to either a room temperature noise test probe or a into the dilution refrigerator measurement chain. The latter starts with a box that takes in a 3.5 mm aux cable, breaks ground, attenuates power, filters out high frequency signals, and feeds into the top of the fridge by way of an SMA cable.  
+## QNS Capsule Design
 
-[link to p5js scroll](scrolls/p5js)
+Machine these out of brass or gold plated OFHC copper.
 
-In all there are three filter boxes, one at room temperature, one at 4k and one at the still.  
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-box-frontview.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-box-sideview.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-box-topview.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+This design is used for all elements of the system.  
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+## QNS printed circuit board
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-pcb.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+This is a .svg which has the exact dimensions of the copper and board outlines, in separate layers:
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/pcbdrawing.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-schematic.svg)
+Get these boards made with FR4, no soldermask, backside can be a ground plane or not, test both.
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+## SMA Board Launch connectors
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/sma-launch-pcb-screenshot.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/sma-launch.png)
+
+## QNS Standard Filter
+
+We use a filter which attenuates voltage by 10x, blocks DC, has a bias resistor to ground, and rolls off with several poles above a few kHz.  
+
+Here is a schematic of this filter:
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rcline-schematic.svg)
+
+Here is a plot of calculated insertion loss of that filter:
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-insertion-loss.png)
+
+[link to the p5js app which created the plot](filter.html)
+
+## QNS Tunnel Junction Bias Capsule
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/cold-box-schematic.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+The inductor is a conical bias tee inductor of a few microhenries from Coilcraft.  The tunnel junction has a DC path to ground through the bias resistor, but no DC path to the outside world.  This should improve both thermalization and make it harder to destroy junctions by accident.  The bias applied from the input side causes fluctuations in the white noise generated by the junction, which goes through the RF amplifier chain to the QNS Downconversion capsule.
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+## QNS Downconversion Capsule
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/amp-chain.svg)
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/down-convert-capsule-schematic.svg)
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/out-blue-arrow.svg)
+A bandpass filter lets in only the RF band we are interested in.  This signal is rectified with a fast diode, and that rectified signal is put through another band pass in the audio range we are interested in, generally from a few hundred Hz through a few kHz.
 
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-red-arrow.svg)
+## Junction response Theory
 
-
-![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/mixer.svg)
-
-
-After going through the whole RF chain, we finally get out an audio signal, making the WHOLE system into a guitar pedal.  This can then be read out into another web browser which turns the sound into a heat map of noise power as a function of temperature and frequency.
-
-
-
-The Quantum Noise Synth is a way of reading out the noise from a normal metal tunnel junction in which the junction is biased with a ramped sine wave in the audio frequency range, with zero DC bias.  This acts like a module in a [modular synthesizer](https://en.wikipedia.org/wiki/Modular_synthesizer), taking an input signal in the audio range, and eventually converting it back into an audio output signal based on the mixed down noise from a microwave frequency.
-
-The advantages of this method of reading out the noise noise from a tunnel junction are that we can have no DC connection with the junction, which should make it less susceptible to electrostatic damage and also to low frequency noise(which can be filtered out).  By blocking all DC current coming into the junction, we can add a DC path to ground through a bias resistor, vastly improving the thermal anchoring to whatever is being measured. We will build the bias tee for this into a custom enclosure along with a filter and a set of contacts for a flip chip geometry, removing the need for wire bonds.  
-
-We further propose to build a dedicated fabrication facility for depositing the metals in normal metal tunnel junctions for this purpose. That machine will be a clone in capability to "JoeTek", the custom-built junction deposition system at NIST boult by Joe Aumentado, but with the ability to dope the aluminum with manganese to make it normal at all temperatures without the need for a permanent magnet.  
-
-We are building as part of this system a set of filters for the audio signal, one for use at 4 kelvin and one for use at the still in a dilution refrigerator.  A room temperature box will generate the audio AC bias signal and downconvert the RF noise coming out of the measurement channel of the dilution fridge into an audible range. Finally, this ramped white noise signal will be read into the web browser of any web enabled device(laptop, desktop, mobile, tablet, any operating system) which will convert that signal into the desired noise, gain and temperature metrology data needed by the quantum information technology community for both amplifier calibration and thermometry. 
-
-The proposal is to estimate the total potential user base across the US initially for this technology, and then to raise funds to support building a lifetime supply for everyone in the world who might use such a thing, and use economies of scale to supply that whole demand for free as a research project.  This is a hybrid project: part commercialization, part government project, part academic collaboration and part art and music project.  We will find a government grant to build the microfabrication facility into an existing university user facility which already has optical and or e-beam lithography working.   This could be the University of Colorado, Boulder or the University of Central Florida for example, both of which have friendly faculty and existing fabrication user facilities.  With that facility in place, we can get a grant to support the time of Dr. Spietz and some labor for technicians to get trained on the process and work together to perfect it.  
 
 To analyze how signals are transformed by the QNS, we use a set of units normalized by fundamental constants and the system temperature, namely the normalized bias voltage indicated by a lowercase v, normalized frequency $\phi$ and normalized noise power in temperature units $p$:
 
