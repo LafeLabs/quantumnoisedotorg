@@ -10,7 +10,7 @@ Rules of QNS:
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/whole-system-schematic.svg)
 
-Audio signal goes through a series of filters down into a dilution refrigerator, and then biases a tunnel junction, which produces RF noise, which gets amplified, filtered, mixed back down into the audio, and filtered again, then out via an SMA which is converted to audio cables.
+Audio signals go through a series of audio bandpass filters down into a dilution refrigerator, and then bias a tunnel junction, which produces RF(GHz) noise, which gets amplified, filtered, mixed back down into the audio, and filtered again, then out via an SMA which is converted to audio cables.
 
 ## Audio tone generation
 
@@ -24,6 +24,8 @@ We can generate tones from any web enabled device by using the [p5js JavaScript 
 
 ## QNS Capsule Design
 
+Every stage in the above system, both warm and cold, is the same design of both the capsule and the printed circuit board which goes inside the capsule.  Only the component values and locations change from one stage to the next. 
+
 Machine these out of brass or gold plated OFHC copper.
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-box-frontview.svg)
@@ -34,7 +36,17 @@ Machine these out of brass or gold plated OFHC copper.
 
 This design is used for all elements of the system.  
 
-## QNS printed circuit board
+The M4 through hole is for mounting on the various plates of a [Bluefors](https://bluefors.com/) dilution refrigerator.  The diameter should be 4.5 mm for a medium fit.  Threaded holes in the corners are M2 threads for the lid screws. 
+
+The lid is slightly smaller than the body of the capsule so that the edges never interfere with the flush contact of the body with the mounting plate.  
+
+Should the lid or body have some kind of holes to make sure that gas can get removed easily?  Design options here must be explored.  
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/lid-drawing.svg)
+
+Also, a threaded hole in the lid could be used as a tuner with an insulating screw.  
+
+## QNS printed circuit board(PCB)
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-pcb.svg)
 
@@ -196,8 +208,8 @@ My hope is that all this will turn out to be interesting not so much in terms of
  - Improving in-house calibrations for amplifier-making labs in large companies, government labs and academia
  - Thermometer calibration apparatus for calibrating secondary thermometers
  - Analog quantum information processing with arbitrary quantum circuits
- - Making epic gnarly riffs like no one has ever made before
- - Method of fast and efficient probes of arbitrary devices(including the tunnel junctions)
+ - Making epic gnarly riffs like no one has ever made before using the quantum structure of reality
+ - Method of fast and efficient probes of arbitrary electronic devices(including the tunnel junctions)
  - Street quantum demo, busking with quantum with the trash magic crew
 
 ## Trash Magic
