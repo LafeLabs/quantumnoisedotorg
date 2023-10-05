@@ -59,7 +59,19 @@ Should the lid or body have some kind of holes to make sure that gas can get rem
 
 Also, a threaded hole in the lid could be used as a tuner with an insulating screw.  
 
+[link to M2 brass screws on mcmaster](https://www.mcmaster.com/96741A013/)
+
+[link to M4 fancy brass screw](https://www.mcmaster.com/90349A114/)
+
+[link to cheaper M4's out of stainless](https://www.mcmaster.com/91292A122/)
+
+[color coded pink 3 mm hex wrench, L with ball end](https://www.mcmaster.com/2617n28/)
+
 ## QNS printed circuit board(PCB)
+
+Standard FR4 circuit boards are about 1.6 mm in thickness, and have a dielectric constant of about 3.8-4.8.  We want a 3 mm wide center line, which gives a gap of about 300 microns to be 50 ohms.  
+
+[Microwaves101.com coplanar waveguide calculator](https://www.microwaves101.com/calculators/864-coplanar-waveguide-calculator)
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/universal-pcb.svg)
 
@@ -175,7 +187,7 @@ How is it that this is a guitar pedal?  It is an analog circuit with a real time
 
 But at the end of the day what makes it a guitar pedal is that we will actually put this in the signal chain of an active music setup. This is intended to be a fully playable apparatus.  And part of that is building the *social* network required to get the right sort of experimental musicians to show up and try this out.  Ideally we can find the overlap of riff magicians, pedal nerds, modular synth weirdos, and general eccentrics who can see the artistic appeal of playing the quantum noise as an instrument.
 
-## The QNS Distribution
+## QNS Distribution
 
 We will provide all parts of this system for free to anyone who can make good use of them.  We will raise funds to support this project, separate from the user base.  Users might put into the crowd fund, but they are not "buying" the individual units.  Users get the unit that is most appropriate for their application, whatever that may be. 
 
