@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.5" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.05" altunitdist="inch" altunit="inch"/>
+<grid distance="0.15" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.05" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -174,6 +174,18 @@
 <wire x1="15.494" y1="0.508" x2="15.494" y2="29.21" width="0.0762" layer="51"/>
 <text x="-7.62" y="-5.08" size="2.286" layer="27">Arduino Wee v1.3</text>
 <text x="2.54" y="-2.54" size="1.778" layer="27">Tent Vias!</text>
+<rectangle x1="0" y1="0" x2="30" y2="1.35" layer="1"/>
+<rectangle x1="0" y1="1.65" x2="5.85" y2="4.35" layer="1"/>
+<rectangle x1="0" y1="4.65" x2="30" y2="6" layer="1"/>
+<rectangle x1="24.15" y1="1.65" x2="30" y2="4.35" layer="1"/>
+<rectangle x1="21.15" y1="1.65" x2="23.85" y2="4.35" layer="1"/>
+<rectangle x1="18.15" y1="1.65" x2="20.85" y2="4.35" layer="1"/>
+<rectangle x1="18.15" y1="1.65" x2="20.85" y2="4.35" layer="1"/>
+<rectangle x1="15.15" y1="1.65" x2="17.85" y2="4.35" layer="1"/>
+<rectangle x1="12.15" y1="1.65" x2="14.85" y2="4.35" layer="1"/>
+<rectangle x1="9.15" y1="1.65" x2="11.85" y2="4.35" layer="1"/>
+<rectangle x1="6.15" y1="1.65" x2="8.85" y2="4.35" layer="1"/>
+<rectangle x1="0" y1="0" x2="30" y2="6" layer="17"/>
 </plain>
 <libraries>
 </libraries>
@@ -360,80 +372,6 @@ design rules under a new name.</description>
 <signal name="N$37">
 </signal>
 <signal name="N$38">
-</signal>
-<signal name="GND">
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="0" y="1.425"/>
-<vertex x="30" y="1.425"/>
-<vertex x="30" y="0"/>
-<vertex x="0" y="0"/>
-</polygon>
-<polygon width="0.254" layer="16" isolate="0.3048">
-<vertex x="0" y="6"/>
-<vertex x="30" y="6"/>
-<vertex x="30" y="0"/>
-<vertex x="0" y="0"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="0" y="6"/>
-<vertex x="30" y="6"/>
-<vertex x="30" y="4.575"/>
-<vertex x="0" y="4.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="0" y="4.425"/>
-<vertex x="5.925" y="4.425"/>
-<vertex x="5.925" y="1.575"/>
-<vertex x="0" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="24.075" y="4.425"/>
-<vertex x="30" y="4.425"/>
-<vertex x="30" y="1.575"/>
-<vertex x="24.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="6.075" y="4.425"/>
-<vertex x="8.925" y="4.425"/>
-<vertex x="8.925" y="1.575"/>
-<vertex x="6.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="6.075" y="4.425"/>
-<vertex x="8.925" y="4.425"/>
-<vertex x="8.925" y="1.575"/>
-<vertex x="6.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="9.075" y="4.425"/>
-<vertex x="11.925" y="4.425"/>
-<vertex x="11.925" y="1.575"/>
-<vertex x="9.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="12.075" y="4.425"/>
-<vertex x="14.925" y="4.425"/>
-<vertex x="14.925" y="1.575"/>
-<vertex x="12.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="15.075" y="4.425"/>
-<vertex x="17.925" y="4.425"/>
-<vertex x="17.925" y="1.575"/>
-<vertex x="15.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="18.075" y="4.425"/>
-<vertex x="20.925" y="4.425"/>
-<vertex x="20.925" y="1.575"/>
-<vertex x="18.075" y="1.575"/>
-</polygon>
-<polygon width="0.254" layer="1" isolate="0.3048">
-<vertex x="21.075" y="4.425"/>
-<vertex x="23.925" y="4.425"/>
-<vertex x="23.925" y="1.575"/>
-<vertex x="21.075" y="1.575"/>
-</polygon>
 </signal>
 </signals>
 <mfgpreviewcolors>

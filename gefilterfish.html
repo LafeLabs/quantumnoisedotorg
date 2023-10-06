@@ -15,7 +15,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>Filter Plots:not pi</title>
+        <title>Filter Plots</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -83,6 +83,7 @@
 
 
 </table>
+        
 
 <p>this is not a pi filter</p>
         
@@ -152,25 +153,33 @@ $$
     $$
 </p>
 
-
-<p>
-    For the output T we use the same matrix, but with the roles of the first two impedances reversed.
-</p>
-
-<p>
-$$    
+<p>$$    
   \left[ {\begin{array}{cc}
     A & B \\
     C & D \\
   \end{array} } \right]=
-  \\
   \left[ {\begin{array}{cc}
     3 + i\left(\omega RC - \frac{1}{\omega RC}\right) & 4R + i\left(\omega R^2C - \frac{1}{\omega C}\right) \\
     \frac{1}{R}  + i\omega C & 2 + i\omega RC \\
   \end{array} } \right]
-$$
-
+$$</p>
+<p>
+    For the output T we use the same matrix, but with the roles of the first two impedances reversed.
 </p>
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+      2 + i\omega RC & 4R + i\left(\omega R^2C - \frac{1}{\omega C}\right) \\
+    \frac{1}{R}  + i\omega C &   3 + i\left(\omega RC - \frac{1}{\omega RC}\right)\\
+  \end{array} } \right]
+$$</p>
+
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/slime-module.svg"/>
 
 <p>
 The device impedance $Z_{slime}$ is in parallel with a capacitor C, having total admittance to ground of 
@@ -194,61 +203,12 @@ The device impedance $Z_{slime}$ is in parallel with a capacitor C, having total
     1 & 0 \\
     \frac{1}{Z_{SLIME}} + i\omega C & 1\\
   \end{array} } \right]
-
     $$
 </p>
-
-<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-output-module.svg"/>
-
-<p>
-$$    
-  \left[ {\begin{array}{cc}
-    A & B \\
-    C & D \\
-  \end{array} } \right]=
-  \left[ {\begin{array}{cc}
-    1 & 0 \\
-    \frac{1}{R_{out}} & 1 \\
-  \end{array} } \right]
- 
-$$
-</p>
-
-<p>
-    $\omega = 2\pi f_{audio}$, and $f_{audio}$ is varied logarithmically from 1 Hz to  10 GHz.  If we are plotting across a square graph which is [graphsize] wide and offset by [margin] from the left of the p5js canvas, the frequency in Hz as a function of position x is:
-</p>
-
-<p>
-    $$
-    f = 10^{10*(x-margin)/graphsize}
-    $$
-</p>
-
-
-<p>The S parameter $S_{21}$ for a device with known ABCD matrix is</p>
-
-<p>
-    $$
-    S_{21} = \frac{2}{A + B/Z_0 + CZ_0 + D}
-    $$
-</p>
-
-<p>
-    We will want to display insertion loss in dB and have 0 be the top of the screen and the bottom be -100 dB, so that the y value associated with a given scattering parameter  
-</p>
-
-<p>
-    $$
-    y = [\textrm{margin}] - 20\left(\frac{[\textrm{graphsize}]}{100}\right)\log_{10}(|S_{21}|)
-    $$
-</p>
-
-
 
 </div>
 
 <script>
-
 
 margin = 100;//margin in px
 squaretime = 0;
@@ -256,15 +216,17 @@ v = 0;
 period = 50;
 graphsize = 100;
 
-Rline = 35;//ohms
-Cline = 0.05e-6;//farads
-Ccouple = 5e-6;//farads
+Rline = 100;//ohms
+Cline = 1e-12;//farads
+Cslime = 1e-12;//farads
+Rslime = 1000;
 Z0 = 50;//ohms
-Rout = 50;//ohms
+
 f = 1;//Hz
 omega = 1;//radians/s
 nstages = 5;
 
+/*
 document.getElementById("clineinput").value = (Cline*1e9).toString();
 document.getElementById("rlineinput").value = Rline.toString();
 document.getElementById("ccoupleinput").value = (Ccouple*1e6).toString();
@@ -283,6 +245,7 @@ document.getElementById("routinput").onchange = function(){
     Rout = parseFloat(this.value);
 }
 
+*/
 
 
 A = math.complex(0,0);
@@ -321,54 +284,50 @@ function draw(){
   stroke("blue");
   beginShape();
       
-      
-
-    
-
   for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
       
       f = 10**(10*squaretime/graphsize);
       omega = 2*Math.PI*f;
     
-       A = math.complex(1,0);
-       B = math.complex(0,0);
-       C = math.complex(1/Rout,0);
-       D = math.complex(1,0);
+    
+       Ainstage = math.complex(3,omega*Rline*Cline - 1/(omega*Rline*Cline));
+       Binstage = math.complex(4*Rline,omega*Rline*Rline*Cline - 1/(omega*Cline));
+       Cinstage = math.complex(1/Rline,omega*Cline);
+       Dinstage = math.complex(2,omega*Rline*Cline);
 
-      
 
-      Arc = math.complex(1,omega*Rline*Cline);
-      Brc = math.complex(Rline,0);
-      Crc = math.complex(0,omega*Cline);
+      Arc = math.complex(1,0);
+      Brc = math.complex(0,0);
+      Crc = math.complex(1/Rslime,omega*Cslime);
       Drc = math.complex(1,0);
 
-    for(var stageindex = 0;stageindex < nstages;stageindex++){
-      Aout = math.add(math.multiply(Arc,A),math.multiply(Brc,C));
-      Bout = math.add(math.multiply(Arc,B),math.multiply(Brc,D));
-      Cout = math.add(math.multiply(A,Crc),math.multiply(C,Drc));
-      Dout = math.add(math.multiply(B,Crc),math.multiply(D,Drc));
-      A = Aout;
-      B = Bout;
-      C = Cout;
-      D = Dout;
-    }      
 
+       Aoutstage = math.complex(2,omega*Rline*Cline);
+       Boutstage = math.complex(4*Rline,omega*Rline*Rline*Cline - 1/(omega*Cline));
+       Coutstage = math.complex(1/Rline,omega*Cline);
+       Doutstage = math.complex(3,omega*Rline*Cline - 1/(omega*Rline*Cline)); 
+     
 
-       Ain = math.complex(1,0);
-       Bin = math.complex(0,-1/(omega*Ccouple));
-       Cin = math.complex(0,0);
-       Din = math.complex(1,0);
-
-      Aout = math.add(math.multiply(Ain,A),math.multiply(Bin,C));
-      Bout = math.add(math.multiply(Ain,B),math.multiply(Bin,D));
-      Cout = math.add(math.multiply(A,Cin),math.multiply(C,Din));
-      Dout = math.add(math.multiply(B,Cin),math.multiply(D,Din));
+      Aout = math.add(math.multiply(Arc,Aoutstage),math.multiply(Brc,Coutstage));
+      Bout = math.add(math.multiply(Arc,Boutstage),math.multiply(Brc,Doutstage));
+      Cout = math.add(math.multiply(Aoutstage,Crc),math.multiply(Coutstage,Drc));
+      Dout = math.add(math.multiply(Boutstage,Crc),math.multiply(Doutstage,Drc));
 
       A = Aout;
       B = Bout;
       C = Cout;
       D = Dout;
 
+
+      Aout = math.add(math.multiply(Ainstage,A),math.multiply(Binstage,C));
+      Bout = math.add(math.multiply(Ainstage,B),math.multiply(Binstage,D));
+      Cout = math.add(math.multiply(Cinstage,A),math.multiply(Dinstage,C));
+      Dout = math.add(math.multiply(Cinstage,B),math.multiply(Dinstage,D));
+
+      A = Aout;
+      B = Bout;
+      C = Cout;
+      D = Dout;
 
       
       denominator = math.add(A,math.multiply((1/Z0),B),math.multiply(Z0,C),D);
@@ -433,7 +392,6 @@ text("Rout = " + (Rout).toString() + " ohms",margin + 0.5*graphsize,64);
 
     
 }
-
 
 
 
@@ -544,6 +502,8 @@ var httpc9 = new XMLHttpRequest();
 };
 httpc9.open("GET", "dir.php?filename=trashmagic", true);
 httpc9.send();
+
+
 </script>
 <style>
 body{

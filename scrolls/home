@@ -32,6 +32,7 @@ We can generate tones from any web enabled device by using the [p5js JavaScript 
 1. [Simple tone generator](playtone.html)
 2. [Amplitude ramp generator](playramp.html)
 3. [Frequency sweep generator](playsweep.html)
+5. [Noise generator](noiseband.html)
 4. [Read the response spectra](https://quantumnoise.org/QNS-spectra.html)
 5. [link to p5js scroll](scrolls/p5js)
 
