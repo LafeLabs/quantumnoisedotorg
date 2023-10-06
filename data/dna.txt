@@ -20,6 +20,7 @@
         "label.html",
         "linkeditor.html",
         "links.html",
+        "notpi.html",
         "parabola.html",
         "playramp.html",
         "playsweep.html",
