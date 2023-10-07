@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>Filter Plots</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+
+<!--
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+    -->
+    
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+
+
+<div id = "feedscroll">
+    
+    <a href = "index.html">HOME</a>
+    
+    <h1>Slime Filter</h1>
+    
+        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+   <table>
+       
+    <tr>
+        <td>C_input [uF]:</td>
+        <td>
+            <input id = "cininput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Rbias [ohms]:</td>
+        <td>
+            <input id = "rbiasinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>C_slime [uF]:</td>
+        <td>
+            <input id = "cslimeinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>R_slime [ohms]:</td>
+        <td>
+            <input id = "rslimeinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>C_output [uF]:</td>
+        <td>
+            <input id = "coutinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Z_0 [ohms]:</td>
+        <td>
+            <input id = "z0input"/>
+        </td>
+    </tr>
+
+
+</table>
+        
+
+<p>slime filter</p>
+        
+        
+<p>Let us consider the following circuit:</p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/slimezistor.svg"/>
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A_1 & B_1 \\
+    C_1 & D_1 \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & \frac{-i}{\omega C_{in}} \\
+    0 & 1 \\
+  \end{array} } \right]
+$$</p>
+
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A_2 & B_2 \\
+    C_2 & D_2 \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & R_{bias} \\
+    0 & 1 \\
+  \end{array} } \right]
+$$</p>
+
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A_3 & B_3 \\
+    C_3 & D_3 \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & 0 \\
+    i\omega C_{slime} & 1 \\
+  \end{array} } \right]
+$$</p>
+
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A_4 & B_4 \\
+    C_4 & D_4 \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & 0 \\
+    \frac{1}{R_{slime}} & 1 \\
+  \end{array} } \right]
+$$</p>
+
+<p>$$    
+  \left[ {\begin{array}{cc}
+    A_5 & B_5 \\
+    C_5 & D_5 \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & \frac{-i}{\omega C_{out}} \\
+    0 & 1 \\
+  \end{array} } \right]
+$$</p>
+
+
+</div>
+
+<script>
+
+margin = 100;//margin in px
+squaretime = 0;
+v = 0;
+period = 50;
+graphsize = 100;
+
+Cin = 0.47e-6;//farads
+Cout = 0.47e-6;//farads
+Cslime = 0.01e-6;//farads
+Rslime = 1000;//ohms
+Rbias = 1000;//ohms
+Z0 = 1000;//ohms
+
+f = 1;//Hz
+omega = 1;//radians/s
+
+
+document.getElementById("cininput").value = (Cin*1e6).toString();
+document.getElementById("rbiasinput").value = (Rbias).toString();
+document.getElementById("rslimeinput").value = Rslime.toString();
+document.getElementById("cslimeinput").value = (Cslime*1e6).toString();
+document.getElementById("coutinput").value = (Cout*1e6).toString();
+document.getElementById("z0input").value = Z0.toString();
+
+document.getElementById("z0input").onchange = function(){
+    Z0 = parseFloat(this.value);
+}
+
+document.getElementById("cininput").onchange = function(){
+    Cin = 1e-6*parseFloat(this.value);
+}
+
+document.getElementById("rbiasinput").onchange = function(){
+    Rbias = parseFloat(this.value);
+}
+
+document.getElementById("rslimeinput").onchange = function(){
+    Rslime = parseFloat(this.value);
+}
+document.getElementById("cslimeinput").onchange = function(){
+    Cslime = 1e-6*parseFloat(this.value);
+}
+document.getElementById("coutinput").onchange = function(){
+    Cout = parseFloat(this.value);
+}
+
+
+
+A = math.complex(0,0);
+B = math.complex(0,0);
+C = math.complex(0,0);
+D = math.complex(0,0);
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+
+graphsize = squaresize- 2*margin;
+
+function setup() {
+
+  createCanvas(squaresize, squaresize);    
+   strokeWeight(2);  
+   background("#F8F0E3");
+    
+}
+
+
+
+function draw(){
+
+  Rbias = 5000*mouseX/width;
+  Rslime = 5000*mouseY/height;
+
+  clear();
+  strokeWeight(6);
+  noFill();
+  stroke("blue");
+  beginShape();
+      
+  for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
+      
+      f = 10**(10*squaretime/graphsize);
+      omega = 2*Math.PI*f;
+    
+    
+       A1 = math.complex(1,0);
+       B1 = math.complex(0,-1/(omega*Cin));
+       C1 = math.complex(0,0);
+       D1 = math.complex(1,0);
+
+       A2 = math.complex(1,0);
+       B2 = math.complex(Rbias,0);
+       C2 = math.complex(0,0);
+       D2 = math.complex(1,0);
+
+       A3 = math.complex(1,0);
+       B3 = math.complex(0,0);
+       C3 = math.complex(0,omega*Cslime);
+       D3 = math.complex(1,0);
+
+       A4 = math.complex(1,0);
+       B4 = math.complex(0,0);
+       C4 = math.complex(1/Rslime,0);
+       D4 = math.complex(1,0);
+
+
+       A5 = math.complex(1,0);
+       B5 = math.complex(0,-1/(omega*Cout));
+       C5 = math.complex(0,0);
+       D5 = math.complex(1,0);
+
+
+      A = math.add(math.multiply(A4,A5),math.multiply(B4,C5));
+      B = math.add(math.multiply(A4,B5),math.multiply(B4,D5));
+      C = math.add(math.multiply(C4,A5),math.multiply(D4,C5));
+      D = math.add(math.multiply(C4,B5),math.multiply(D4,D5));
+
+      Anext = math.add(math.multiply(A3,A),math.multiply(B3,C));
+      Bnext = math.add(math.multiply(A3,B),math.multiply(B3,D));
+      Cnext = math.add(math.multiply(C3,A),math.multiply(D3,C));
+      Dnext = math.add(math.multiply(C3,B),math.multiply(D3,D));
+
+      A = Anext;
+      B = Bnext;
+      C = Cnext;
+      D = Dnext;
+
+      Anext = math.add(math.multiply(A2,A),math.multiply(B2,C));
+      Bnext = math.add(math.multiply(A2,B),math.multiply(B2,D));
+      Cnext = math.add(math.multiply(C2,A),math.multiply(D2,C));
+      Dnext = math.add(math.multiply(C2,B),math.multiply(D2,D));
+
+      A = Anext;
+      B = Bnext;
+      C = Cnext;
+      D = Dnext;
+    
+      Anext = math.add(math.multiply(A1,A),math.multiply(B1,C));
+      Bnext = math.add(math.multiply(A1,B),math.multiply(B1,D));
+      Cnext = math.add(math.multiply(C1,A),math.multiply(D1,C));
+      Dnext = math.add(math.multiply(C1,B),math.multiply(D1,D));
+
+      A = Anext;
+      B = Bnext;
+      C = Cnext;
+      D = Dnext;
+
+      
+      denominator = math.add(A,math.multiply((1/Z0),B),math.multiply(Z0,C),D);
+      mags = math.abs(math.multiply(math.complex(1,0),denominator.inverse()));
+      y = margin - 20*(graphsize/100)*Math.log10(mags);
+      vertex(margin + squaretime,y);
+  }
+  
+  endShape();
+  
+  stroke("black");
+  rect(margin, margin,graphsize,graphsize);
+  
+ textSize(30);
+  strokeWeight(1);
+  for(var gridindex = 0;gridindex < 10;gridindex++){
+      line(margin + gridindex*graphsize/10,margin,margin + gridindex*graphsize/10,margin+graphsize);
+      line(margin,margin + gridindex*graphsize/10,margin+graphsize,margin + gridindex*graphsize/10); 
+  }
+
+
+stroke("red");
+strokeWeight(6);
+line(margin + 3*graphsize/10,margin,margin + 3*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 kHz",margin-32 + 3*graphsize/10,margin+graphsize+32);
+
+stroke("green");
+strokeWeight(6);
+line(margin + 6*graphsize/10,margin,margin + 6*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 MHz",margin-32 + 6*graphsize/10,margin+graphsize+32);
+
+stroke("purple");
+strokeWeight(6);
+line(margin + 9*graphsize/10,margin,margin + 9*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 GHz",margin-32 + 9*graphsize/10,margin+graphsize+32);
+
+stroke("black");
+
+
+//line(margin,margin + 0.5*graphsize,margin+graphsize,margin + 0.5*graphsize);
+ 
+
+//  text("0 dB",margin - 90,margin + 8);
+
+ textSize(28);
+
+  for(var index = 1;index < 10;index++){
+      text("-" + index.toString() + "0 dB",margin - 90,margin + 8 + index*graphsize/10);
+  }
+
+
+text("Rbias = " + (Math.round(Rbias)).toString() + " ohms",50,50);
+
+text("Rslime = " + (Math.rou(Rslime)).toString() + " ohms",0.5*graphsize,50);
+
+
+//  text("0",margin-32,margin + 0.5*graphsize);
+//  text("V_max",margin-32,margin-32);
+//  text("sweep time",graphsize-32,margin+graphsize+32);
+
+    
+}
+
+
+
+function post(){
+            
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    var url = "pngsave.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=trashmagic/square" + timestamp +  "-filter.png");//send text to filesaver.php
+     //location.reload(); 
+     
+    newfilename = "trashmagic/square" + timestamp +  "-filter.png";
+    
+    var newbox = document.createElement("DIV");
+    newbox.classList.add("imagebox");         
+    
+    var deletespan = document.createElement("SPAN");
+    deletespan.innerHTML = "X";
+    deletespan.classList.add("deletespan");
+    deletespan.onclick = function(){
+        //delete the parent div of the image
+        //delete the file
+        var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+        var httpc = new XMLHttpRequest();
+        var url = "deletefile.php";         
+        httpc.open("POST", url, true);
+        httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    }
+    
+    newbox.appendChild(deletespan);
+
+    var newdiv = document.createElement("DIV");
+    newdiv.innerHTML = newfilename;
+    newdiv.className = "filelabel";
+    newbox.appendChild(newdiv);
+
+    var newimg = document.createElement("IMG");
+    newimg.src = png64;
+    newimg.classList.add("uploadimage");
+    newimg.classList.add("button");
+    newbox.appendChild(newimg);    
+
+
+    document.getElementById("feedscroll").insertBefore(newbox,document.getElementById("feedscroll").getElementsByClassName("imagebox")[0]);
+        
+}
+
+function keyPressed() {
+
+    if(key == 's'){
+        post();
+    }
+
+}
+
+
+upuploadImages = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        upuploadImages = JSON.parse(this.responseText);
+        for(var index = upuploadImages.length - 1;index >= 0;index--) {
+            
+            if(upuploadImages[index].includes("-filter")){
+            
+                var newbox = document.createElement("DIV");
+                newbox.classList.add("imagebox");         
+                
+                var deletespan = document.createElement("SPAN");
+                deletespan.innerHTML = "X";
+                deletespan.classList.add("deletespan");
+                deletespan.onclick = function(){
+                    //delete the parent div of the image
+                    //delete the file
+                    var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+                    var httpc = new XMLHttpRequest();
+                    var url = "deletefile.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }
+                
+                newbox.appendChild(deletespan);
+        
+                var newdiv = document.createElement("DIV");
+                newdiv.innerHTML = upuploadImages[index];
+                newdiv.className = "filelabel";
+                newbox.appendChild(newdiv);
+            
+                
+                document.getElementById("feedscroll").appendChild(newbox);
+                var newimg = document.createElement("IMG");
+                newimg.src = "trashmagic/" + upuploadImages[index];
+                newimg.classList.add("uploadimage");
+                newimg.classList.add("button");
+                newbox.appendChild(newimg);
+                
+            }
+            
+        }
+    }
+};
+httpc9.open("GET", "dir.php?filename=trashmagic", true);
+httpc9.send();
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#F8F0E3;
+    font-family:Arial;
+}
+main{
+    position:absolute;
+    right:25px;
+    top:25px;
+    border-left:solid;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Arial;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Arial;
+    text-align:center;
+    overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Arial;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#F8F0E3; 
+    padding:1em 1em 1em 1em;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+</style>
+</body>
+</html>

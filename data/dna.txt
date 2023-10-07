@@ -45,6 +45,8 @@
         "scrollset.html",
         "set.html",
         "slime.html",
+        "slimefilter.html",
+        "slimefilterold.html",
         "squares.html",
         "sweepergraph.html",
         "sweepsquare.html",
