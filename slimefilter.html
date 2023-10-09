@@ -175,7 +175,7 @@ graphsize = 100;
 
 Cin = 0.47e-6;//farads
 Cout = 0.47e-6;//farads
-Cslime = 0.01e-6;//farads
+Cslime = 0.1e-6;//farads
 Rslime = 1000;//ohms
 Rbias = 1000;//ohms
 Z0 = 1000;//ohms
@@ -245,8 +245,8 @@ function setup() {
 
 function draw(){
 
-  Rbias = 5000*mouseX/width;
-  Rslime = 5000*mouseY/height;
+  Rbias = 100000*mouseX/width;
+  Rslime = 100000*mouseY/height;
 
   clear();
   strokeWeight(6);
@@ -375,9 +375,17 @@ stroke("black");
   }
 
 
-text("Rbias = " + (Math.round(Rbias)).toString() + " ohms",50,50);
+text("Rbias = " + (Math.round(Rbias)).toString() + " ohms",50,30);
 
-text("Rslime = " + (Math.rou(Rslime)).toString() + " ohms",0.5*graphsize,50);
+text("Rslime = " + (Math.round(Rslime)).toString() + " ohms",0.5*graphsize,30);
+
+text("Cslime = " + ((Cslime*1e6).toFixed(2)).toString() + " uF",0.5*graphsize,60);
+
+
+
+text("Cin = " + ((Cin*1e6).toFixed(2)).toString() + " uF",0.2*graphsize,margin + graphsize +60);
+
+text("Cout = " + ((Cout*1e6).toFixed(2)).toString() + " uF",0.8*graphsize,margin + graphsize +60);
 
 
 //  text("0",margin-32,margin + 0.5*graphsize);
