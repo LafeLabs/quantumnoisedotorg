@@ -54,6 +54,7 @@
         "trashbook.html",
         "trashmagic.html",
         "trashrobot.html",
+        "washboard.html",
         "webdestroyer.html",
         "webeditor.html"
     ],
