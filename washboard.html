@@ -47,7 +47,14 @@
         <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
         
     <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
-    
+    <p>
+        This is the potential energy surface for the "phase particle" of a Josephson Junction.  We simulate an AC bias of the current through the junction which is of comparable frequency to the plasma frequency of the junction. The plasma frequency is the resonant frequency between the capacitance of the junction and the effective inductance of the junction from the Josephson effect. This frequency can be altered with a bias capacitor in parallel with the junction.  
+    </p>
+    <p>
+Can the QNS modulate itself? Can we use signals down in the audio band to mix up into the microwave?  How does that work?  How exactly do signals get upconverted from audio to microwave and what do they look like after they get down converted back to audio after being amplified?  The QNS can ring up complex quantum resonant circuits, which can then reflect back to the QNS and all be convolved, and then that signal can go back to the audio output. This audio output can get connected to a web browser with p5js which takes the analog signal and evolves algorithms to shape the audio analog signal which goes back into the whole system. Thus we can make algorithms that program the whole quantum system using only analog signals.  
+
+
+    </p>
     
     <p>
 position mouse to set the amplitude of oscillation and the josephson energy.  hit the s key to save a plot.
@@ -62,15 +69,81 @@ U_J = E_J\left[1 - \cos{\delta} - \delta A \cos{\left(\frac{2\pi t}{T_{bias}}\ri
         \delta = \frac{2\pi x}{T_{phase}}
         $$
     </p>
+    
+    <p>the differential equation we solve in order to get trajectories is as follows:</p>
+    <p>
+        $$
+        \ddot{\delta} = \frac{1}{\omega_P^2}\left(1 - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta},
+        $$
+    </p>
+    <p>
+        where $\omega_P$ is the plasma frequency of the junction.
+    </p>
+    <p>
+        This second order differential equation can be re-written as a first order differential equation on a vector consisting of the phase space variables $\delta$ and $\dot{\delta}$.  
+    </p>
+    <p>
+        $$
+        \frac{d}{dt} \begin{bmatrix}\delta \\ \dot{\delta}\end{bmatrix} = \begin{bmatrix}\dot{\delta} \\ \frac{1}{\omega_P^2}\left(1 - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta} \end{bmatrix}
+        $$
+    </p>
+    <p>We will now use the fourth order <a href= "https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge Kutta</a> method to turn this into a difference equation.</p>
+    <p>
+        $$
+        \frac{dy}{dt} = f(y,t), y(t_0) = y_0
+        $$
+    </p>
+    <p>
+        $$
+        y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2*k_3 + k_4),
+        $$
+    </p>
+    <p>
+        $$
+    t_{n+1} = t_n + h
+    $$
+    </p>
+    <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Runge-Kutta_slopes.svg/1920px-Runge-Kutta_slopes.svg.png"/>
+    <p>
+        $$
+        k_1 = f(t_n,y_n)
+        $$
+        $$
+        k_2 = f(t_n + \frac{h}{2},y_n + h\frac{k_1}{2})
+        $$
+        $$
+        k_3 = f(t_n + \frac{h}{2},y_n + h\frac{k_2}{2})
+        $$
+        $$
+        k_4 = f(t_n + h,y_n + hk_3)
+        $$
+    </p>
 </div>
 
 <script>
 
 let Tbias = 30;//period of current bias in frames
+RC = 30;//RC time in frames
 let Tphase = 300;//period of phase across the x axis in pixels
 let frameIndex = 0;
 Ej = 100;//Josephoson energy in pixels
 A = 0.10;//bias current amplitude in pixels
+
+ballX = 0;
+ballY = 0;
+
+h = 1;//1 frame is one step in time
+
+omegap = 1;
+
+delta = 6;
+deltadot = 0;
+y = [0,0];
+ynext = [0,0];
+k1 = [0,0];
+k2 = [0,0];
+k3 = [0,0];
+k4 = [0,0];
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -103,6 +176,47 @@ function draw(){
 //  background(220);
   background("#ffffff");
 
+  k1[0] = deltadot;
+  k1[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*deltadot + A*Math.cos(2*Math.PI*frameIndex/Tbias);
+
+  ynext[0] = delta + 0.5*h*k1[0];
+  ynext[1] = deltadot + 0.5*h*k1[1];  
+
+  k2[0] = ynext[1];
+  k2[1] = (1/omegap)*(1-sin(ynext[0])) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias);
+
+
+  ynext[0] = delta + 0.5*h*k2[0];
+  ynext[1] = deltadot + 0.5*h*k2[1];  
+
+
+  k3[0] = ynext[1];
+  k3[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias);
+
+  ynext[0] = delta + h*k3[0];
+  ynext[1] = deltadot + h*k3[1];  
+    
+  k4[0] = ynext[1];
+  k4[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + h)/Tbias);
+
+  ynext[0] = delta + 0.1667*h*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0]);
+  ynext[1] = deltadot + 0.1667*h*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1]); 
+
+  delta = ynext[0];
+  deltadot = ynext[1];
+  
+  if(delta < 0){
+      delta = 2*Math.PI*squaresize/Tphase - 1;
+  }
+  if(delta > 2*Math.PI*squaresize/Tphase){
+      delta = 0;
+  }
+
+  ballX = delta*Tphase/(2*Math.PI);
+  ballY = 0.5*height - Ej*(-Math.cos(2*Math.PI*ballX/Tphase) - (2*Math.PI*ballX*A/Tphase)*Math.cos(2*Math.PI*frameIndex/Tbias) );
+
+   
+    
 
   noFill();
   // plot hyperbolic tangent functions
@@ -112,6 +226,11 @@ function draw(){
       vertex(x,0.5*height - Ej*(-Math.cos(2*Math.PI*x/Tphase) - (2*Math.PI*x*A/Tphase)*Math.cos(2*Math.PI*frameIndex/Tbias) ));
   }
   endShape();
+  
+  fill("red");
+  ellipse(ballX,ballY,20,20);
+
+  
   frameIndex++;
   
   if(frameIndex > 100000){
