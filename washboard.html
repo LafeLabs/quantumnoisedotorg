@@ -47,50 +47,126 @@
         <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
         
     <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
-    <p>
-        This is the potential energy surface for the "phase particle" of a Josephson Junction.  We simulate an AC bias of the current through the junction which is of comparable frequency to the plasma frequency of the junction. The plasma frequency is the resonant frequency between the capacitance of the junction and the effective inductance of the junction from the Josephson effect. This frequency can be altered with a bias capacitor in parallel with the junction.  
-    </p>
-    <p>
-Can the QNS modulate itself? Can we use signals down in the audio band to mix up into the microwave?  How does that work?  How exactly do signals get upconverted from audio to microwave and what do they look like after they get down converted back to audio after being amplified?  The QNS can ring up complex quantum resonant circuits, which can then reflect back to the QNS and all be convolved, and then that signal can go back to the audio output. This audio output can get connected to a web browser with p5js which takes the analog signal and evolves algorithms to shape the audio analog signal which goes back into the whole system. Thus we can make algorithms that program the whole quantum system using only analog signals.  
+    
+<img src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rcsj.svg"/>    
+    
+<p>We begin with the resistively and capacitively shunted Josephson junction with resistance R in ohms, capacitance C in farads, and critical current in amperes $I_0$. The current bias is I(t), also in amperes, and is some general function of time which comes from the input signal.  The first Josephson equation is:</p>
 
+<p>
+    $$
+    I(t) = I_0\sin{\delta},
+    $$
+</p>
+<p>
+    where $\delta$ is the difference in phase between the wave function on each side of the tunnel barrier, and it is a function of time.  The second Josephson equation is that the voltage across the junction is 
+</p>
+
+<p>
+    $$
+    V = \frac{\Phi_0}{2\pi}\dot{\delta}      
+    $$
+</p>
+<p>
+$\Phi_0$ is the flux quantum, which is $h/2e$, or about $2.07\times 10^{-15}$ webers, and $\dot{\delta}$ is the time derivative of the phase difference in radians.
+</p>
+
+<p>The full equation of motion with a resistor and capacitor is </p>
+
+<p>
+    $$
+    C\dot{V} + \frac{V}{R} + I_0\sin{\delta} = I(t)
+    $$
+</p>
+<p>
+    From this we can subsitute the second Josephson equation above to get 
+</p>
+
+<p>
+    $$
+    \frac{\Phi_0}{2\pi}C\ddot{\delta} + \frac{\Phi_0}{2\pi}\frac{1}{R}\dot{\delta} = I(t) - I_0\sin{\delta} 
+    $$
+</p>
+<p>
+    now we define the Josephson inductance to be 
+</p>
+
+<p>
+    $$
+    L_J \equiv \frac{\Phi_0}{2\pi}\frac{1}{I_0},
+    $$
+</p>
+<p>
+    Define the normalized current bias to be $i(t) = I(t)/I_0$, and divide each side of the equation by the critical current to get 
+</p>
+
+<p>
+    $$
+    L_JC\ddot{\delta} + \frac{L_J}{R}\dot{\delta} = i(t) - \sin{\delta}
+    $$
+</p>
+<p>
+    Now we define the plasma frequency to be 
+    $$
+\omega_p = \frac{1}{\sqrt{L_J C}}
+    $$
+    and multiply both sides of the equation by $\omega_p^2$ to get:
+</p>
+<p>
+    $$
+    \ddot{\delta} + \frac{1}{RC}\dot{\delta} = \omega_p^2(i(t) - \sin{\delta})
+    $$
+</p>
+<p>
+    And now we note that the right side of this equation can be seen as position derivative of an effective potential $U(\delta)$ which is 
+</p>
+
+<p>
+    $$
+    U(\delta) = E_J(1 - \cos{\delta} - i(t)\delta)
+    $$
+</p>
+<p>
+    This is enough information to plot the oscillating potential energy surface.  The normalized current bias is an AC bias with period of a few frames in our animation.  Our animations are generally 10 to 30 frames, so the period should be a few frames. The period in frames is $T_{bias}$
+</p>
+
+<p>
+    $$
+    i(t) = A\cos{\left(\frac{2\pi \textrm{[frameIndex]}}{T_{bias}}\right)}
+    $$
+</p>
+
+<p>
+    We vary the position x from 0 on the left side of the square plot to $[\textrm{squaresize}]$ pixels.  The phase $\delta$ varies across the horizontal axis with a period defined by $T_{phase}$ in units of pixels.  We want to center the plot on the center of the square, at the x value of $[\textrm{squresize}]/2$, and so the value of $\delta$ across the square as a function of x is 
+    $$
+    \delta = \frac{2\pi}{T_{phase}}\left(x - \frac{[\textrm{squaresize}]}{2}\right) 
+    $$
+    and the y value will be 
+    $$
+    y = \frac{[\textrm{squaresize}]}{2} - E_J(1 - \cos{\delta} - i(t)\delta),
+    $$
+    where $E_J$ is the Josephson energy in units of pixels.  Note that $\delta$ is always in units of radians.  
+</p>
 
     </p>
     
     <p>
-position mouse to set the amplitude of oscillation and the josephson energy.  hit the s key to save a plot.
+position mouse to set the amplitude of oscillation(X) and the josephson energy(Y).  hit the s key to save a plot.
     </p>
-    <p>
-        $$
-U_J = E_J\left[1 - \cos{\delta} - \delta A \cos{\left(\frac{2\pi t}{T_{bias}}\right)}\right]
-        $$
-    </p>
-    <p>
-        $$
-        \delta = \frac{2\pi x}{T_{phase}}
-        $$
-    </p>
-    
-    <p>the differential equation we solve in order to get trajectories is as follows:</p>
-    <p>
-        $$
-        \ddot{\delta} = \frac{1}{\omega_P^2}\left(1 - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta},
-        $$
-    </p>
-    <p>
-        where $\omega_P$ is the plasma frequency of the junction.
-    </p>
-    <p>
-        This second order differential equation can be re-written as a first order differential equation on a vector consisting of the phase space variables $\delta$ and $\dot{\delta}$.  
-    </p>
-    <p>
-        $$
-        \frac{d}{dt} \begin{bmatrix}\delta \\ \dot{\delta}\end{bmatrix} = \begin{bmatrix}\dot{\delta} \\ \frac{1}{\omega_P^2}\left(1 - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta} \end{bmatrix}
-        $$
-    </p>
+
+
     <p>We will now use the fourth order <a href= "https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge Kutta</a> method to turn this into a difference equation.</p>
+    
+    <p>
+        The order differential equation can be re-written as a first order differential equation on a vector consisting of the phase space variables $\delta$ and $\dot{\delta}$.  
+    </p>
     <p>
         $$
-        \frac{dy}{dt} = f(y,t), y(t_0) = y_0
+        \frac{d}{dt} \begin{bmatrix}\delta \\ \dot{\delta}\end{bmatrix} = \begin{bmatrix}\dot{\delta} \\ \omega_P^2\left(i(t) - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta} \end{bmatrix}
+        $$
+    </p>
+    <p>
+        $$
+        \frac{d\vec{y}(t)}{dt} = f(\vec{y}(t),t), y(t_0) = y_0
         $$
     </p>
     <p>
@@ -122,8 +198,8 @@ U_J = E_J\left[1 - \cos{\delta} - \delta A \cos{\left(\frac{2\pi t}{T_{bias}}\ri
 
 <script>
 
-let Tbias = 30;//period of current bias in frames
-RC = 30;//RC time in frames
+let Tbias = 60;//period of current bias in frames
+RC = 300;//RC time in frames
 let Tphase = 300;//period of phase across the x axis in pixels
 let frameIndex = 0;
 Ej = 100;//Josephoson energy in pixels
@@ -134,9 +210,10 @@ ballY = 0;
 
 h = 1;//1 frame is one step in time
 
-omegap = 1;
+omegap = 0.1;
+Tplasma = 120;//natural period of small oscillations in frames
 
-delta = 6;
+delta = 0.1;
 deltadot = 0;
 y = [0,0];
 ynext = [0,0];
@@ -169,21 +246,23 @@ function setup() {
 
 function draw(){
 
-  frameRate(30);
+  frameRate(20);
   
+  omegap = 2*Math.PI/Tplasma;
   Ej = mouseY;
   A = mouseX/width;
 //  background(220);
   background("#ffffff");
 
   k1[0] = deltadot;
-  k1[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*deltadot + A*Math.cos(2*Math.PI*frameIndex/Tbias);
+  k1[1] = omegap*(A*Math.cos(2*Math.PI*frameIndex/Tbias) - sin(delta)) - (1/RC)*deltadot;
+
 
   ynext[0] = delta + 0.5*h*k1[0];
   ynext[1] = deltadot + 0.5*h*k1[1];  
 
   k2[0] = ynext[1];
-  k2[1] = (1/omegap)*(1-sin(ynext[0])) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias);
+  k2[1] = omegap*(A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias) - sin(ynext[0])) - (1/RC)*ynext[1];
 
 
   ynext[0] = delta + 0.5*h*k2[0];
@@ -191,13 +270,13 @@ function draw(){
 
 
   k3[0] = ynext[1];
-  k3[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias);
+  k3[1] = omegap*(A*Math.cos(2*Math.PI*(frameIndex + 0.5*h)/Tbias) - sin(delta)) - (1/RC)*ynext[1];
 
   ynext[0] = delta + h*k3[0];
   ynext[1] = deltadot + h*k3[1];  
     
   k4[0] = ynext[1];
-  k4[1] = (1/omegap)*(1-sin(delta)) - (1/RC)*ynext[1] + A*Math.cos(2*Math.PI*(frameIndex + h)/Tbias);
+  k4[1] = omegap*(A*Math.cos(2*Math.PI*(frameIndex + h)/Tbias)-sin(delta)) - (1/RC)*ynext[1];
 
   ynext[0] = delta + 0.1667*h*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0]);
   ynext[1] = deltadot + 0.1667*h*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1]); 
@@ -205,30 +284,32 @@ function draw(){
   delta = ynext[0];
   deltadot = ynext[1];
   
-  if(delta < 0){
-      delta = 2*Math.PI*squaresize/Tphase - 1;
+  if(delta > Math.PI*squaresize/Tphase){
+      delta = -Math.PI*squaresize/Tphase;
   }
-  if(delta > 2*Math.PI*squaresize/Tphase){
-      delta = 0;
+  if(delta < -Math.PI*squaresize/Tphase){
+      delta = Math.PI*squaresize/Tphase;
   }
 
-  ballX = delta*Tphase/(2*Math.PI);
-  ballY = 0.5*height - Ej*(-Math.cos(2*Math.PI*ballX/Tphase) - (2*Math.PI*ballX*A/Tphase)*Math.cos(2*Math.PI*frameIndex/Tbias) );
 
-   
     
-
   noFill();
   // plot hyperbolic tangent functions
   strokeWeight(8);
   beginShape();
+  
   for (let x = 0; x <= width; x++)  {
-      vertex(x,0.5*height - Ej*(-Math.cos(2*Math.PI*x/Tphase) - (2*Math.PI*x*A/Tphase)*Math.cos(2*Math.PI*frameIndex/Tbias) ));
+      var deltaplotx = (x - 0.5*squaresize)*Math.PI*2/Tphase;
+      vertex(x,0.5*height - Ej*(1 - Math.cos(deltaplotx) - deltaplotx*A*Math.cos(2*Math.PI*frameIndex/Tbias) ));
   }
   endShape();
   
+  ballX = 0.5*squaresize + delta*Tphase/(2*Math.PI);
+  ballY = 0.5*height - Ej*(1 - Math.cos(delta) - delta*A*Math.cos(2*Math.PI*frameIndex/Tbias) );
+
+     
   fill("red");
-  ellipse(ballX,ballY,20,20);
+  ellipse(ballX,ballY,40,40);
 
   
   frameIndex++;
