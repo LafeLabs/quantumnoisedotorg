@@ -49,6 +49,21 @@
     <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
     
 <img src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rcsj.svg"/>    
+
+<table>
+    <tr>
+        <td>Natural oscillation period [frames]</td>
+        <td><input id = "tplasmainput"/></td>
+    </tr>
+    <tr>
+        <td>Bias period [frames]</td>
+        <td><input id = "tbiasinput"/></td>
+    </tr>
+    <tr>
+        <td>RC time [frames]</td>
+        <td><input id = "rcinput"/></td>
+    </tr>
+</table>
     
 <p>We begin with the resistively and capacitively shunted Josephson junction with resistance R in ohms, capacitance C in farads, and critical current in amperes $I_0$. The current bias is I(t), also in amperes, and is some general function of time which comes from the input signal.  The first Josephson equation is:</p>
 
@@ -157,11 +172,15 @@ position mouse to set the amplitude of oscillation(X) and the josephson energy(Y
     <p>We will now use the fourth order <a href= "https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge Kutta</a> method to turn this into a difference equation.</p>
     
     <p>
-        The order differential equation can be re-written as a first order differential equation on a vector consisting of the phase space variables $\delta$ and $\dot{\delta}$.  
+        The second order differential equation can be re-written as a first order differential equation on a vector consisting of the phase space variables $\delta$ and $\dot{\delta}$.  
     </p>
     <p>
         $$
         \frac{d}{dt} \begin{bmatrix}\delta \\ \dot{\delta}\end{bmatrix} = \begin{bmatrix}\dot{\delta} \\ \omega_P^2\left(i(t) - \sin{\delta}\right) - \frac{1}{RC}\dot{\delta} \end{bmatrix}
+        $$
+        
+        $$
+        \vec{y} \equiv \begin{bmatrix}\delta \\ \dot{\delta}\end{bmatrix} 
         $$
     </p>
     <p>
@@ -171,7 +190,7 @@ position mouse to set the amplitude of oscillation(X) and the josephson energy(Y
     </p>
     <p>
         $$
-        y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2*k_3 + k_4),
+        \vec{y_{n+1}} = \vec{y_n} + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4),
         $$
     </p>
     <p>
@@ -179,21 +198,31 @@ position mouse to set the amplitude of oscillation(X) and the josephson energy(Y
     t_{n+1} = t_n + h
     $$
     </p>
+    <p>
+        h is the time increment which is always one frame by default so that we are computing positions frame by frame.  All time units are in frames in our p5js code.  The coefficients are also vectors and are evaluated one after another. 
+    </p>
+    
     <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Runge-Kutta_slopes.svg/1920px-Runge-Kutta_slopes.svg.png"/>
     <p>
         $$
-        k_1 = f(t_n,y_n)
+        \vec{k_1} = f(t_n,\vec{y_n})
         $$
         $$
-        k_2 = f(t_n + \frac{h}{2},y_n + h\frac{k_1}{2})
+        \vec{k_2} = f(t_n + \frac{h}{2},\vec{y_n} + h\frac{\vec{k_1}}{2})
         $$
         $$
-        k_3 = f(t_n + \frac{h}{2},y_n + h\frac{k_2}{2})
+        \vec{k_3} = f(t_n + \frac{h}{2},\vec{y_n} + h\frac{\vec{k_2}}{2})
         $$
         $$
-        k_4 = f(t_n + h,y_n + hk_3)
+        \vec{k_4} = f(t_n + h,\vec{y_n} + h\vec{k_3})
         $$
     </p>
+    
+    <p>
+        this is how this is simulated. 
+    </p>
+    
+    
 </div>
 
 <script>
