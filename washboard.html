@@ -251,6 +251,21 @@ k2 = [0,0];
 k3 = [0,0];
 k4 = [0,0];
 
+
+document.getElementById("tplasmainput").value = Tplasma.toString();
+document.getElementById("tbiasinput").value = Tbias.toString();
+document.getElementById("rcinput").value = RC.toString();
+
+document.getElementById("rcinput").onchange = function(){
+ RC = parseInt(this.value);    
+}
+document.getElementById("tbiasinput").onchange = function(){
+ Tbias = parseInt(this.value);    
+}
+document.getElementById("tplasmainput").onchange = function(){
+ Tplasma = parseInt(this.value);    
+}
+
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
     document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
