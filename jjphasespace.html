@@ -226,21 +226,13 @@ position mouse to set the amplitude of oscillation(X) and the josephson energy(Y
 </div>
 
 <script>
-noiseon = false;
+
 let Tbias = 60;//period of current bias in frames
 RC = 300;//RC time in frames
 let Tphase = 300;//period of phase across the x axis in pixels
 let frameIndex = 0;
 Ej = 100;//Josephoson energy in pixels
 A = 0.10;//bias current amplitude in pixels
-
-let noise;
-let fft;
-let filter, filterFreq, filterWidth;
-
-filterWidth = 25;//Hz
-filterFreq = 666;//Hz
-filtergain = 1000;
 
 ballX = 0;
 ballY = 0;
@@ -259,6 +251,7 @@ k2 = [0,0];
 k3 = [0,0];
 k4 = [0,0];
 
+deltagain = 5.0;
 
 document.getElementById("tplasmainput").value = Tplasma.toString();
 document.getElementById("tbiasinput").value = Tbias.toString();
@@ -291,31 +284,20 @@ function setup() {
   createCanvas(squaresize, squaresize);    
    strokeWeight(2);  
    background("#F8F0E3");
-   
-     filter = new p5.BandPass();
-      noise = new p5.Noise();
-      
-       noise.disconnect(); // Disconnect soundfile from master output...
-  filter.process(noise); // ...and connect to filter so we'll only hear BandPass.
-  noise.start();
-
-  fft = new p5.FFT();
-
     
 }
 
 
 
 function draw(){
-  
- 
+
   frameRate(20);
   
   omegap = 2*Math.PI/Tplasma;
   Ej = mouseY;
   A = mouseX/width;
 //  background(220);
-  background("#ffffff");
+//  background("#ffffff");
 
   k1[0] = deltadot;
   k1[1] = omegap*(A*Math.cos(2*Math.PI*frameIndex/Tbias) - sin(delta)) - (1/RC)*deltadot;
@@ -344,6 +326,8 @@ function draw(){
   ynext[0] = delta + 0.1667*h*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0]);
   ynext[1] = deltadot + 0.1667*h*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1]); 
 
+  line(0.5*squaresize + delta*Tphase/(2*Math.PI),0.5*squaresize + deltagain*deltadot*Tphase/(2*Math.PI),0.5*squaresize + ynext[0]*Tphase/(2*Math.PI),0.5*squaresize + deltagain*ynext[1]*Tphase/(2*Math.PI));
+
   delta = ynext[0];
   deltadot = ynext[1];
   
@@ -354,33 +338,18 @@ function draw(){
       delta = Math.PI*squaresize/Tphase;
   }
 
-  filterFreq= filtergain*Math.abs(deltadot);
-  if(filterFreq < 200){
-      filterFreq = 200;
-  }
-  
-  filter.set(filterFreq, filterWidth);
 
     
   noFill();
   // plot hyperbolic tangent functions
-  strokeWeight(8);
-  beginShape();
-  
-  for (let x = 0; x <= width; x++)  {
-      var deltaplotx = (x - 0.5*squaresize)*Math.PI*2/Tphase;
-      vertex(x,0.5*height - Ej*(1 - Math.cos(deltaplotx) - deltaplotx*A*Math.cos(2*Math.PI*frameIndex/Tbias) ));
-  }
-  endShape();
-  
-  ballX = 0.5*squaresize + delta*Tphase/(2*Math.PI);
-  ballY = 0.5*height - Ej*(1 - Math.cos(delta) - delta*A*Math.cos(2*Math.PI*frameIndex/Tbias) );
+  strokeWeight(1);
+
+//  ballX = 0.5*squaresize + delta*Tphase/(2*Math.PI);
+  //ballY = 0.5*height - Ej*(1 - Math.cos(delta) - delta*A*Math.cos(2*Math.PI*frameIndex/Tbias) );
 
      
-  fill("red");
-  ellipse(ballX,ballY,40,40);
-//  text(filterFreq.toString(),100,100);
-  //text(filterWidth.toString(),100,200);
+//  fill("red");
+  //ellipse(ballX,ballY,40,40);
 
   
   frameIndex++;
@@ -501,17 +470,6 @@ var httpc9 = new XMLHttpRequest();
 httpc9.open("GET", "dir.php?filename=trashmagic", true);
 httpc9.send();
 
-document.body.onclick = function(){
-    if(noiseon == false){
-        noise.start();
-        noiseon = true;
-    }
-    else{
-        noise.stop();
-        noiseon = false;
-        
-    }
-}
 
 </script>
 <style>

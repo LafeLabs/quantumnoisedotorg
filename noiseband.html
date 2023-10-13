@@ -121,6 +121,9 @@ function draw() {
   // set filter parameters
   filter.set(filterFreq, filterWidth);
 
+  text(filterFreq.toString(),100,100);
+  text(filterWidth.toString(),100,200);
+
   // Draw every value in the FFT spectrum analysis where
   // x = lowest (10Hz) to highest (22050Hz) frequencies,
   // h = energy / amplitude at that frequency
