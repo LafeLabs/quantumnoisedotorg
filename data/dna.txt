@@ -35,6 +35,7 @@
         "qrcode-page.html",
         "qrcode.html",
         "quantumsquare.html",
+        "ramp2.html",
         "readme.html",
         "readmeeditor.html",
         "replicators.html",

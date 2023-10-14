@@ -135,30 +135,30 @@ $$
 $$
 
 $$
-p \equiv \frac{P}{4kB},
+p \equiv \frac{P}{4kBT},
 $$
 
 where k is the Boltzmann constant now fixed by the quantum SI to be $1.380649\times10^{-23} J/K$, e is the elementary charge, now fixed by the quantum SI to be $1.602176634 \times 10^{-19}C$, B is the effective bandwidth of the noise power measurement in hertz, f is the frequency in hertz at which noise is measured, T is the absolute temperature in kelvin, and P is the power in watts.  The normalized expression for the noise power response p as a function of v for fixed $\phi$ is as follows:
 
 $$
-p = T\left[ \frac{1}{2}\left( \frac{v + \phi}{2}\right)\coth{\left( \frac{v + \phi}{2}\right)} +\frac{1}{2}\left( \frac{v - \phi}{2}\right)\coth{\left( \frac{v - \phi}{2}\right)}  \right],
+p = \left( \frac{v + \phi}{4}\right)\coth{\left( \frac{v + \phi}{2}\right)} + \left( \frac{v - \phi}{4}\right)\coth{\left( \frac{v - \phi}{2}\right)},
 $$
 
 which reduces to 
 
 $$
-p = T
+p = 1
 $$
 
 for $v = 0$ and $\phi = 0$ and 
 
 $$
-p = T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
+p = \left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
 $$
 for $\phi = 0$, and 
 
 $$
-p = T\left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
+p = \left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
 $$
 for $v = 0$.
 

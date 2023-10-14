@@ -15,7 +15,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>classical noise response Plots</title>
+        <title>Ramp and Response Plots</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -46,7 +46,45 @@
     
     <a href = "index.html">HOME</a>
     
-    <h1>Sweeper Graph</h1>
+    <h1>Ramp Response Graph</h1>
+
+<p>
+We apply a linear ramp of voltage at some audio frequency $f_{in}$ in Hz, with a ramp time of $T_{ramp}$ to the QNS filters and then a tunnel junction.  We normalize the voltage directly across the junction to the temperature of the device, to define a normalized voltage $v(t)$ which is the following function of $V(t)$:
+
+$$
+v(t) \equiv \frac{eV(t)}{kT}
+$$
+where k is the Boltzmann constant now fixed by the quantum SI to be $1.380649\times10^{-23} J/K$, e is the elementary charge, now fixed by the quantum SI to be $1.602176634 \times 10^{-19}C$.
+
+The tunnel junction broadcasts Gaussian random noise at all frequencies in a combination of thermal noise, shot noise and quantum zero point fluctuations.  We measure the integrated noise power over some band centered at a microwave frequency $f_{RF}$, and normalize the frequency to temperature to get the following reduced quantum frequency:
+
+$$
+\phi \equiv \frac{hf_{RF}}{kT},
+$$
+
+, where h is the Planck constant now fixed by the Quantum SI at $6.62607015 \times 10^{-34} J \cdot s$.  
+
+Now we normalize the noise power integrated over a band B to the 
+
+$$
+p \equiv \frac{P}{4kB},
+$$
+
+where B is the effective bandwidth of the noise power measurement in hertz, f is the frequency in hertz at which noise is measured,  P is the power in watts.  This signal is put through an amplifier with gain in linear power units of G and noise temperature of $T_N$, and the normalized output noise power is 
+</p>
+<p>
+    $$
+    p = G\left[T_N + \frac{T}{2}\left(\frac{v + \phi}{2}\right)\coth{\left(\frac{v + \phi}{2}\right)} + \frac{T}{2}\left(\frac{v - \phi}{2}\right)\coth{\left(\frac{v - \phi}{2}\right)}\right]
+    $$
+</p>
+
+
+    <p>Classically that is
+    $$
+    p = G\left[T_N + T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)} \right]
+    $$
+    </p>
+
     
         <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
         
@@ -62,7 +100,6 @@ Ramp of sine amplitude goes up across the square, and this is the response. the 
         G\left[\frac{T_N}{T} + \left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}\right]
         $$
     </p>
-    
     <p>
         T is the temperature in pixels, which is set by the Y position of the mouse.  The x position sets the period of the bias sweep. The amplitude of the bias sweep is set by the size of the square, and goes up to twice that, which is what puts the top of the shot noise right at the top corner of the square.
     </p>
@@ -75,8 +112,13 @@ Ramp of sine amplitude goes up across the square, and this is the response. the 
 margin = 100;//margin in px
 squaretime = 0;
 v = 0;
+vmax = 6;//in units of kT
 period = 50;
+tnorm = 0.1;//normalized temperature
 graphsize = 100;
+phi = 5;//hf/kT
+
+QUANTUM = false;
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -102,35 +144,100 @@ function setup() {
 
 
 function draw(){
+  period = mouseX/4;
+  delta = 4*(mouseY - squaresize/2)/squaresize;
+  phi = 20*mouseY/squaresize;
+  tn = 1;//noise temperature divided by temperature
+  G = graphsize/4;
+   
+   if(QUANTUM){
+       vmax = 16;//in units of kT
+       
+   }
+   else{
+       vmax = 6;//in units of kT
+   }
 
-clear();
+  clear();
   strokeWeight(4);
   noFill();
-  stroke("blue");
+  stroke("red");
   beginShape();
-  period = mouseX/4;
-  tpixels = 0.5*(squaresize - margin - mouseY);
   
   for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
       v = squaretime*Math.cos(2*Math.PI*squaretime/period);
-      p = 2*(0.5*v)/Math.tanh(0.5*v/tpixels);
+      vertex(margin + squaretime, margin + 0.5*graphsize - 0.5*v);
+  }
+  endShape();
+
+  stroke("blue");
+  beginShape();
+  for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
+      v = (squaretime*vmax/graphsize)*Math.cos(2*Math.PI*squaretime/period);
+      if(QUANTUM){
+          p = 2*G*( 0.25*(v + phi)/Math.tanh(0.5*(v + phi))  + 0.25*(v - phi)/Math.tanh(0.5*(v - phi)))*2*Math.tanh(phi/2)/phi;
+      }
+      else{
+          p = G*(tn - delta + 0.5*v*(1 + delta)/Math.tanh(0.5*v));
+      }
+
       vertex(margin + squaretime, margin + graphsize - p);
   }
   endShape();
-  stroke("black");
 
+
+if(!QUANTUM){
+  beginShape();
+  for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
+      v = (squaretime*vmax/graphsize);
+      p = G*(tn - delta + 0.5*v*(1+ delta));   
+      vertex(margin + squaretime, margin + graphsize - p);
+  }
+  endShape();
+
+  beginShape();
+  for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
+      v = (squaretime*vmax/graphsize);
+      p = G*(tn + 1);   
+      vertex(margin + squaretime, margin + graphsize - p);
+  }
+  endShape();
+    
+}
+
+  stroke("black");
 
   rect(margin, margin,graphsize,graphsize);
   
-
-
   strokeWeight(1);
-    line(margin,graphsize + margin - 2*tpixels,margin+graphsize,graphsize + margin - 2*tpixels);
-  textSize(32);
+  
+  line(margin,0.5*graphsize + margin,margin+graphsize,0.5*graphsize + margin);
+  
+  textSize(40);
+
+if(QUANTUM){
+    text("QUANTUM",40,40);
+    text("hf/kT = " + (phi.toFixed(1)).toString(),margin + 0.5*graphsize,40);
+}
+else{
+    text("CLASSICAL",40,40);
+}
+    
+text("0",margin,margin + graphsize + 40);
+text("time",margin + 0.5*graphsize,margin + graphsize + 40);
+text("T_ramp",margin + graphsize - margin,margin + graphsize + 40);
+
+  stroke("red");
+  text("v(t)",10,margin + 0.5*graphsize);
+
+  stroke("blue");
+  text("p(t)",margin+graphsize+40,margin + 0.5*graphsize);
+
+
 //  text("-V_max",margin-32,margin+graphsize+32);
-  text("1",margin-32,graphsize + margin - 2*tpixels);
-  text("p_max/T",margin-32,margin-32);
-  text("sweep time",graphsize-32,margin+graphsize+32);
+//  text("1",margin-32,graphsize + margin - 2*tpixels);
+  //text("p_max/T",margin-32,margin-32);
+  //text("sweep time",graphsize-32,margin+graphsize+32);
 
     
 }
@@ -192,7 +299,9 @@ function keyPressed() {
     if(key == 's'){
         post();
     }
-
+    if(key == 'q'){
+        QUANTUM = !QUANTUM;
+    }
 }
 
 
