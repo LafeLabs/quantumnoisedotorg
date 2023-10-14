@@ -23,6 +23,8 @@ This web page is a part of a set of self-replicating documents including PHP scr
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/whole-system-schematic.svg)
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/warm-qns.svg)
+
 Audio signals go through a series of audio bandpass filters down into a dilution refrigerator, and then bias a tunnel junction, which produces RF(GHz) noise, which gets amplified, filtered, mixed back down into the audio, and filtered again, then out via an SMA which is converted to audio cables.
 
 ## Audio tone generation
@@ -135,30 +137,30 @@ $$
 $$
 
 $$
-p \equiv \frac{P}{4kBT},
+p \equiv \frac{P}{4kB},
 $$
 
 where k is the Boltzmann constant now fixed by the quantum SI to be $1.380649\times10^{-23} J/K$, e is the elementary charge, now fixed by the quantum SI to be $1.602176634 \times 10^{-19}C$, B is the effective bandwidth of the noise power measurement in hertz, f is the frequency in hertz at which noise is measured, T is the absolute temperature in kelvin, and P is the power in watts.  The normalized expression for the noise power response p as a function of v for fixed $\phi$ is as follows:
 
 $$
-p = \left( \frac{v + \phi}{4}\right)\coth{\left( \frac{v + \phi}{2}\right)} + \left( \frac{v - \phi}{4}\right)\coth{\left( \frac{v - \phi}{2}\right)},
+p = T\left( \frac{v + \phi}{4}\right)\coth{\left( \frac{v + \phi}{2}\right)} + T\left( \frac{v - \phi}{4}\right)\coth{\left( \frac{v - \phi}{2}\right)},
 $$
 
 which reduces to 
 
 $$
-p = 1
+p = T
 $$
 
 for $v = 0$ and $\phi = 0$ and 
 
 $$
-p = \left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
+p = T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
 $$
 for $\phi = 0$, and 
 
 $$
-p = \left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
+p = T\left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
 $$
 for $v = 0$.
 
@@ -178,6 +180,12 @@ The bias we apply to this is a linear ramped sine wave which looks like this:
 
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/response.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/classical-response.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-response.png)
+
+[ramp plotter](ramp2.html)
 
 The response to the ramped stimulus is shown above.  As long as the peak value of the AC bias wave is below the quantum knee at $v = \phi$, there is almost no response, then the response suddenly turns on as that threshold is reached. This calibrates the time axis of the response curves using the value of that quantum frequency, which can be known quite accurately, hence calibrating the time axis in units of temperature.  Since the slope of the shot noise response is known, this also calibrates the vertical axis in units of temperature, which is the desired result for both noise and temperature metrology.  This calibration process is for the both the audio bias and RF response *directly across the junction*, so it removes both the attenuation going down to the junction and the gain going back up.
 
