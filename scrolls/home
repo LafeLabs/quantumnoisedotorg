@@ -25,6 +25,11 @@ This web page is a part of a set of self-replicating documents including PHP scr
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/warm-qns.svg)
 
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/classical-response.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-response.png)
+
+
 Audio signals go through a series of audio bandpass filters down into a dilution refrigerator, and then bias a tunnel junction, which produces RF(GHz) noise, which gets amplified, filtered, mixed back down into the audio, and filtered again, then out via an SMA which is converted to audio cables.
 
 ## Audio tone generation
@@ -83,6 +88,10 @@ Standard FR4 circuit boards are about 1.6 mm in thickness, and have a dielectric
 This is a .svg which has the exact dimensions of the copper and board outlines, in separate layers:
 
 ![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/pcbdrawing.svg)
+
+ - [qns-v1.sch](https://github.com/LafeLabs/quantumnoisedotorg/raw/master/pcblayout/CAMOutputs/GerberFiles/qns-v1.sch)
+ - [qns-v1.brd](https://github.com/LafeLabs/quantumnoisedotorg/raw/master/pcblayout/CAMOutputs/GerberFiles/qns-v1.brd)
+ - [link to zip of gerber files](https://github.com/LafeLabs/quantumnoisedotorg/raw/master/pcblayout/CAMOutputs/GerberFiles/quantum-noise-synth-v1.zip)
 
 Get these boards made with FR4, no soldermask, backside can be a ground plane or not, test both.
 
