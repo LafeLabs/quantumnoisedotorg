@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>QUANTUM NOISE CURVE</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+
+
+<div id = "feedscroll">
+    
+    <h1>PLAY RAMP!</h1>
+    
+        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+        
+    <h1><a style = "color:blue;text-align:center;margin:auto" href = "index.html">HOME</a></h1>
+    
+    
+    <table>
+        <tr>
+            <td>Sweeptime[frames]:</td>
+            <td>
+                <input id = "sweeptimeinput"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Frequency[Hz]:</td>
+            <td>
+                <input id = "frequencyinput"/>
+            </td>
+        </tr>
+        <tr>
+            <td id = "startbutton" class = "button">START/STOP SWEEP</td><td></td>
+        </tr>
+    </table>
+    
+    <p>
+click on the screen to start the tone
+    </p>
+    <p>
+
+
+    </p>
+</div>
+
+<script>
+
+
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+
+let osc, fft;
+
+freq = 666;//frequency of sine wave in Hz
+maxv = 0.5;//max amplitude
+sweepframes = 30;
+oscon = false;
+sweepindex = 0;
+
+function setup() {
+
+   createCanvas(squaresize, squaresize);    
+   strokeWeight(6);  
+   background("#F8F0E3");
+   osc = new p5.SinOsc(); // set frequency and type
+  osc.amp(maxv);
+
+  fft = new p5.FFT();
+  osc.start();
+
+  
+
+
+}
+
+
+
+function draw(){
+  background(255);
+  stroke("#ff0000");
+  frameRate(30);
+  let waveform = fft.waveform(); // analyze the waveform
+  beginShape();
+  strokeWeight(5);
+  for (let i = 0; i < waveform.length; i++) {
+    let x = map(i, 0, waveform.length, 0, width);
+    let y = map(waveform[i], -1, 1, height, 0);
+    vertex(x, y);
+  }
+  endShape();
+
+  osc.freq(freq);
+
+  let amp = map(mouseY, 0, height, 1, 0.01);
+  osc.amp(amp*sweepindex/sweepframes);
+    sweepindex++;
+    if(sweepindex > sweepframes){
+        sweepindex = 0;
+    }
+}
+
+function mouseClicked() {
+  
+  if(!oscon){
+      osc.start();
+  }
+  else{
+      osc.stop();
+  }
+  oscon = !oscon;
+    
+}
+
+
+document.getElementById("sweeptimeinput").value = sweepframes.toString();
+document.getElementById("frequencyinput").value = freq.toString();
+
+document.getElementById("sweeptimeinput").onchange = function(){
+    sweepframes = parseInt(this.value);
+}
+
+
+document.getElementById("frequencyinput").onchange = function(){
+    freq = parseInt(this.value);
+}
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#F8F0E3;
+    font-family:Arial;
+}
+main{
+    position:absolute;
+    right:25px;
+    top:25px;
+    border-left:solid;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Arial;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Arial;
+    text-align:center;
+    overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Arial;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#F8F0E3; 
+    padding:1em 1em 1em 1em;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+#startbutton{
+    border:solid;
+}
+.data{
+    display:none;
+}
+</style>
+</body>
+</html>

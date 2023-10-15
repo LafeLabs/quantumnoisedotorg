@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>parabolic conductance guitar pedal</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+
+
+<div id = "feedscroll">
+    
+    <a href = "index.html">HOME</a>
+    
+    <h1>Parabolic Conductance</h1>
+    
+        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+        
+    <p>
+        hit the letter "s" to post a square to the feed. move pointer around on square to change the paramters of the curve.
+    </p>
+    
+    <p>
+
+    </p>
+
+
+</div>
+
+<script>
+
+margin = 10;//margin in px
+squaretime = 0;
+v = 0;
+vout = 0;
+graphsize = 100;
+vstar = 800;
+Rjnorm = 2.0;
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+http://quantumnoise.org/squares.html
+graphsize = squaresize- 2*margin;
+
+vmax = graphsize/2;//voltage oscillation magnitude in px units
+period = 150;//period in frames
+
+function setup() {
+
+   createCanvas(squaresize, squaresize);    
+   strokeWeight(2);  
+   background("#F8F0E3");
+   background("black");
+    
+}
+
+
+timeindex = 0;
+
+function draw(){
+    
+   vstar = mouseX*3;
+   Rjnorm = mouseY/100;
+  frameRate(20);
+  clear();
+  strokeWeight(6);
+  noFill();
+  stroke(0);
+
+  v = vmax*Math.cos(2*Math.PI*timeindex/period);
+  vout = 2*v/(1 + Rjnorm*(1 - (v*v/(vstar*vstar))));
+
+  
+  beginShape();
+  for (var plotx = -vmax; plotx < vmax; plotx++)  {
+      vertex(0.5*squaresize + plotx, 0.5*squaresize - 2*plotx/(1 + Rjnorm*(1 - (plotx*plotx/(vstar*vstar)))));
+  }
+  endShape();   
+
+
+  stroke("blue");
+  beginShape();
+  for (var timewavezero = 0; timewavezero < squaresize; timewavezero++)  {
+      var vlocal = vmax*Math.cos(2*Math.PI*timewavezero/period);
+      vertex(timewavezero, 0.5*squaresize - 2*vlocal/(1 + Rjnorm*(1 - (vlocal*vlocal/(vstar*vstar)))));
+  }
+  endShape();
+  stroke("red");
+
+  beginShape();
+  for (var timewavezero = 0; timewavezero < squaresize; timewavezero++)  {
+      var vlocal = vmax*Math.cos(2*Math.PI*timewavezero/period);
+      vertex(timewavezero, 0.5*squaresize  - (2*vmax/(1 + Rjnorm*(1 - (vlocal*vlocal/(vstar*vstar))))) +  2*vmax/(1 + Rjnorm) );
+  }
+  endShape();  
+   stroke("black");
+ 
+  line(0,0.5*squaresize,squaresize,0.5*squaresize);
+  line(0.5*squaresize,0,0.5*squaresize,squaresize);
+  
+  strokeWeight(6);
+  fill("grey");
+  stroke("grey");
+    
+
+  ellipse(0.5*squaresize + v,0.5*squaresize - vout,20,20);
+  
+  strokeWeight(1);
+  fill("black");
+  textSize(24);
+  text("V* = " + vstar.toString(),100,100);
+  text("Rj/Rbias = " + Rjnorm.toString(),100,150);
+
+  noFill();
+
+    timeindex++;
+    if(timeindex>1e5){
+        timeindex =0 ;
+    }
+}
+
+
+
+
+function post(){
+            
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    var url = "pngsave.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=trashmagic/square" + timestamp +  "-parabola.png");//send text to filesaver.php
+     //location.reload(); 
+     
+    newfilename = "trashmagic/square" + timestamp +  "-parabola.png";
+    
+    var newbox = document.createElement("DIV");
+    newbox.classList.add("imagebox");         
+    
+    var deletespan = document.createElement("SPAN");
+    deletespan.innerHTML = "X";
+    deletespan.classList.add("deletespan");
+    deletespan.onclick = function(){
+        //delete the parent div of the image
+        //delete the file
+        var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+        var httpc = new XMLHttpRequest();
+        var url = "deletefile.php";         
+        httpc.open("POST", url, true);
+        httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    }
+    
+    newbox.appendChild(deletespan);
+
+    var newdiv = document.createElement("DIV");
+    newdiv.innerHTML = newfilename;
+    newdiv.className = "filelabel";
+    newbox.appendChild(newdiv);
+
+    var newimg = document.createElement("IMG");
+    newimg.src = png64;
+    newimg.classList.add("uploadimage");
+    newimg.classList.add("button");
+    newbox.appendChild(newimg);    
+
+
+    document.getElementById("feedscroll").insertBefore(newbox,document.getElementById("feedscroll").getElementsByClassName("imagebox")[0]);
+        
+}
+
+function keyPressed() {
+
+    if(key == 's'){
+        post();
+    }
+
+}
+
+
+upuploadImages = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        upuploadImages = JSON.parse(this.responseText);
+        for(var index = upuploadImages.length - 1;index >= 0;index--) {
+            
+            if(upuploadImages[index].includes("-parabola")){
+            
+                var newbox = document.createElement("DIV");
+                newbox.classList.add("imagebox");         
+                
+                var deletespan = document.createElement("SPAN");
+                deletespan.innerHTML = "X";
+                deletespan.classList.add("deletespan");
+                deletespan.onclick = function(){
+                    //delete the parent div of the image
+                    //delete the file
+                    var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+                    var httpc = new XMLHttpRequest();
+                    var url = "deletefile.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }
+                
+                newbox.appendChild(deletespan);
+        
+                var newdiv = document.createElement("DIV");
+                newdiv.innerHTML = upuploadImages[index];
+                newdiv.className = "filelabel";
+                newbox.appendChild(newdiv);
+            
+                
+                document.getElementById("feedscroll").appendChild(newbox);
+                var newimg = document.createElement("IMG");
+                newimg.src = "trashmagic/" + upuploadImages[index];
+                newimg.classList.add("uploadimage");
+                newimg.classList.add("button");
+                newbox.appendChild(newimg);
+                
+            }
+            
+        }
+    }
+};
+httpc9.open("GET", "dir.php?filename=trashmagic", true);
+httpc9.send();
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#F8F0E3;
+    font-family:Arial;
+}
+main{
+    position:absolute;
+    right:25px;
+    top:25px;
+    border-left:solid;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Arial;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Arial;
+    text-align:center;
+    overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Arial;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#F8F0E3; 
+    padding:1em 1em 1em 1em;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+</style>
+</body>
+</html>

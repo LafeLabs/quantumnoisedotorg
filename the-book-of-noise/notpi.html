@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>Filter Plots:not pi</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+
+<!--
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+    -->
+    
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+
+
+<div id = "feedscroll">
+    
+    <a href = "index.html">HOME</a>
+    
+    <h1>Filter</h1>
+    
+        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+   <table>
+       
+    <tr>
+        <td>C_line [nF]:</td>
+        <td>
+            <input id = "clineinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>R_line [ohms]:</td>
+        <td>
+            <input id = "rlineinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>C_in [uF]:</td>
+        <td>
+            <input id = "ccoupleinput"/>
+        </td>
+    </tr>
+    <tr>
+        <td>R_out [ohms]:</td>
+        <td>
+            <input id = "routinput"/>
+        </td>
+    </tr>
+
+
+</table>
+
+<p>this is not a pi filter</p>
+        
+        
+<p>Let us begin with a general T topology from p. 208 of Pozar(softcover Singapore edition)</p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/T.svg"/>
+        
+        
+        <p>This is the ABCD matrix:</p>
+<P>
+$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 + \frac{Z_1}{Z_3} & Z_1 + Z_2 + \frac{Z_1 Z_2}{Z_3} \\
+    \frac{1}{Z_3} & 1 + \frac{Z_2}{Z_3}\\
+  \end{array} } \right]
+$$
+        </P>
+
+<p>Now let us consider the following circuit:</p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/notpi3.svg"/>
+
+<p>
+    A reasonable normal engineer type person would select the components in the schematic above using some sort of elaborate scheme for a desired outcome.  We choose instead to make all capacitors the same and all resistors the same, appealing more to artistic than any kind of physical symmetry. This is not engineering. 
+</p>
+
+
+<p>The input segment can be modelled as a T like this:</p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/T-components.svg"/>
+
+
+<p>
+    $$
+    Z_1 = R - \frac{i}{\omega C}
+    $$
+</p>    
+<p>
+    $$
+    Z_2 = R
+    $$
+</p>
+<p>
+    $$
+    Z_3 = \frac{R}{1 + i\omega RC} = \frac{R}{1 - \omega^2R^2C^2} - \frac{i\omega RC}{1 - \omega^2R^2C^2}
+    $$
+</p>
+
+<p>
+    $$
+    Z_1 = R
+    $$
+</p>
+<p>
+    $$
+    Z_2 = R - \frac{i}{\omega C}
+    $$
+</p>    
+<p>
+    $$
+    Z_3 = \frac{R}{1 + i\omega RC} = \frac{R}{1 - \omega^2R^2C^2} - \frac{i\omega RC}{1 - \omega^2R^2C^2}
+    $$
+</p>
+
+
+<p>
+    For the output T we use the same matrix, but with the roles of the first two impedances reversed.
+</p>
+
+<p>
+$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \\
+  \left[ {\begin{array}{cc}
+    3 + i\left(\omega RC - \frac{1}{\omega RC}\right) & 4R + i\left(\omega R^2C - \frac{1}{\omega C}\right) \\
+    \frac{1}{R}  + i\omega C & 2 + i\omega RC \\
+  \end{array} } \right]
+$$
+
+</p>
+
+<p>
+The device impedance $Z_{slime}$ is in parallel with a capacitor C, having total admittance to ground of 
+</p>
+
+<p>
+    $$
+    Y = \frac{1}{Z_{SLIME}} + i\omega C
+    $$
+</p>
+
+<p>and the ABCD matrix for this device is </p>
+
+<p>
+    $$
+      \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & 0 \\
+    \frac{1}{Z_{SLIME}} + i\omega C & 1\\
+  \end{array} } \right]
+
+    $$
+</p>
+
+<img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/filter-output-module.svg"/>
+
+<p>
+$$    
+  \left[ {\begin{array}{cc}
+    A & B \\
+    C & D \\
+  \end{array} } \right]=
+  \left[ {\begin{array}{cc}
+    1 & 0 \\
+    \frac{1}{R_{out}} & 1 \\
+  \end{array} } \right]
+ 
+$$
+</p>
+
+<p>
+    $\omega = 2\pi f_{audio}$, and $f_{audio}$ is varied logarithmically from 1 Hz to  10 GHz.  If we are plotting across a square graph which is [graphsize] wide and offset by [margin] from the left of the p5js canvas, the frequency in Hz as a function of position x is:
+</p>
+
+<p>
+    $$
+    f = 10^{10*(x-margin)/graphsize}
+    $$
+</p>
+
+
+<p>The S parameter $S_{21}$ for a device with known ABCD matrix is</p>
+
+<p>
+    $$
+    S_{21} = \frac{2}{A + B/Z_0 + CZ_0 + D}
+    $$
+</p>
+
+<p>
+    We will want to display insertion loss in dB and have 0 be the top of the screen and the bottom be -100 dB, so that the y value associated with a given scattering parameter  
+</p>
+
+<p>
+    $$
+    y = [\textrm{margin}] - 20\left(\frac{[\textrm{graphsize}]}{100}\right)\log_{10}(|S_{21}|)
+    $$
+</p>
+
+
+
+</div>
+
+<script>
+
+
+margin = 100;//margin in px
+squaretime = 0;
+v = 0;
+period = 50;
+graphsize = 100;
+
+Rline = 35;//ohms
+Cline = 0.05e-6;//farads
+Ccouple = 5e-6;//farads
+Z0 = 50;//ohms
+Rout = 50;//ohms
+f = 1;//Hz
+omega = 1;//radians/s
+nstages = 5;
+
+document.getElementById("clineinput").value = (Cline*1e9).toString();
+document.getElementById("rlineinput").value = Rline.toString();
+document.getElementById("ccoupleinput").value = (Ccouple*1e6).toString();
+document.getElementById("routinput").value = Rout.toString();
+
+document.getElementById("clineinput").onchange = function(){
+    Cline = 1e-9*parseFloat(this.value);
+}
+document.getElementById("rlineinput").onchange = function(){
+    Rline = parseFloat(this.value);
+}
+document.getElementById("ccoupleinput").onchange = function(){
+    Ccouple = 1e-6*parseFloat(this.value);
+}
+document.getElementById("routinput").onchange = function(){
+    Rout = parseFloat(this.value);
+}
+
+
+
+A = math.complex(0,0);
+B = math.complex(0,0);
+C = math.complex(0,0);
+D = math.complex(0,0);
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+
+graphsize = squaresize- 2*margin;
+
+function setup() {
+
+  createCanvas(squaresize, squaresize);    
+   strokeWeight(2);  
+   background("#F8F0E3");
+    
+}
+
+
+
+function draw(){
+
+  clear();
+  strokeWeight(6);
+  noFill();
+  stroke("blue");
+  beginShape();
+      
+      
+
+    
+
+  for (var squaretime = 0; squaretime < graphsize; squaretime++)  {
+      
+      f = 10**(10*squaretime/graphsize);
+      omega = 2*Math.PI*f;
+    
+       A = math.complex(1,0);
+       B = math.complex(0,0);
+       C = math.complex(1/Rout,0);
+       D = math.complex(1,0);
+
+      
+
+      Arc = math.complex(1,omega*Rline*Cline);
+      Brc = math.complex(Rline,0);
+      Crc = math.complex(0,omega*Cline);
+      Drc = math.complex(1,0);
+
+    for(var stageindex = 0;stageindex < nstages;stageindex++){
+      Aout = math.add(math.multiply(Arc,A),math.multiply(Brc,C));
+      Bout = math.add(math.multiply(Arc,B),math.multiply(Brc,D));
+      Cout = math.add(math.multiply(A,Crc),math.multiply(C,Drc));
+      Dout = math.add(math.multiply(B,Crc),math.multiply(D,Drc));
+      A = Aout;
+      B = Bout;
+      C = Cout;
+      D = Dout;
+    }      
+
+
+       Ain = math.complex(1,0);
+       Bin = math.complex(0,-1/(omega*Ccouple));
+       Cin = math.complex(0,0);
+       Din = math.complex(1,0);
+
+      Aout = math.add(math.multiply(Ain,A),math.multiply(Bin,C));
+      Bout = math.add(math.multiply(Ain,B),math.multiply(Bin,D));
+      Cout = math.add(math.multiply(A,Cin),math.multiply(C,Din));
+      Dout = math.add(math.multiply(B,Cin),math.multiply(D,Din));
+
+      A = Aout;
+      B = Bout;
+      C = Cout;
+      D = Dout;
+
+
+      
+      denominator = math.add(A,math.multiply((1/Z0),B),math.multiply(Z0,C),D);
+      mags = math.abs(math.multiply(math.complex(1,0),denominator.inverse()));
+      y = margin - 20*(graphsize/100)*Math.log10(mags);
+      vertex(margin + squaretime,y);
+  }
+  
+  endShape();
+  
+  stroke("black");
+  rect(margin, margin,graphsize,graphsize);
+  
+ textSize(30);
+  strokeWeight(1);
+  for(var gridindex = 0;gridindex < 10;gridindex++){
+      line(margin + gridindex*graphsize/10,margin,margin + gridindex*graphsize/10,margin+graphsize);
+      line(margin,margin + gridindex*graphsize/10,margin+graphsize,margin + gridindex*graphsize/10); 
+  }
+
+
+stroke("red");
+strokeWeight(6);
+line(margin + 3*graphsize/10,margin,margin + 3*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 kHz",margin-32 + 3*graphsize/10,margin+graphsize+32);
+
+stroke("green");
+strokeWeight(6);
+line(margin + 6*graphsize/10,margin,margin + 6*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 MHz",margin-32 + 6*graphsize/10,margin+graphsize+32);
+
+stroke("purple");
+strokeWeight(6);
+line(margin + 9*graphsize/10,margin,margin + 9*graphsize/10,margin+graphsize);
+strokeWeight(1);
+text("1 GHz",margin-32 + 9*graphsize/10,margin+graphsize+32);
+
+stroke("black");
+text("Cline = " + (1e9*Cline).toString() + " nF",margin,32);
+text("Rline = " + (Rline).toString() + " ohms",margin,64);
+
+text("Ccouple = " + (1e6*Ccouple).toString() + " uF",margin + 0.5*graphsize,32);
+text("Rout = " + (Rout).toString() + " ohms",margin + 0.5*graphsize,64);
+
+
+//line(margin,margin + 0.5*graphsize,margin+graphsize,margin + 0.5*graphsize);
+ 
+
+//  text("0 dB",margin - 90,margin + 8);
+
+ textSize(28);
+
+  for(var index = 1;index < 10;index++){
+      text("-" + index.toString() + "0 dB",margin - 90,margin + 8 + index*graphsize/10);
+  }
+
+//  text("0",margin-32,margin + 0.5*graphsize);
+//  text("V_max",margin-32,margin-32);
+//  text("sweep time",graphsize-32,margin+graphsize+32);
+
+    
+}
+
+
+
+
+function post(){
+            
+    png64 = document.getElementById("defaultCanvas0").toDataURL("image/png");
+    var timestamp = Math.round((new Date().getTime())/1000).toString();
+    var httpc = new XMLHttpRequest();
+    var url = "pngsave.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpc.send("data="+encodeURIComponent(png64.substring(22))+"&filename=trashmagic/square" + timestamp +  "-filter.png");//send text to filesaver.php
+     //location.reload(); 
+     
+    newfilename = "trashmagic/square" + timestamp +  "-filter.png";
+    
+    var newbox = document.createElement("DIV");
+    newbox.classList.add("imagebox");         
+    
+    var deletespan = document.createElement("SPAN");
+    deletespan.innerHTML = "X";
+    deletespan.classList.add("deletespan");
+    deletespan.onclick = function(){
+        //delete the parent div of the image
+        //delete the file
+        var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+        var httpc = new XMLHttpRequest();
+        var url = "deletefile.php";         
+        httpc.open("POST", url, true);
+        httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    }
+    
+    newbox.appendChild(deletespan);
+
+    var newdiv = document.createElement("DIV");
+    newdiv.innerHTML = newfilename;
+    newdiv.className = "filelabel";
+    newbox.appendChild(newdiv);
+
+    var newimg = document.createElement("IMG");
+    newimg.src = png64;
+    newimg.classList.add("uploadimage");
+    newimg.classList.add("button");
+    newbox.appendChild(newimg);    
+
+
+    document.getElementById("feedscroll").insertBefore(newbox,document.getElementById("feedscroll").getElementsByClassName("imagebox")[0]);
+        
+}
+
+function keyPressed() {
+
+    if(key == 's'){
+        post();
+    }
+
+}
+
+
+upuploadImages = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        upuploadImages = JSON.parse(this.responseText);
+        for(var index = upuploadImages.length - 1;index >= 0;index--) {
+            
+            if(upuploadImages[index].includes("-filter")){
+            
+                var newbox = document.createElement("DIV");
+                newbox.classList.add("imagebox");         
+                
+                var deletespan = document.createElement("SPAN");
+                deletespan.innerHTML = "X";
+                deletespan.classList.add("deletespan");
+                deletespan.onclick = function(){
+                    //delete the parent div of the image
+                    //delete the file
+                    var filename = this.parentElement.getElementsByClassName("filelabel")[0].innerHTML; 
+                    var httpc = new XMLHttpRequest();
+                    var url = "deletefile.php";         
+                    httpc.open("POST", url, true);
+                    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+                    httpc.send("filename=trashmagic/" + filename);//send text to deletefile.php
+                    this.parentElement.parentElement.removeChild(this.parentElement);
+                }
+                
+                newbox.appendChild(deletespan);
+        
+                var newdiv = document.createElement("DIV");
+                newdiv.innerHTML = upuploadImages[index];
+                newdiv.className = "filelabel";
+                newbox.appendChild(newdiv);
+            
+                
+                document.getElementById("feedscroll").appendChild(newbox);
+                var newimg = document.createElement("IMG");
+                newimg.src = "trashmagic/" + upuploadImages[index];
+                newimg.classList.add("uploadimage");
+                newimg.classList.add("button");
+                newbox.appendChild(newimg);
+                
+            }
+            
+        }
+    }
+};
+httpc9.open("GET", "dir.php?filename=trashmagic", true);
+httpc9.send();
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#F8F0E3;
+    font-family:Arial;
+}
+main{
+    position:absolute;
+    right:25px;
+    top:25px;
+    border-left:solid;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Arial;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Arial;
+    text-align:center;
+    overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Arial;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#F8F0E3; 
+    padding:1em 1em 1em 1em;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+</style>
+</body>
+</html>

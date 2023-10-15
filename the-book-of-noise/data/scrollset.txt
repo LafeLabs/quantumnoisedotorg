@@ -1,0 +1,10 @@
+{
+    "server": "https://quantumnoise.org/",
+    "scrolls": [
+        "detectors",
+        "home",
+        "manifesto",
+        "sources",
+        "tale"
+    ]
+}
