@@ -3,14 +3,6 @@
 
 # Quantum Noise Manifesto
 
-The laws of QNS are as follows:
+QNS is building a link between the world of music and the world of quantum information!
 
- 1. Everything is a [guitar pedal](https://en.wikipedia.org/wiki/Effects_unit)
- 2. Everything is [public domain](https://en.wikipedia.org/wiki/Public_domain)
- 3. Everything lives in a [web browser](https://en.wikipedia.org/wiki/Web_browser)
-
-
-We are a network of artists, makers, musicians, metrologists, and applied physicists which seeks to distribute free QNS technology to everyone who can make use of it.  We aim to seek out labs who can make use of this for thermometery, amplifier calibration, fundamental studies, analog quantum information algorithm development, and build collaborations where we help with measurements and collaborate on publications.  We also aim to connect labs with musicians and artists to create a network for experimentation with the system as a guitar pedal and creation of music and art which can spread the memes of the QNS.  
-
-We will spread our memes using self-replicating media transmitted from web server to web server via self-replicating sets of computer files.  For maximum replication, all files are Public Domain. We use free open source software and client-side JavaScript to create all of the apps needed to build signal sources, detectors, simulations, and plots which allow us to interact with the QNS.  The physical elements of the system consist of a combination of existing RF measurement tools in any given lab, web enabled devices running web browser and servers, and the standard QNS capsule which contains various filters, bias circuits, and detectors, as well as the adapters needed to get from the RF circuits to standard audio electronics(both 1/4 inch and 3.5 mm).  
 

@@ -3,6 +3,7 @@
 
 # Detector Apps
   
- - [Noise Image](QNS-spectra.html)
- - [Noise Spectrum]()
- - [Oscilloscope]
+ - [Noise Image](noise-image.html)
+ - [Noise Spectrum](noise-spectrum.html)
+ - [Oscilloscope](oscilloscope.html)
+ - [Web code editor](webeditor.html)

@@ -1,0 +1,84 @@
+
+## [HOME](scrolls/home)
+
+# theory
+ 
+![](https://upload.wikimedia.org/wikipedia/commons/4/48/E14-V20-B1.gif)
+
+Electrons are waves. And also particles!
+
+The wave function can tunnel through the barrier of amorphous sapphire which separates the two aluminum electrodes.  As soon as it does, however, POP! The electron pops across the barrier and makes a current pulse corresponding to a single electron instantly appearing on the opposite side of the barrier.  These pops happen about 12 trillion times per second for our 50 ohm aluminum tunnel junctions.  All those trillions of pops add up to a roar of a random white noise signal.  
+
+In the QNS we use an audio signal to determine the current pushed through a quantum tunnel junction.  This is the input of the guitar pedal, sound comes in and turns into a current bias, which affects how many pops of electrons tunneling across the barrier there are per second, which affects the volume and frequency response of the white noise.  This white noise signal is then integrated down to audio again, and we get out a modulated white noise signal which is the output of the guitar pedal.  
+
+We convert the incoming noise to a voltage across the junction which is normalized to temperature as follows:
+
+$$
+v \equiv \frac{eV}{kT}
+$$ 
+where k is the Boltzmann constant now fixed by the quantum SI to be $1.380649\times10^{-23} J/K$, e is the elementary charge, now fixed by the quantum SI to be $1.602176634 \times 10^{-19}C$, T is the temperature in kelvin and V is the voltage across the junction in volts.  In the simplest instance of the QNS we ramp a sinusoidal audio signal in amplitude as the input, which we can generate using a web browser. 
+
+[here is a link to the trash magic app which plays a ramp](playramp.html)
+
+Here is the ramp input:
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/stimulus.png)
+
+We then define a normalized RF measurement frequency as follows:
+
+$$
+\phi \equiv \frac{hf}{kT},
+$$
+
+where h is the Planck constant now fixed by the Quantum SI at $ 	6.62607015 \times 10^{-34}J\cdot s$ and f is the frequency of the narrow band RF measurement.  We also define an integrated and normalized power out in temperature units of 
+
+$$
+p \equiv \frac{P}{4kB},
+$$
+ 
+The way that incoming signals modulate the noise power p is by way of the super coth equation below:
+
+$$
+p = T\left( \frac{v + \phi}{4}\right)\coth{\left( \frac{v + \phi}{2}\right)} + T\left( \frac{v - \phi}{4}\right)\coth{\left( \frac{v - \phi}{2}\right)},
+$$
+
+which reduces to 
+
+$$
+p = T
+$$
+
+for $v = 0$ and $\phi = 0$ and 
+
+$$
+p = T\left(\frac{v}{2}\right)\coth{\left(\frac{v}{2}\right)}.
+$$
+for $\phi = 0$, and 
+
+$$
+p = T\left(\frac{\phi}{2}\right)\coth{\left(\frac{\phi}{2}\right)}.
+$$
+for $v = 0$.
+
+The full expression for p as a function of v with $\phi>>1$ shows the flat-bottomed v curve below:
+
+![theoretical quantum noise curve with no units](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/coth-frontpage.png)
+
+The bias we apply to this is a linear ramped sine wave which looks like this:
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/stimulus.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/inarrow.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/in-out-capsule.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/outarrow.png)
+
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/response.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/classical-response.png)
+
+![](https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/quantum-response.png)
+
+We can generate plots of the ramp and response using the ramp plot trash magic app at [ramp2.html](ramp2.html).
