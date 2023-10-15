@@ -1,0 +1,14 @@
+
+## [HOME](scrolls/home)
+
+# simulation
+ 
+ - [AC biased tilted washboard](washboard.html)
+ - [Phase Space Plot](jjphasespace.html)
+ - [Fermi Animation](fermi.html)
+ - JBA
+ - JPA
+ - use audio noise to drive simulation
+ - use simulation to make beats and ring ups of oscillators
+ - white hiss volume modulated by ramped sine bias on junction 
+ 

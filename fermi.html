@@ -48,7 +48,8 @@
     
     <h1>Fermi Functions</h1>
     
-        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/p5js">p5js Scroll</a></h1>
+        <h1><a style = "color:blue;text-align:center;margin:auto" href = "user.php?scroll=scrolls/plotting">plotting Scroll</a></h1>
+        
         
     <p>
         this page doesn't work on mobile. hit the letter "s" to post a square to the feed. move pointer around on square to change the paramters of the curve.
@@ -85,11 +86,16 @@ T = graphsize/100;//temperature in px units
 vmax = graphsize/2;//voltage oscillation magnitude in px units
 fermizero = 0.5*graphsize;
 fermiheight = 0.2*graphsize;
-period = 150;//period in frames
+period = 30;//period in frames
 photonenergy = 0.15*graphsize;
 
 mustachex0 = 0.5*graphsize;
 mustachey0 = graphsize;
+let noise;
+let fft;
+
+noiseon = false;
+
 
 function setup() {
 
@@ -97,7 +103,11 @@ function setup() {
    strokeWeight(2);  
    background("#F8F0E3");
    background("black");
-    
+   noise = new p5.Noise();   
+     fft = new p5.FFT();
+     
+     
+       noise.start();
 }
 
 
@@ -107,7 +117,6 @@ function draw(){
     
   photonenergy = Math.abs(mouseY/4);
   T = Math.abs(mouseX/20);
-  
   frameRate(20);
   clear();
   strokeWeight(6);
@@ -162,7 +171,7 @@ function draw(){
   beginShape();
   for (var mustachex = -vmax; mustachex < vmax; mustachex++)  {
     
-      mustachey = margin +  mustachey0 - 0.25*(((0.5*mustachex + photonenergy)/Math.tanh((0.5*mustachex + photonenergy)/(2*T)))  + ((0.5*mustachex - photonenergy)/Math.tanh((0.5*mustachex - photonenergy)/(2*T))));
+      mustachey = margin +  mustachey0 - 0.5*(((0.5*mustachex + photonenergy)/Math.tanh((0.5*mustachex + photonenergy)/(2*T)))  + ((0.5*mustachex - photonenergy)/Math.tanh((0.5*mustachex - photonenergy)/(2*T))));
 
       vertex(margin + mustachex0 + mustachex,mustachey);
   }
@@ -170,7 +179,7 @@ function draw(){
   
     strokeWeight(1);
 
-  stroke("#00ff00");
+  stroke("black");
   
   sigma = 0.25*(((0.5*v + photonenergy)/Math.tanh((0.5*v + photonenergy)/(2*T)))  + ((0.5*v - photonenergy)/Math.tanh((0.5*v - photonenergy)/(2*T))));
   beginShape();
@@ -184,8 +193,12 @@ function draw(){
   stroke("grey");
     
     
-  mustachey = margin +  mustachey0 - 0.25*(((0.5*v + photonenergy)/Math.tanh((0.5*v + photonenergy)/(2*T)))  + ((0.5*v - photonenergy)/Math.tanh((0.5*v - photonenergy)/(2*T))));    
+  mustachey = margin +  mustachey0 - 0.5*(((0.5*v + photonenergy)/Math.tanh((0.5*v + photonenergy)/(2*T)))  + ((0.5*v - photonenergy)/Math.tanh((0.5*v - photonenergy)/(2*T))));    
   ellipse(margin + mustachex + v,mustachey,20,20);
+  
+  amplitude = (height - mustachey)/(10*height);
+  noise.amp(amplitude);
+
   noFill();
   stroke(255,44,180);
   line(margin + fermizero,margin,margin+fermizero,margin+graphsize);
@@ -320,13 +333,26 @@ httpc9.open("GET", "dir.php?filename=trashmagic", true);
 httpc9.send();
 
 
+
+document.body.onclick = function(){
+    if(noiseon == false){
+        noise.start();
+        noiseon = true;
+    }
+    else{
+        noise.stop();
+        noiseon = false;
+        
+    }
+}
+
+
 </script>
 <style>
 body{
     overflow:hidden;
     background-color:#F8F0E3;
     font-family:Arial;
-    background-color:#404040;
 }
 main{
     position:absolute;
