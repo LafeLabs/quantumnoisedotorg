@@ -54,6 +54,7 @@
         "slime.html",
         "slimefilter.html",
         "slimefilterold.html",
+        "smoothed-noise-spectrum.html",
         "squares.html",
         "sweepergraph.html",
         "sweepsquare.html",

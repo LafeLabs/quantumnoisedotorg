@@ -48,7 +48,7 @@
         
     
     <h1>
-    Spectra!
+    Spectra! smoothed.
     </h1>
 
 </div>
@@ -58,8 +58,17 @@
 let mic, fft;
 svgstring = "";
 
+nsmooth = 10;//number of points to average
+gain = 2.0;//multiply average by this
 
 squaresize = 500;
+
+angles = [];
+numangles = 30;
+anglespeed = 0.001;
+for(var index=  0;index< numangles;index++){
+    angles.push(0);
+}
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -93,6 +102,9 @@ function draw(){
   background(159,135,103);
   noFill();
     fill("#808080");
+    
+    
+    
   beginShape();
   vertex(0,height);
   stroke(0);
@@ -100,21 +112,72 @@ function draw(){
   svgstring = svgopen;
 
   svgstring += squaresize.toString() + " ";
-  
+
+  angleIndex = 0;  
   for (let i = 0; i < spectrum.length; i++) {
-    vertex(i, map(spectrum[i], 0, 255, height, 0));
+    if(i%nsmooth == 0 && i > 0){
+        avg = 0;
+        for(var index = 0;index < nsmooth;index++){
+            avg += spectrum[i - nsmooth + index + 1];
+        }
+        avg /= nsmooth;
+        avg *= gain;
+        vertex(3*i, map(avg, 0, 255, height, 0));       
+
+
+        if(angleIndex < angles.length){
+            angles[angleIndex] += avg*anglespeed;
+        }
+        angleIndex++;
+    }
+
     svgstring += "L" + i.toString() + " " + (map(spectrum[i], 0, 255, height, 0)).toString() + " ";
     
   }
   svgstring += "L" + squaresize.toString() + " " + squaresize.toString() + " ";  
   vertex(width,height);
   endShape();
+  
 
+  for (let i = 0; i < spectrum.length; i++) {
+    if(i%nsmooth == 0 && i > 0){
+        var avg = 0;
+        for(var index = 0;index < nsmooth;index++){
+            avg += spectrum[i - nsmooth + index + 1];
+        }
+        avg /= nsmooth;
+        avg *= gain;
+        ellipse(3*i, map(avg, 0, 255, height, 0),10,10);        
+    }
 
+    svgstring += "L" + i.toString() + " " + (map(spectrum[i], 0, 255, height, 0)).toString() + " ";
+    
+  }
 
   svgstring += svgclose;
 
  // svgstring = "<svg width=\"400\" height=\"400\" viewbox = \"0 0 400 400\"  xmlns=\"http://www.w3.org/2000/svg\"><path d = \"M200 200 L200 127 L263 163 L200 200 Z\" stroke = \"#000000\" stroke-width = \"1\" fill = \"#000000\" /></svg>";
+
+  noFill();
+  
+  
+  r = 25;
+  x = width/2;
+  y = height/2;
+  strokeWeight(6);
+  fill("#808080");
+  for(var index= 0;index  < numangles;index ++){
+      strokeWeight(6);
+      line(x,y,x + r*Math.cos(angles[index]), y + r*Math.sin(angles[index]));
+        strokeWeight(1);
+      ellipse(x,y,10,10);
+      x += r*Math.cos(angles[index]);
+      y += r*Math.sin(angles[index]);
+  }
+  ellipse(x,y,10,10);
+
+//  text(angles[10].toString(),100,100);
+
   fill(255,0,100);
   stroke(255,0,100);
 
