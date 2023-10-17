@@ -7,6 +7,7 @@
  - [blochchain2.html](blochchain2.html)
  - [blochchain3.html](blochchain3.html)
 
+
 The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.  For n qubits, there are $2^n$ basis states.  Each state can has a complex coefficient, and the sums of the squares of the magnitudes of all the components of the state vector are always 1. We remove the global phase of the wave function and end up with coordinates which represent a generalization of latitude and longitude into higher dimensional spheres.  
 
 This is a generalization of the Bloch Sphere, which maps the states of a one qubit system to the latitude and longitude on a sphere to a higher dimensional sphere and more qubits.  We combine angles into pairs and map the set of angles into two rotation angles of a sequence of line segments which link spheres in 3d space. We display those spheres in a web browser. 
@@ -16,6 +17,29 @@ Any quantum system can be mapped to this. Optical, atoms, superconductors, micro
 We are converting the whole idea of the quantum "computer" into a technology of analog control of geometry.  And we are doing it using only self-replicating code in web browsers.  
 
 An SDR and some python code should be able to convert mixed down noise from a quantum system into various tones at different frequencies which push the angles around the chain. 
+
+## Rotations
+
+We rotate the translation vector by each $\theta_i$ and $\phi_i$ as follows:
+
+$$
+ \left( {\begin{array}{ccc}
+    \cos{\phi_i} & -\sin{\phi_i} & 0 \\\
+    \sin{\phi_i} & \cos{\phi_i} & 0 \\\
+    0 & 0 & 1 \\\
+\end{array} } \right)
+\left( {\begin{array}{ccc}
+    \cos{\theta_i} & 0 & \sin{\theta_i}\\\    
+    0 & 1 & 0 \\\
+    -\sin{\theta_i}  & 0 & \cos{\theta_i}\\\
+\end{array} } \right)\left( {\begin{array}{c}
+    0 \\\    
+    0 \\\  
+    1 \\\
+\end{array} } \right)
+$$
+
+then translate by the translation vector, and draw a sphere, with little spheres along the way while we transit from each sphere to the next.  This is the chain of spheres which makes up the Bloch Chain.
 
 ## 1 Qubit
 
