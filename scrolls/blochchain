@@ -7,7 +7,15 @@
  - [blochchain2.html](blochchain2.html)
  - [blochchain3.html](blochchain3.html)
 
-The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.
+The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.  For n qubits, there are $2^n$ basis states.  Each state can has a complex coefficient, and the sums of the squares of the magnitudes of all the components of the state vector are always 1. We remove the global phase of the wave function and end up with coordinates which represent a generalization of latitude and longitude into higher dimensional spheres.  
+
+This is a generalization of the Bloch Sphere, which maps the states of a one qubit system to the latitude and longitude on a sphere to a higher dimensional sphere and more qubits.  We combine angles into pairs and map the set of angles into two rotation angles of a sequence of line segments which link spheres in 3d space. We display those spheres in a web browser. 
+
+Any quantum system can be mapped to this. Optical, atoms, superconductors, microwave, anything.  Any of the numerous quantum systems people are using to try to build quantum computers can be illuminated by an analog signal from a QNS, then down converted and translated into a bloch chain.  We then aim to map this chain's geometry to both web memes and mathematical problems, and program analog signals to evolve algorithms which evolve the shape of this chain.  
+
+We are converting the whole idea of the quantum "computer" into a technology of analog control of geometry.  And we are doing it using only self-replicating code in web browsers.  
+
+An SDR and some python code should be able to convert mixed down noise from a quantum system into various tones at different frequencies which push the angles around the chain. 
 
 ## 1 Qubit
 
