@@ -1,16 +1,19 @@
 To make a new server, get a computer from the trash, install ubuntu on it, open a terminal and type the following commands:
 
+
+```
 sudo apt update
 sudo apt install apache2 -y
 sudo apt install php libapache2-mod-php -y
 cd /var/www/html
 sudo rm index.html
 sudo apt install curl
-sudo curl -o replicator.php https://raw.githubusercontent.com/LafeLabs/ontology/main/php/replicator.txt
+sudo curl -o replicator.php https://raw.githubusercontent.com/LafeLabs/squares/main/php/replicator.txt
 cd ..
 sudo chmod -R 0777 *
 cd html
 php replicator.php
 sudo chmod -R 0777 *
+```
 
 ![](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/23e46db0-9012-40a3-aff1-b5ed3ed66165/dg3ivri-8465be25-7e6f-4d41-9207-742999a07bc9.jpg/v1/fill/w_894,h_894,q_70,strp/dreamup_creation_by_deadnettlez_dg3ivri-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcLzIzZTQ2ZGIwLTkwMTItNDBhMy1hZmYxLWI1ZWQzZWQ2NjE2NVwvZGczaXZyaS04NDY1YmUyNS03ZTZmLTRkNDEtOTIwNy03NDI5OTlhMDdiYzkuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.v96g53b5fmbYd6Mku9Df6bTlw8tYWaLCleT018U5GIU)

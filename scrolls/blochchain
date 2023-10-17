@@ -1,0 +1,65 @@
+
+## [HOME](scrolls/home)
+
+# blochchain
+ 
+ - [blochchain1.html](blochchain1.html)
+ - [blochchain2.html](blochchain2.html)
+ - [blochchain3.html](blochchain3.html)
+
+The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.
+
+## 1 Qubit
+
+$$
+\left|\psi\right> = \cos{\left(\frac{\theta}{2}\right)}\left|0\right> + e^{i\phi}\sin{\left(\frac{\theta}{2}\right)}\left|1\right>
+$$
+
+## 2 Qubits
+
+$$
+\left|\psi\right> = 
+$$
+$$
+\cos{\left(\frac{\theta_0}{2}\right)}\left|00\right> + 
+$$
+$$
+e^{i\phi_0}\sin{\left(\frac{\theta_0}{2}\right)}\cos{\left(\frac{\theta_1}{2}\right)}\left|01\right> + 
+$$
+$$
+e^{i\phi_1}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\cos{\left(\frac{\theta_2}{2}\right)}\left|10\right> + 
+$$
+$$
+e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\left|11\right>
+$$
+
+
+## 3 Qubits
+
+$$
+\left|\psi\right> = 
+$$
+$$
+\cos{\left(\frac{\theta_0}{2}\right)}\left|000\right> + 
+$$
+$$
+e^{i\phi_0}\sin{\left(\frac{\theta_0}{2}\right)}\cos{\left(\frac{\theta_1}{2}\right)}\left|001\right> + 
+$$
+$$
+e^{i\phi_1}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\cos{\left(\frac{\theta_2}{2}\right)}\left|010\right> + 
+$$
+$$
+e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\cos{\left(\frac{\theta_3}{2}\right)}\left|011\right> + 
+$$
+$$
+e^{i\phi_3}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\sin{\left(\frac{\theta_3}{2}\right)}\cos{\left(\frac{\theta_4}{2}\right)}\left|100\right> + 
+$$
+$$
+e^{i\phi_4}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\sin{\left(\frac{\theta_3}{2}\right)}\sin{\left(\frac{\theta_4}{2}\right)}\cos{\left(\frac{\theta_5}{2}\right)}\left|101\right> + 
+$$
+$$
+e^{i\phi_5}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\sin{\left(\frac{\theta_3}{2}\right)}\sin{\left(\frac{\theta_4}{2}\right)}\sin{\left(\frac{\theta_5}{2}\right)}\cos{\left(\frac{\theta_6}{2}\right)}\left|110\right> + 
+$$
+$$
+e^{i\phi_6}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\sin{\left(\frac{\theta_3}{2}\right)}\sin{\left(\frac{\theta_4}{2}\right)}\sin{\left(\frac{\theta_5}{2}\right)}\sin{\left(\frac{\theta_6}{2}\right)}\left|111\right>
+$$

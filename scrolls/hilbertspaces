@@ -1,0 +1,35 @@
+
+## [HOME](scrolls/home)
+
+# Hilbert spaces
+ 
+
+## 1 Qubit
+
+$$
+\left|\psi\right> = \cos{\theta/2}\|0\> + e^{i\phi}\sin{\theta/2}\left|1\right>
+$$
+
+## 2 Qubits
+
+$$
+\left|\psi\right> = 
+$$
+$$
+\cos{\theta_0/2}\left|00\right> + 
+$$
+$$
+e^{i\phi_0}\sin{\theta_0/2}\cos{\theta_1/2}\left|01\right> + 
+$$
+$$
+e^{i\phi_1}\sin{\theta_0/2}\sin{\theta_1/2}\cos{\theta_2/2}\left|10\right> + 
+$$
+$$
+e^{i\phi_2}\sin{\theta_0/2}\sin{\theta_1/2}\sin{\theta_2/2}\left|11\right>
+$$
+
+What we do in QCHAIN is convert the Hilbert space of any given quantum system into a set of angles. Then we map those angles into a sequence of rotation angles of a sequence of line segments.  That chain can create structures in either 2d or 3d.  In 2d we simply alternate $\theta$ and $\phi$ angles.  For n qubits, there will be $2^n-1$ angles of each kind, or $2^{n+1} - 2$.  So for 1 qubit that is 2, for 3 qubits it's 3, for 3 qubits it's 6, for 4 qubits it is 14.  
+
+For the 3d QCHAIN we want to have each pair of $\theta$ and $\phi$ represent the *relative* latitude referenced to the North Pole and *relative* longitude of a segment between two balls.  
+
+
