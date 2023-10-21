@@ -96,13 +96,20 @@ z = 0;
 r = squaresize/10;
 bigball = 15;
 littleball = 3;
-let mic, fft;
+let mic, fft, osc;
 svgstring = "";
 
 nsmooth = 10;//number of points to average
 gain = 2.0;//multiply average by this
 
 //squaresize = 500;
+startfreq = 333;//frequency of sine wave in Hz
+stopfreq = 666;//frequency of sine wave in Hz
+maxv = 0.5;//max amplitude
+sweepframes = 140;
+oscon = false;
+sweepindex = 0;
+
 
 angles = [];
 numangles = 30;
@@ -121,6 +128,9 @@ function setup() {
   mic.start();
   fft = new p5.FFT();
   fft.setInput(mic);
+    osc = new p5.SinOsc(); // set frequency and type
+  osc.amp(maxv);
+  osc.start();
 }
 
 
@@ -248,8 +258,32 @@ function draw(){
   sphere(bigball);
       
       
+     osc.freq(startfreq + sweepindex*Math.abs(stopfreq - startfreq)/sweepframes);
+
+  let amp = map(mouseY, 0, height, 1, 0.01);
+  osc.amp(amp);
+  
+    sweepindex++;
+    if(sweepindex > sweepframes){
+        sweepindex = 0;
+    }   
+      
+      
 }
 
+
+
+function mouseClicked() {
+  
+  if(!oscon){
+      osc.start();
+  }
+  else{
+      osc.stop();
+  }
+  oscon = !oscon;
+    
+}
 
 
 
