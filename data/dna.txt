@@ -25,6 +25,7 @@
         "geometron.js",
         "hypercube.html",
         "index.html",
+        "iv.html",
         "jjphasespace.html",
         "label.html",
         "linkeditor.html",
