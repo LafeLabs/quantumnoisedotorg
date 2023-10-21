@@ -15,7 +15,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>THE BLOCH CHAIN</title>
+        <title>BLOCH CHAIN 2D</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -25,59 +25,54 @@
 <!--geometron javascript library-->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script>
-            MathJax.Hub.Config({
-                tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']],
-                processEscapes: true,
-                processClass: "mathjax",
-                ignoreClass: "no-mathjax"
-                }
-            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
-        </script>
-
+    
+    
 </head>
 <body>
-
+<div id = "postbutton">POST</div>
 
 <div id = "feedscroll">
+    <h1>BLOCH CHAIN 2D</h1>
     
-    <h1>Bloch Chain 2</h1>
+    <p>just a bunch of angles</p>
     
-    <p>2 Qubit Bloch Chain.  </p>
+    <a href = "user.php?scroll=scrolls/blochchain2d.html">bloch chain scroll</a>
     
-    <a href = "squares.html">internet of squares</a>
+    <ul>
+        <li>
+            <a href = "index.html">HOME</a>
+        </li>
+        <li>
+            <a href = "squares.html">INTERNET OF SQUARES</a>
+        </li>
+        <li>
+            <a href = "user.php?scroll=scrolls/detectors">DETECTOR SCROLL</a>
+        </li>
+    </ul>
+        
     
-    <p>
-        A sequence of spheres which map states of quantum systems into memes in a web browser.  Move mouse to set angles.  This is for a 1 qubit system.
-    </p>
-    
-    <a href = "blochchain3.html">3 qubit bloch chain</a>
+    <h1>
+QCHAIN!
+    </h1>
 
-    <h1><a href = "https://en.wikipedia.org/wiki/Felix_Bloch">who was Felix Bloch?</a></h1>
-    
-    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "user.php?scroll=scrolls/blochchain">bloch chain scroll</a></h1>    
-    
-    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
-    
-    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "user.php?scroll=scrolls/plotting">plotting scroll</a></h1>
-    
-
-    
-    <p>
-        this page doesn't work on mobile. hit the letter "s" to post a square to the feed. move pointer around on square to change the paramters of the curve.
-    </p>
-    
-    <p>
-
-    </p>
 </div>
 
 <script>
 
+let mic, fft;
+svgstring = "";
 
+nsmooth = 10;//number of points to average
+gain = 2.0;//multiply average by this
+
+squaresize = 500;
+
+angles = [];
+numangles = 30;
+anglespeed = 0.001;
+for(var index=  0;index< numangles;index++){
+    angles.push(0);
+}
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
@@ -91,54 +86,37 @@ else{
 }
 
 
-theta = 0;
-phi = 0;
-x = 0;
-y = 0;
-z = 0;
-r = squaresize/8;
-bigball = 25;
-littleball = 5;
-let mic, fft;
-svgstring = "";
-
-nsmooth = 10;//number of points to average
-gain = 2.0;//multiply average by this
-
-//squaresize = 500;
-
-angles = [];
-numangles = 30;
-anglespeed = 0.001;
-for(var index=  0;index< numangles;index++){
-    angles.push(0);
-}
-
-
 function setup() {
-
-  createCanvas(squaresize, squaresize,WEBGL);    
-  strokeWeight(2);  
-  background(159,135,103);
-    mic = new p5.AudioIn();
+  createCanvas(squaresize, squaresize);    
+  mic = new p5.AudioIn();
   mic.start();
   fft = new p5.FFT();
   fft.setInput(mic);
+//   background(159,135,103);
 }
 
+charsize = 50;
+
+svgopen = "<svg width=\"" + squaresize.toString() + "\" height=\"" + squaresize.toString() + "\" viewbox = \"0 0 " + squaresize.toString() + " " + squaresize.toString() + "\"  xmlns=\"http://www.w3.org/2000/svg\">\n <path d = \"M0 ";
+svgclose = " Z\" stroke = \"#000000\" stroke-width = \"3\" fill = \"#808080\" />\n</svg>";
 
 
 function draw(){
-
-  frameRate(30); 
-  background(159,135,103);
- 
-   textSize(32);
-   noFill();
-  
-    rotateX(Math.PI/2);
-
   let spectrum = fft.analyze(); 
+  background(159,135,103);
+  noFill();
+    fill("#808080");
+    
+    
+    
+  beginShape();
+  vertex(0,height);
+  stroke(0);
+  strokeWeight(1);
+  svgstring = svgopen;
+
+  svgstring += squaresize.toString() + " ";
+
   angleIndex = 0;  
   for (let i = 0; i < spectrum.length; i++) {
     if(i%nsmooth == 0 && i > 0){
@@ -148,59 +126,70 @@ function draw(){
         }
         avg /= nsmooth;
         avg *= gain;
+        vertex(3*i, map(avg, 0, 255, height, 0));       
+
+
         if(angleIndex < angles.length){
             angles[angleIndex] += avg*anglespeed;
         }
         angleIndex++;
     }
 
+    svgstring += "L" + i.toString() + " " + (map(spectrum[i], 0, 255, height, 0)).toString() + " ";
+    
+  }
+  svgstring += "L" + squaresize.toString() + " " + squaresize.toString() + " ";  
+  vertex(width,height);
+  endShape();
+  
+
+  for (let i = 0; i < spectrum.length; i++) {
+    if(i%nsmooth == 0 && i > 0){
+        var avg = 0;
+        for(var index = 0;index < nsmooth;index++){
+            avg += spectrum[i - nsmooth + index + 1];
+        }
+        avg /= nsmooth;
+        avg *= gain;
+        ellipse(3*i, map(avg, 0, 255, height, 0),10,10);        
+    }
+
+    svgstring += "L" + i.toString() + " " + (map(spectrum[i], 0, 255, height, 0)).toString() + " ";
+    
   }
 
+  svgstring += svgclose;
+
+ // svgstring = "<svg width=\"400\" height=\"400\" viewbox = \"0 0 400 400\"  xmlns=\"http://www.w3.org/2000/svg\"><path d = \"M200 200 L200 127 L263 163 L200 200 Z\" stroke = \"#000000\" stroke-width = \"1\" fill = \"#000000\" /></svg>";
+
   noFill();
-  strokeWeight(8);
-  normalMaterial();
-  sphere(bigball);
-  theta = angles[0];
-  phi = angles[1];
-  x = 0.1*r*Math.cos(phi)*Math.sin(theta);
-  y = 0.1*r*Math.sin(phi)*Math.sin(theta);
-  z = 0.1*r*Math.cos(theta);
-  for(var index = 0;index < 10;index++){
-    translate(x,y,z);
-    sphere(littleball);      
-  } 
-  translate(x, y, z);
-  sphere(bigball);
-
-  theta = angles[2];
-  phi = angles[3];
-  sphere(bigball);
-  x = 0.1*r*Math.cos(phi)*Math.sin(theta);
-  y = 0.1*r*Math.sin(phi)*Math.sin(theta);
-  z = 0.1*r*Math.cos(theta);
-  for(var index = 0;index < 10;index++){
-    translate(x,y,z);
-    sphere(littleball);      
-  } 
-  translate(x, y, z);
-  sphere(bigball);
-
-  theta = angles[4];
-  phi = angles[5];
-  sphere(bigball);
-  x = 0.1*r*Math.cos(phi)*Math.sin(theta);
-  y = 0.1*r*Math.sin(phi)*Math.sin(theta);
-  z = 0.1*r*Math.cos(theta);
-  for(var index = 0;index < 10;index++){
-    translate(x,y,z);
-    sphere(littleball);      
-  } 
-  translate(x, y, z);
-  sphere(bigball);
   
-  text("BLOCH CHAIN",200,200);
+  
+  r = 25;
+  x = width/2;
+  y = height/2;
+  strokeWeight(6);
+  fill("#808080");
+  for(var index= 0;index  < numangles;index ++){
+      strokeWeight(6);
+      line(x,y,x + r*Math.cos(angles[index]), y + r*Math.sin(angles[index]));
+        strokeWeight(1);
+      ellipse(x,y,10,10);
       
+      x += r*Math.cos(angles[index]);
+      y += r*Math.sin(angles[index]);
+  }
+  
+  
+  ellipse(x,y,10,10);
+
+//  text(angles[10].toString(),100,100);
+
+  fill(255,0,100);
+  stroke(255,0,100);
+
 }
+
 
 
 
@@ -254,14 +243,24 @@ function post(){
         
 }
 
+document.getElementById("postbutton").onclick = function(){
+          post();
+
+}
+
+
 function keyPressed() {
 
     if(key == 's'){
         post();
     }
+    if(key == 'r'){
+        for(var index = 0;index < angles.length;index++){
+            angles[index] = 0;
+        }
+    }
 
 }
-
 
 upuploadImages = [];
 var httpc9 = new XMLHttpRequest();
@@ -270,7 +269,7 @@ var httpc9 = new XMLHttpRequest();
         upuploadImages = JSON.parse(this.responseText);
         for(var index = upuploadImages.length - 1;index >= 0;index--) {
             
-            if(upuploadImages[index].includes("-coth")){
+            if(upuploadImages[index].includes("-fft")){
             
                 var newbox = document.createElement("DIV");
                 newbox.classList.add("imagebox");         
@@ -326,7 +325,25 @@ main{
     border-left:solid;
     border-width:10px
 }
-
+#postbutton{
+    position:absolute;
+    top:2em;
+    left:5px;
+    font-family:Comic Sans MS;
+    font-size:1.5em;
+    border:solid;
+    border-radius:10px;
+    text-align:center;
+    border-width:5px;
+    width:8em;
+    cursor:pointer;
+}
+#postbutton:hover{
+    background-color:green;
+}
+#postbutton:active{
+    background-color:yellow;
+}
 
 #feedscroll img{
     max-width:80%;
@@ -340,7 +357,6 @@ p{
     margin:1em 1em 1em 1em;
     font-size:1.5em;
     font-family:Comic Sans MS;
-    overflow:scroll;
 }
 h1,h2,h3{
     font-family:Comic Sans MS;

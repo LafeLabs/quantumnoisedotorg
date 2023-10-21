@@ -4,8 +4,9 @@
 # blochchain
  
  - [blochchain1.html](blochchain1.html)
- - [blochchain2.html](blochchain2.html)
- - [blochchain3.html](blochchain3.html)
+ - [blochchain2.html](https://quantumnoise.org/blochchain2.html)
+ - [bloch chain 2d](https://quantumnoise.org/blochchain2D.html)
+ - [blochchain3.html](https://quantumnoise.org/blochchain3.html)
 
 
 The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.  For n qubits, there are $2^n$ basis states.  Each state can has a complex coefficient, and the sums of the squares of the magnitudes of all the components of the state vector are always 1. We remove the global phase of the wave function and end up with coordinates which represent a generalization of latitude and longitude into higher dimensional spheres.  

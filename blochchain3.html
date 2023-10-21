@@ -133,7 +133,7 @@ function draw(){
    textSize(32);
    noFill();
   
-  
+  rotateX(Math.PI/2);
   let spectrum = fft.analyze(); 
   angleIndex = 0;  
   for (let i = 0; i < spectrum.length; i++) {
