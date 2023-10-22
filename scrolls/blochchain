@@ -33,7 +33,8 @@ $$
     \cos{\theta_i} & 0 & \sin{\theta_i}\\\    
     0 & 1 & 0 \\\
     -\sin{\theta_i}  & 0 & \cos{\theta_i}\\\
-\end{array} } \right)\left( {\begin{array}{c}
+\end{array} } \right)
+\left( {\begin{array}{c}
     0 \\\    
     0 \\\  
     1 \\\
@@ -42,11 +43,22 @@ $$
 
 then translate by the translation vector, and draw a sphere, with little spheres along the way while we transit from each sphere to the next.  This is the chain of spheres which makes up the Bloch Chain.
 
+Let us also define rotation matrix around the z axis by $\theta_i$ above as $R^z_{\theta_i}$ and the rotation matrix around the y axis by $\phi_i$ as $R^y_{\phi_i}$.  The unit vector in the z direction is $\hat{z}$.  
+
+
 ## 1 Qubit
 
 $$
 \left|\psi\right> = \cos{\left(\frac{\theta}{2}\right)}\left|0\right> + e^{i\phi}\sin{\left(\frac{\theta}{2}\right)}\left|1\right>
 $$
+
+The 1 qubit Bloch chain is just a Bloch sphere, drawn in the browser in a specific way.  We draw a sphere of radius $r_{big}$ at the coordinate (0,0,0).  We then draw a sequence of spheres of radius $r_{small}$ along the vector 
+
+$$
+\vec{b} = R^y_{\phi_0} R^z_{\theta_0}\hat{z}
+$$
+
+by an amount $\delta = 1/m$ where m is the number of small spheres.  
 
 ## 2 Qubits
 
