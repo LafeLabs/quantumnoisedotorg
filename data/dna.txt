@@ -11,6 +11,7 @@
         "classicalsquare.html",
         "coth.html",
         "distro.html",
+        "dtmf.html",
         "fermi.html",
         "fft.html",
         "fft2d.html",

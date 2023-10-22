@@ -58,7 +58,7 @@ $$
 \vec{b} = R^y_{\phi_0} R^z_{\theta_0}\hat{z}
 $$
 
-by an amount $\delta = 1/m$ where m is the number of small spheres.  
+by an amount $\delta = 1/m$ where m is the number of small spheres.  Step m times, then move another $R_{big}$ and then we draw another sphere.
 
 ## 2 Qubits
 
@@ -78,6 +78,8 @@ $$
 e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\left|11\right>
 $$
 
+
+Start with a single qubit Bloch chain and then extend...
 
 ## 3 Qubits
 
