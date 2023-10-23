@@ -48,17 +48,85 @@
 
 <div id = "feedscroll">
     
-    <h1>Bloch Chain 2</h1>
-    
-    <p>2 Qubit Bloch Chain.  </p>
-    
-    <a href = "squares.html">internet of squares</a>
+    <h1>2 Qubit Bloch Chain</h1>
     
     <p>
-        A sequence of spheres which map states of quantum systems into memes in a web browser.  Move mouse to set angles.  This is for a 1 qubit system.
+        We normalize and explore the space spanned by 2 qubits, with basis vectors $\left|00\right>$, $\left|01\right>$, $\left|10\right>$, $\left|11\right>$ as follows:
     </p>
     
-    <a href = "blochchain3.html">3 qubit bloch chain</a>
+    <p>
+        $$
+\left|\psi\right> = 
+$$
+$$
+\cos{\left(\frac{\theta_0}{2}\right)}\left|00\right> + 
+$$
+$$
+e^{i\phi_0}\sin{\left(\frac{\theta_0}{2}\right)}\cos{\left(\frac{\theta_1}{2}\right)}\left|01\right> + 
+$$
+$$
+e^{i\phi_1}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\cos{\left(\frac{\theta_2}{2}\right)}\left|10\right> + 
+$$
+$$
+e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\left|11\right>
+$$
+    </p>
+
+<p>
+    This is represented by a sequence of three($2^2 - 1$) pairs of angles $(\theta_0,\phi_0)$, $(\theta_1,\phi_1)$, and $(\theta_2,\phi_2)$ which rotate a sequence of vectors along which we display spheres.  
+</p>
+
+<p>
+    
+</p>
+
+<p style = "color:red;background-color:black">
+$$
+    \alpha \equiv \left< *0\right> = \left< 00|00\right> + \left< 10|10\right>
+$$    
+</p>
+<p style = "color:green;background-color:black">
+$$
+    \beta \equiv \left< *1\right> = \left< 01|01\right> + \left< 11|11\right>
+$$    
+</p>
+<p style = "color:blue;background-color:black">
+$$
+    \gamma \equiv \left< 0*\right> = \left< 00|00\right> + \left< 01|01\right>
+$$    
+</p>
+<p style = "color:purple;background-color:black">
+$$
+    \delta \equiv \left< 1*\right> = \left< 10|10\right> + \left< 11|11\right>
+$$    
+</p>
+
+<p>These four probabilities are used to determine the opacity of four images, each representing either a one or a zero of either the first or second qubit.</p>
+
+<p>
+    $$
+    \alpha = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)} 
+    $$
+</p>
+<p>
+    $$
+    \beta = \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)} 
+    $$
+</p>
+<p>
+    $$
+    \gamma = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)}
+    $$
+</p>
+<p>
+    $$
+    \delta = \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}
+    $$
+</p>
+
+<p>
+    In a web browser each of these values determins an opacity of a Geometron symbol which represents that state. There are four of these, one for each state of each qubit.  
+</p>
 
     <h1><a href = "https://en.wikipedia.org/wiki/Felix_Bloch">who was Felix Bloch?</a></h1>
     
