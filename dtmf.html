@@ -40,11 +40,70 @@
 first, getting calibrated frequencies in an fft...
 
 */
-let osc, fft;
+let osc, fft,osc2,osc3;
 
 frameIndex = 0;
 xgain = 6;
 oscon = false;
+
+colorwheel = [];
+angles = [];
+spingain = 0.001;
+spinradius = 100;
+n = 12;
+
+for(var index = 0;index < n;index++){
+    H = index*360/n;
+    z = 255*(1 - Math.abs((H/60)%2 - 1));
+    
+    if(H < 60){
+        red = 255;
+        green = Math.round(z);
+        blue = 0;
+    }
+    if(H >= 60 && H < 120){
+        red = Math.round(z);
+        green = 255;
+        blue = 0;
+    }
+    if(H >= 120 && H < 180){
+        red = 0;
+        green = 255;
+        blue = Math.round(z);
+    }
+    if(H >= 180 && H < 240){
+        red = 0;    
+        green = Math.round(z);
+        blue = 255;
+    }
+    if(H >= 240 && H < 300){
+        red = Math.round(z);    
+        green = 0;
+        blue = 255;
+    }
+    if(H >= 300 && H < 360){
+        red = 255;    
+        green = 0;
+        blue = Math.round(z);
+    }
+        
+    redstring = red.toString(16);
+    if(redstring.length < 2){
+        redstring = "0" + redstring;    
+    }
+    greenstring = green.toString(16);
+    if(greenstring.length < 2){
+        greenstring = "0" + greenstring; 
+    }
+    bluestring = blue.toString(16);
+    if(bluestring.length < 2){
+        bluestring = "0" + bluestring; 
+    }
+    color = "#" + redstring + greenstring + bluestring;
+    colorwheel.push(color);
+    angles.push(0);
+}
+
 
 function setup() {
 
@@ -96,6 +155,11 @@ function draw() {
   text("fx = " + freq.toString() + " Hz",10,60);
   text("fy = " + freq2.toString() + " Hz",10,90);
 
+  text("Number of Points = " + spectrum.length.toString(),10,120);
+
+//  text("12th point freq = " + (12*binFreq).toString()  + " Hz",10,150);
+  //text("24th point freq = " + (24*binFreq).toString()  + " Hz",10,180);
+
   noFill();
   beginShape();
   vertex(0,height);
@@ -127,10 +191,25 @@ function draw() {
   text("4 kHz",xgain*4*i1000 + 10,100);
 
 
-  //stroke(0,255,0);
-//  line(0,height - 3*i1000,width,height - 3*i1000);
-  //strokeWeight(5);
-  
+  for(var index = 0;index < n;index++){
+      fill(colorwheel[index] + "80");
+      strokeWeight(10);
+      stroke(colorwheel[index]);
+      circle((index + 1)*12*xgain,map(spectrum[12*(index + 1)], 0, 255, height, 0),50);
+     angles[index] += spingain*spectrum[12*(index + 1)];
+     line((index + 1)*12*xgain,0.5*height,(index + 1)*12*xgain + spinradius*Math.sin(angles[index]),0.5*height + spinradius*Math.cos(angles[index]));
+      
+  }
+    
+  noFill();
+  strokeWeight(1);
+  for(var index = 0;index < n;index++){
+      stroke(colorwheel[index]);
+      text(((index + 1)*12*binFreq).toString() + " Hz",(index + 1)*12*xgain,map(spectrum[12*(index + 1)], 0, 255, height, 0) - 100)  
+  }
+
+
+
 }
 
 function mouseClicked() {

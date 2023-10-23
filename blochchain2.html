@@ -41,6 +41,10 @@
 </head>
 <body>
 
+<img class = "qubit" id = "qubit0" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/zero-red.svg"/>
+<img class = "qubit" id = "qubit1" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/one-green.svg"/>
+<img class = "qubit" id = "qubit2" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/zero-blue.svg"/>
+<img class = "qubit" id = "qubit3" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/one-purple.svg"/>
 
 <div id = "feedscroll">
     
@@ -198,7 +202,15 @@ function draw(){
   translate(x, y, z);
   sphere(bigball);
   
-  text("BLOCH CHAIN",200,200);
+  alpha = Math.cos(angles[0]/2)*Math.cos(angles[0]/2) + Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[2]/2)*Math.sin(angles[2]/2)*Math.cos(angles[4]/2)*Math.cos(angles[4]/2);
+  beta = Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.cos(angles[2]/2)*Math.cos(angles[2]/2) + Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[2]/2)*Math.sin(angles[2]/2)*Math.sin(angles[4]/2)*Math.sin(angles[4]/2);
+  gamma = Math.cos(angles[0]/2)*Math.cos(angles[0]/2) + Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.cos(angles[2]/2)*Math.cos(angles[2]/2);
+  delta = Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[2]/2)*Math.sin(angles[2]/2);
+  document.getElementById("qubit0").style.opacity = (alpha).toString();
+  document.getElementById("qubit1").style.opacity = (beta).toString();
+  document.getElementById("qubit2").style.opacity = (gamma).toString();
+  document.getElementById("qubit3").style.opacity = (delta).toString();
+//  text("BLOCH CHAIN",200,200);
       
 }
 
@@ -390,6 +402,30 @@ a{
 .data{
     display:none;
 }
+.qubit{
+    width:200px;
+    position:absolute;
+    top:0px;
+    display:block;
+}
+#qubit0{
+    right:0px;    
+    z-index:2;
+}
+#qubit1{
+    right:0px;    
+    z-index:3;
+    
+}
+#qubit2{
+    right:200px;
+    z-index:2;
+}
+#qubit3{
+    right:200px;
+    z-index:3;
+}
+
 </style>
 </body>
 </html>
