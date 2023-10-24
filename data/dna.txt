@@ -24,6 +24,7 @@
         "gaussian.html",
         "gefilterfish.html",
         "geometron.js",
+        "gyrator-hex.html",
         "hypercube.html",
         "index.html",
         "iv.html",
