@@ -32,7 +32,7 @@
 
     <div id = "qrcode"></div>
 
-<img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/hex.svg"/>
+<img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/roctal.svg"/>
 
 <div id = "readme">
     click to turn the sound on/off.  mouse position x and y control the two frequencies.
@@ -57,10 +57,10 @@ asciimax = 8;
 
 colorwheel = [];
 angles = [];
-spingain = 0.001;
+spingain = 0.005;
 spinradius = 100;
-n = 16;
-binsize = 12;
+n = 8;
+binsize = 20;
 
 for(var index = 0;index < n;index++){
     H = index*360/n;
@@ -170,7 +170,7 @@ function draw() {
 
 
   text("hex glyph = " + glyph,10,150);
-  text("ascii glyph = " + ascii,10,180);
+//  text("ascii glyph = " + ascii,10,180);
 
 //  text("12th point freq = " + (12*binFreq).toString()  + " Hz",10,150);
   //text("24th point freq = " + (24*binFreq).toString()  + " Hz",10,180);
@@ -221,15 +221,19 @@ function draw() {
       fill(colorwheel[index] + "80");
       circle((index + 1.5)*binsize*xgain,map(power, 0, 255, height, 0),50);
       if(-angles[index] > 2*Math.PI){
-          glyph += (index).toString(16);
+          glyph += (index).toString(8);
           angles[index] += 2*Math.PI;
             if(glyph.length > 0 && glyph.length%2 == 0){
-                asciival = 16*parseInt(glyph.charAt(glyph.length - 2),16) + parseInt(glyph.charAt(glyph.length - 1),16);
+               octalval = 8*parseInt(glyph.charAt(glyph.length - 2),8) + parseInt(glyph.charAt(glyph.length - 1),8);
+               document.getElementById("unicode").innerHTML =  "&#x" + (0x4dc0 + octalval).toString(16) + ";";
+            /*
+                asciival = 16*parseInt(glyph.charAt(glyph.length - 2),8) + parseInt(glyph.charAt(glyph.length - 1),8);
                 asciival = asciival&127;
                 if(asciival >= 040 && asciival <= 0176){
                     ascii += String.fromCharCode(asciival);                    
                 }
                 document.getElementById("unicode").innerHTML =  "&#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
+                */
             }
       }
       if(ascii.length > asciimax){
