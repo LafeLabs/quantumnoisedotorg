@@ -32,8 +32,7 @@
 
     <div id = "qrcode"></div>
 
-<img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/hex.svg"/>
-
+    
 <div id = "readme">
     click to turn the sound on/off.  mouse position x and y control the two frequencies.
 </div>
@@ -58,8 +57,8 @@ colorwheel = [];
 angles = [];
 spingain = 0.001;
 spinradius = 100;
-n = 16;
-binsize = 12;
+n = 64;
+binsize = 3;
 document.getElementById("uniscroll").value = "";
 
 for(var index = 0;index < n;index++){
@@ -162,14 +161,14 @@ function draw() {
   strokeWeight(1);
   stroke(0);
   noFill();
-  text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
+//  text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
   text("fx = " + freq.toString() + " Hz",10,60);
   text("fy = " + freq2.toString() + " Hz",10,90);
 
 //  text("Number of Points = " + spectrum.length.toString(),10,120);
 
 
-  text("hex glyph = " + glyph,10,150);
+//  text("hex glyph = " + glyph,10,150);
 
 //  text("12th point freq = " + (12*binFreq).toString()  + " Hz",10,150);
   //text("24th point freq = " + (24*binFreq).toString()  + " Hz",10,180);
@@ -220,23 +219,22 @@ function draw() {
       fill(colorwheel[index] + "80");
       circle((index + 1.5)*binsize*xgain,map(power, 0, 255, height, 0),50);
       if(-angles[index] > 2*Math.PI){
-          glyph += (index).toString(16);
+//          glyph += (index).toString(64);
           angles[index] += 2*Math.PI;
-          if(glyph.length > 0 && glyph.length%2 == 0){
-                unicodeint = 16*parseInt(glyph.charAt(glyph.length - 2),16) + parseInt(glyph.charAt(glyph.length - 1),16);
-            
-            
-                document.getElementById("unicode").innerHTML =  " &#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
+          
+          document.getElementById("unicode").style.color = colorwheel[index];
+          document.getElementById("unicode").innerHTML =  " &#x" + (0x2600 + index).toString(16) + ";";
                 
-                document.getElementById("readme").innerHTML += "&#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
+            document.getElementById("readme").innerHTML += "&#x" + (0x2600 + index).toString(16) + ";";
                 
-                document.getElementById("uniscroll").value += String.fromCharCode(0x2600 + unicodeint);
+            document.getElementById("uniscroll").value += String.fromCharCode(0x2600 + index);
 
-           }
+           
       }
       noFill();
       strokeWeight(1);
-      text(((index + 1)*binsize*binFreq).toString() + " Hz-\n" + ((index + 2)*binsize*binFreq).toString() + " Hz",(index + 0.6)*binsize*xgain,height/3);
+//      text(((index + 1)*binsize*binFreq).toString() + " Hz-\n" + ((index + 2)*binsize*binFreq).toString() + " Hz",(index + 0.6)*binsize*xgain,height/3);
+
   }
 
 

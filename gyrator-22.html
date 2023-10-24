@@ -16,7 +16,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAD/AAAAZ4efAAAA/wAvnh4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERERERERERERERERERERERERERERERERERERERERERERIREhMzMBEQEhESExEQERASERITEREBARIiIhMzERAREhESExERAQESERITERAREBIREhMzMBEQEREREREREREREREREREREREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
     <!--Stop Google:-->
     <META NAME="robots" CONTENT="noindex,nofollow">
@@ -37,7 +37,8 @@
 <img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/abjad.svg"/>
 
 <div id = "readme">
-    click to turn the sound on/off.  mouse position x and y control the two frequencies.
+
+
 </div>
 <script>
     /*
@@ -226,7 +227,8 @@ function draw() {
   binFreq = nyquistFreq / (spectrum.length);
   i1000 = Math.round(1000/binFreq);
 
-  background(159,135,103);
+//  background(159,135,103);
+  background("#9f8767");
   strokeWeight(1);
   stroke(0);
   noFill();
@@ -292,8 +294,8 @@ function draw() {
           indexarray.push(index);
           hebrewGVM1.style.color0 = colorwheel[index];
           hebrewGVM1.style.fill0 = colorwheel[index];
-
           hebrewGVM1.drawGlyph(hebrewicons[index]);
+          addglyph(hebrewicons[index],colorwheel[index]);
           angles[index] += 2*Math.PI;
           for(var zeroindex = 0;zeroindex < angles.length;zeroindex++){
               angles[zeroindex] = 0;
@@ -311,6 +313,7 @@ function draw() {
 
 }
 
+
 function mouseClicked() {
   
   if(!oscon){
@@ -324,6 +327,27 @@ function mouseClicked() {
     
 }
 
+
+function addglyph(localglyph,localcolor){
+    var newspan  = document.createElement("span");
+    var newcan = document.createElement("canvas");
+    newspan.appendChild(newcan);
+    
+    if(document.getElementById("readme").getElementsByTagName("SPAN").length == 0){
+        document.getElementById("readme").appendChild(newspan);
+    }
+    else{
+       document.getElementById("readme").insertBefore(newspan,document.getElementById("readme").getElementsByTagName("SPAN")[0]); 
+    }
+    
+    var newGVM = new GVM(newcan,100,100);
+    newGVM.importbytecode(pixelcube);
+    newGVM.style.line0 = 2;
+    newGVM.style.color0 = localcolor;
+    newGVM.style.fill0 = localcolor;
+    newGVM.drawGlyph(localglyph);
+
+}
 
 codesquaresize = 170;
 marginsize = 40;
@@ -370,14 +394,14 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
         right:10px;
         top:10px;
         border:solid;
-        overflow:scroll;
-        height:200px;
-        width:200px;
+        overflow-x:scroll;
+        height:100px;
+        width:300px;
         border-radius:10px;
         border-width:5px;
         font-family:courier;
         color:white;
-        background-color:#0000ff;
+        background-color:#9f8767;
         font-size:16px;
         padding:1em 1em 1em 1em;
     }

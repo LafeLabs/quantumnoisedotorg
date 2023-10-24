@@ -25,6 +25,7 @@
         "gefilterfish.html",
         "geometron.js",
         "gyrator-22.html",
+        "gyrator-64.html",
         "gyrator-hex.html",
         "gyrator-octal.html",
         "hypercube.html",
