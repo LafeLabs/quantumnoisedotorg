@@ -34,7 +34,7 @@
 
     <div id = "qrcode"></div>
 
-<img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/roctal.svg"/>
+<img id = "dtmfimage" src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/abjad.svg"/>
 
 <div id = "readme">
     click to turn the sound on/off.  mouse position x and y control the two frequencies.
@@ -112,6 +112,7 @@ hebrewGVM1.style.line0 = 2;
 //hebrewGVM1.drawGlyph(hebrewicons[0]);
         
 let osc, fft,osc2,osc3;
+amp = 0.1;
 
 frameIndex = 0;
 xgain = 6;
@@ -193,16 +194,11 @@ function setup() {
 
 
   osc = new p5.SinOsc(); // set frequency and type
-  osc.amp(0.2);
-  osc2 = new p5.SinOsc(); // set frequency and type
-  osc2.amp(0.2);
+  osc.amp(amp);
   fft = new p5.FFT();
   osc.start();
-  osc2.start();
   freq = 1300;
-  freq2= 1000;
   osc.freq(freq);  
-  osc2.freq(freq2);  
 
 
   mic = new p5.AudioIn();
@@ -216,10 +212,14 @@ function setup() {
 
 function draw() {
 
-  freq2= mouseY*5;
-  freq = mouseX*5;
+//  freq2= mouseY*5;
+  
+  freq = mouseX*3.9;//why this value? I don't really know.
+  amp = (height - mouseY)/height;
   osc.freq(freq);  
-  osc2.freq(freq2);  
+  osc.amp(amp);  
+
+//  osc2.freq(freq2);  
 
   spectrum = fft.analyze();
   nyquistFreq = sampleRate() / 2;
@@ -232,7 +232,6 @@ function draw() {
   noFill();
   text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
   text("fx = " + freq.toString() + " Hz",10,60);
-  text("fy = " + freq2.toString() + " Hz",10,90);
 
   text("Number of Points = " + spectrum.length.toString(),10,120);
 
@@ -296,18 +295,9 @@ function draw() {
 
           hebrewGVM1.drawGlyph(hebrewicons[index]);
           angles[index] += 2*Math.PI;
-            if(glyph.length > 0 && glyph.length%2 == 0){
-              // octalval = 8*parseInt(glyph.charAt(glyph.length - 2),8) + parseInt(glyph.charAt(glyph.length - 1),8);
-             //  document.getElementById("unicode").innerHTML =  "&#x" + (0x4dc0 + octalval).toString(16) + ";";
-            /*
-                asciival = 16*parseInt(glyph.charAt(glyph.length - 2),8) + parseInt(glyph.charAt(glyph.length - 1),8);
-                asciival = asciival&127;
-                if(asciival >= 040 && asciival <= 0176){
-                    ascii += String.fromCharCode(asciival);                    
-                }
-                document.getElementById("unicode").innerHTML =  "&#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
-                */
-            }
+          for(var zeroindex = 0;zeroindex < angles.length;zeroindex++){
+              angles[zeroindex] = 0;
+          }
       }
       if(ascii.length > asciimax){
           ascii = "";
@@ -325,12 +315,10 @@ function mouseClicked() {
   
   if(!oscon){
       osc.start();
-      osc2.start();
 
   }
   else{
       osc.stop();
-      osc2.stop();
   }
   oscon = !oscon;
     
