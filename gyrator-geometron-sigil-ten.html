@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!--
+
+        EVERYTHING IS PHYSICAL
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY
+        MO MINING
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+sigil
+
+    -->
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+            <script src = "geometron.js"></script>
+            <script src = "tarot.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>    
+    
+</head>
+<body>    
+<a href = "user.php?scroll=scrolls/gyrators" id = "homelink">SCROLLS</a>
+
+<table id = "actiontable">
+    <tr id = "actionrow">
+    </tr>
+</table>
+
+<input id = "hebrewinput"/>
+
+<div id = "unicode"><canvas id = "letter"></canvas></div>
+
+
+    <div id = "qrcode"></div>
+
+
+
+<div id = "readme"></div>
+
+
+<script>
+    /*
+
+
+*/
+
+four = "0336,0331,0337,0337,0211,0211,0211,0306,0321,0342,0335,0335,0342,0335,0335,0342,0335,0335,0330,0334,0334,0350,0334,0312,0337,0201,0334,0334,0334,0334,0201,0334,0334,0334,0334,0201,0335,0336,0313,0306,0336,0336,0347,0331,0331,0331,0331,0347,0335,0331,0331,0331,0331,0347,0334,0333,0333,0333,0333,0334,0331,0331,0331,0331,0335,0347,0320,0332,0332,0332,0332,0304,0220,0330,0330,0330,0330,0221,0331,0331,0331,0331,0306,0334,0331,0331,0331,0331,0335,0304,0222,0306,0332,0332,0332,0332,0335,0331,0331,0331,0331,0334,0304,0223,";
+
+three = "0211,0211,0321,0334,0337,0342,0335,0335,0342,0334,0336,0333,0333,0336,0347,0332,0332,0332,0332,0347,0332,0332,0332,0332,0347,0320,0220,0333,0333,0333,0333,0221,0333,0333,0333,0333,0222,";
+
+ten = "0210,0210,0336,0337,0321,0337,0306,0334,0201,0335,0201,0335,0201,0335,0201,0335,0201,0335,0201,0334,0335,0335,0330,0334,0334,0201,0334,0201,0334,0201,0334,0201,0331,0335,0331,0335,0335,0342,0331,0342,0335,0342,0334,0334,0342,0335,0335,0335,0335,0201,0342,0335,0342,0335,0342,0335,0342,0335,0342,0335,0342,0330,0335,0335,0350,0335,0312,0337,0342,0335,0335,0336,0333,0334,0337,0334,0342,0335,0335,0336,0333,0334,0334,0337,0342,0334,0336,0330,0334,0334,0334,0337,0342,0335,0335,0342,0330,0334,0336,0306,0336,0336,0347,0332,0332,0332,0347,0335,0331,0331,0331,0347,0334,0331,0331,0331,0347,0331,0331,0331,0347,0335,0330,0330,0330,0347,0330,0330,0330,0347,0334,0331,0331,0331,0347,0335,0331,0331,0331,0347,0334,0331,0331,0331,0347,0320,0330,0330,0330,0330,0330,0330,0330,0330,0330,0330,0330,0330,0313,0304,0320,0220,0306,0335,0333,0333,0333,0334,0304,0221,0306,0332,0332,0332,0335,0331,0331,0331,0334,0304,0222,0306,0333,0333,0333,0335,0333,0333,0333,0334,0331,0331,0331,0304,0223,0306,0335,0331,0331,0331,0335,0331,0331,0331,0334,0334,0304,0224,0306,0334,0331,0331,0331,0335,0304,0225,0306,0335,0334,0334,0331,0331,0331,0335,0304,0226,0306,0332,0332,0332,0335,0331,0331,0331,0334,0304,0227,0306,0334,0331,0331,0331,0335,0304,0230,0331,0331,0331,0231,";
+
+sigil = ten;
+
+cubeedits = [
+    "0220:0350,0334,0351,0366,0335,0367,0350,0334,0351,",
+    "01220:0333,0200,0330,0332,0336,0331,0333,0220,0331,0333,0337,",
+    "0221:0336,0336,0347,0337,0337,0330,",
+    "01221:0333,0200,0336,0330,0332,0336,0331,0337,0221,0221,0331,0336,0333,0331,0331,0331,0333,0337,0337,"
+];
+
+
+actionset = [0322,0323,0324,0325,0326,0327,0500,0501,0502,0503,0504,0505,0506,0507];    
+//actionset = [0322,0323,0324,0325,0326,0327,0334,0304,0335,0220,0305,0220,0306,0220];    
+
+//actionset = [0322,0323,0324,0325,0326,0327,0341,0330,0341,0331,0341,0332,0341,0333,];    
+//actionset = [0500,0501,0502,0503,];    
+    
+GVM1 = new GVM(document.getElementById("letter"),innerWidth,innerHeight);
+GVM1.importbytecode(hypercube);
+GVM1.importbytecode(cubeedits);
+GVM1.y0 = GVM1.height/2;
+
+for(var index = 0;index < 22;index++){
+    GVM1.hypercube[0220 + index] = "0177,";//do nothing
+}
+
+for(var index = 0;index < 22;index++){
+    GVM1.hypercube[0620 + index] =  hebrewicons[index];
+}
+
+GVM1.hypercube[0220] = "0336,0336,0336," + GVM1.hypercube[0620] + "0337,0337,0337,";
+
+
+GVM1.style.line0 = 1;
+GVM1.style.fill1 = "#9f8767";
+GVM1.style.line1 = 6;
+GVM1.style.line2 = 2;
+GVM1.style.line3 = 2;
+GVM1.style.line4 = 2;
+GVM1.style.line5 = 2;
+GVM1.style.line6 = 2;
+GVM1.style.line7 = 2;
+GVM1.unit = 100;
+//GVM1.glyph = "0207,";
+GVM1.drawGlyph(sigil);
+
+        
+let osc, fft,osc2,osc3;
+amp = 0.1;
+
+frameIndex = 0;
+xgain = 6;
+oscon = false;
+
+glyph = "";
+unicode = "";
+indexarray = [];
+
+colorwheel = [];
+angles = [];
+spingain = 0.005;
+spinradius = 100;
+n = 22;
+binsize = 8;
+
+//document.getElementById("hebrewinput").value = "";
+for(var index = 0;index < n;index++){
+    H = index*360/n;
+    z = 255*(1 - Math.abs((H/60)%2 - 1));
+    
+    if(H < 60){
+        red = 255;
+        green = Math.round(z);
+        blue = 0;
+    }
+    if(H >= 60 && H < 120){
+        red = Math.round(z);
+        green = 255;
+        blue = 0;
+    }
+    if(H >= 120 && H < 180){
+        red = 0;
+        green = 255;
+        blue = Math.round(z);
+    }
+    if(H >= 180 && H < 240){
+        red = 0;    
+        green = Math.round(z);
+        blue = 255;
+    }
+    if(H >= 240 && H < 300){
+        red = Math.round(z);    
+        green = 0;
+        blue = 255;
+    }
+    if(H >= 300 && H < 360){
+        red = 255;    
+        green = 0;
+        blue = Math.round(z);
+    }
+        
+    redstring = red.toString(16);
+    if(redstring.length < 2){
+        redstring = "0" + redstring;    
+    }
+    greenstring = green.toString(16);
+    if(greenstring.length < 2){
+        greenstring = "0" + greenstring; 
+    }
+    bluestring = blue.toString(16);
+    if(bluestring.length < 2){
+        bluestring = "0" + bluestring; 
+    }
+    color = "#" + redstring + greenstring + bluestring;
+    colorwheel.push(color);
+    angles.push(0);
+}
+
+cansize = 50;
+for(var index = 0;index < 22;index++){
+    var newtd = document.createElement("TD");
+    var newcan = document.createElement("CANVAS");
+    newcan.style.borderColor = colorwheel[index];
+    document.getElementById("actionrow").appendChild(newtd);
+    newtd.appendChild(newcan);
+    var newGVM = new GVM(newcan,cansize,cansize);
+    newGVM.style.line0 = 1;
+    newGVM.unit = cansize/6;
+    newGVM.style.color0 = colorwheel[index];
+    newGVM.style.fill0 = colorwheel[index];
+
+    newGVM.importbytecode(hypercube);
+    newGVM.importbytecode(cubeedits);
+//    newGVM.drawGlyph("0300,0331,0332,0337,");
+    newGVM.drawGlyph(GVM1.hypercube[0620 + index]);
+    //newGVM.action(01000 + actionset[index]);
+}
+
+
+function setup() {
+
+  t0 = millis();
+  frameRate(32);
+  createCanvas(innerWidth, innerHeight);
+
+   //  background(159,135,103);
+
+
+  osc = new p5.SinOsc(); // set frequency and type
+  osc.amp(amp);
+  fft = new p5.FFT();
+//  osc.start();
+  freq = 1300;
+  osc.freq(freq);  
+
+
+  mic = new p5.AudioIn();
+  mic.start();
+  fft = new p5.FFT();
+  fft.setInput(mic);
+
+  
+}
+
+
+function draw() {
+
+//  freq2= mouseY*5;
+  
+  freq = mouseX*3.9;//why this value? I don't really know.
+  amp = (height - mouseY)/height;
+  osc.freq(freq);  
+  osc.amp(amp);  
+
+//  osc2.freq(freq2);  
+
+  spectrum = fft.analyze();
+  nyquistFreq = sampleRate() / 2;
+  binFreq = nyquistFreq / (spectrum.length);
+  i1000 = Math.round(1000/binFreq);
+
+//  background(159,135,103);
+  background("#9f8767");
+  strokeWeight(1);
+  stroke(0);
+  noFill();
+ // text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
+ // text("fx = " + freq.toString() + " Hz",10,60);
+
+//  text("n  = " + n.toString(),10,120);
+
+
+
+  noFill();
+  beginShape();
+  vertex(0,height);
+  strokeWeight(4);
+  for(var i = 0; i < spectrum.length; i++) {
+     vertex(i*xgain, map(spectrum[i], 0, 255, height, 0));
+  }
+  vertex(width,height);
+  endShape();
+
+/*
+  stroke("red");
+  line(xgain*i1000,0,xgain*i1000,height);
+  stroke("green");
+  line(xgain*2*i1000,0,xgain*2*i1000,height);
+  stroke("blue");
+  line(xgain*3*i1000,0,xgain*3*i1000,height);
+  stroke("purple");
+  line(xgain*4*i1000,0,xgain*4*i1000,height);
+
+  strokeWeight(1);
+  stroke("red");
+  text("1 kHz",xgain*i1000 + 10,100);
+  stroke("green");
+  text("2 kHz",xgain*2*i1000 + 10,100);
+  stroke("blue");
+  text("3 kHz",xgain*3*i1000 + 10,100);
+  stroke("purple");
+  text("4 kHz",xgain*4*i1000 + 10,100);
+  */
+  
+
+  for(var index = 0;index < n;index++){
+      strokeWeight(10);
+      stroke(colorwheel[index]);
+      for(var subindex = 1;subindex < binsize;subindex++){
+          line(xgain*((index + 1)*binsize + subindex - 1),map(spectrum[(index + 1)*binsize + subindex - 1], 0, 255, height, 0),xgain*((index + 1)*binsize + subindex),map(spectrum[(index + 1)*binsize + subindex], 0, 255, height, 0));
+      }
+      power = 0;
+      for(var subindex = 0;subindex < binsize;subindex++){
+         power += spectrum[(index + 1)*binsize + subindex];
+      }
+      power /= binsize;
+      angles[index] -= spingain*power;
+      line((index + 1)*binsize*xgain,0.5*height,(index + 1)*binsize*xgain + spinradius*Math.sin(angles[index]+Math.PI),0.5*height + spinradius*Math.cos(angles[index]+Math.PI));
+      fill(colorwheel[index] + "80");
+      circle((index + 1.5)*binsize*xgain,map(power, 0, 255, height, 0),50);
+      if(-angles[index] > 2*Math.PI){
+          glyph = (index).toString(n) + glyph;
+          indexarray.push(index);
+          addglyph(index);
+
+          angles[index] += 2*Math.PI;
+//          for(var zeroindex = 0;zeroindex < angles.length;zeroindex++){
+  //            angles[zeroindex] = 0;
+    //      }
+      }
+
+      noFill();
+      strokeWeight(1);
+//      text(((index + 1)*binsize*binFreq).toString() + " Hz-\n" + ((index + 2)*binsize*binFreq).toString() + " Hz",(index + 0.6)*binsize*xgain,height/3);
+  }
+
+
+}
+
+
+function mouseClicked() {
+  
+  if(!oscon){
+      osc.start();
+
+  }
+  else{
+      osc.stop();
+  }
+  oscon = !oscon;
+    
+}
+
+
+function addglyph(localindex){
+
+    localcolor = colorwheel[localindex];
+//    GVM1.cursorAction(actionset[localindex]);
+    
+    for(var windex = 0240;windex >= 0221;windex--){
+        GVM1.hypercube[windex] = GVM1.hypercube[windex-1];
+    }
+    
+    GVM1.hypercube[0220] = "0336,0336,0336," + GVM1.hypercube[0620+ localindex] + "0337,0337,0337,";
+
+    GVM1.drawGlyph(sigil);
+
+}
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+</script>
+<style>
+    body{
+        overflow:hidden;
+    }
+
+
+    #homelink{
+        position:absolute;
+        color:blue;
+        top:50px;
+        left:0px;
+        width:4em;
+        font-family:Comic Sans MS;
+        font-size:1.5em;
+        z-index:4;
+    }
+    #unicode{
+        position:absolute;
+        top:0px;
+        left:0px;
+        border:solid;
+        font-family:Comic Sans MS;
+        font-size:10em;
+    }
+    #hebrewinput{
+        display:none;
+        position:absolute;
+        right:45%;
+        width:200px;
+        top:10px;
+        border:solid;
+        border-color:white;
+        background-color:#9f8767;
+        font-size:2em;        
+        font-family:Comic Sans MS;
+    }
+
+    #readme{
+        display:none;
+        position:absolute;
+        right:10px;
+        top:10px;
+        border:solid;
+        overflow-x:scroll;
+        height:500px;
+        width:400px;
+        border-radius:10px;
+        border-width:5px;
+        font-family:courier;
+        color:white;
+        background-color:#9f8767;
+        font-size:16px;
+        padding:1em 1em 1em 1em;
+    }
+
+
+    #dtmfimage{
+        position:absolute;
+        right:10px;
+        width:200px;
+        top:50%;
+    }
+    #tarotimage{
+        position:absolute;
+        right:10px;
+        width:200px;
+        top:57%;
+    }
+    #qrcode{
+        position:absolute;
+        right:50px;
+        bottom:50px;
+        z-index:200;
+        background-color:white;
+        border:solid;
+        border-width:30px;
+        border-color:white;
+    }
+    #actiontable{
+        position:absolute;
+        top:0px;
+        left:0px;
+    }
+    #actiontable canvas{
+        border:solid;
+    }
+</style>
+</body>
+</html>
