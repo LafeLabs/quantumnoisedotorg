@@ -34,7 +34,7 @@
 
     
 <div id = "readme">
-    click to turn the sound on/off.  mouse position x and y control the two frequencies.
+    click to turn the sound on/off.  mouse position x and y control the frequency and amplitude.
 </div>
 <textarea id = "uniscroll"></textarea>
 <script>
@@ -44,6 +44,14 @@ first, getting calibrated frequencies in an fft...
 
 */
 let osc, fft,osc2,osc3;
+
+amp = 0.1;
+//unicodebase = 0x2600;
+unicodebase = 0x1f300;
+//unicodebase = 0x1f340;
+//unicodebase = 0x2a00;
+//unicodebase = 0x1f700;
+//unicodebase = 0x30;//ascii
 
 frameIndex = 0;
 xgain = 6;
@@ -55,7 +63,7 @@ indexarray = [];
 
 colorwheel = [];
 angles = [];
-spingain = 0.001;
+spingain = 0.002;
 spinradius = 100;
 n = 64;
 binsize = 3;
@@ -125,15 +133,14 @@ function setup() {
 
   osc = new p5.SinOsc(); // set frequency and type
   osc.amp(0.2);
-  osc2 = new p5.SinOsc(); // set frequency and type
-  osc2.amp(0.2);
+  //osc2 = new p5.SinOsc(); // set frequency and type
+  //osc2.amp(0.2);
   fft = new p5.FFT();
-  osc.start();
-  osc2.start();
+  //osc.start();
+//  osc2.start();
   freq = 1300;
   freq2= 1000;
   osc.freq(freq);  
-  osc2.freq(freq2);  
 
 
   mic = new p5.AudioIn();
@@ -147,15 +154,17 @@ function setup() {
 
 function draw() {
 
-  freq2= mouseY*5;
-  freq = mouseX*5;
-  osc.freq(freq);  
-  osc2.freq(freq2);  
 
   spectrum = fft.analyze();
   nyquistFreq = sampleRate() / 2;
   binFreq = nyquistFreq / (spectrum.length);
   i1000 = Math.round(1000/binFreq);
+
+  amp= (height - mouseY)/height;
+  freq = binFreq*Math.round((mouseX*3.9)/binFreq);
+  osc.freq(freq);  
+  osc.amp(amp);  
+
 
   background(159,135,103);
   strokeWeight(1);
@@ -163,7 +172,7 @@ function draw() {
   noFill();
 //  text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
   text("fx = " + freq.toString() + " Hz",10,60);
-  text("fy = " + freq2.toString() + " Hz",10,90);
+ // text("fy = " + freq2.toString() + " Hz",10,90);
 
 //  text("Number of Points = " + spectrum.length.toString(),10,120);
 
@@ -223,12 +232,10 @@ function draw() {
           angles[index] += 2*Math.PI;
           
           document.getElementById("unicode").style.color = colorwheel[index];
-          document.getElementById("unicode").innerHTML =  " &#x" + (0x2600 + index).toString(16) + ";";
+            document.getElementById("unicode").innerHTML =  " &#x" + (unicodebase + index).toString(16) + ";";
                 
-            document.getElementById("readme").innerHTML += "&#x" + (0x2600 + index).toString(16) + ";";
+            document.getElementById("uniscroll").value = String.fromCodePoint(unicodebase + index) +document.getElementById("uniscroll").value;
                 
-            document.getElementById("uniscroll").value += String.fromCharCode(0x2600 + index);
-
            
       }
       noFill();
@@ -244,12 +251,10 @@ function mouseClicked() {
   
   if(!oscon){
       osc.start();
-      osc2.start();
 
   }
   else{
       osc.stop();
-      osc2.stop();
   }
   oscon = !oscon;
     
@@ -318,16 +323,15 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
         top:160px;
         border:solid;
         overflow:scroll;
-        height:100px;
-        width:200px;
+        height:250px;
+        width:250px;
         border-radius:10px;
         border-width:5px;
         border-color:yellow;
         font-family:courier;
         color:white;
         background-color:purple;
-        font-size:16px;
-        padding:1em 1em 1em 1em;
+        font-size:2em;
     }
     #dtmfimage{
         position:absolute;

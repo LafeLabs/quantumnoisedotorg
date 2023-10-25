@@ -44,6 +44,9 @@
 first, getting calibrated frequencies in an fft...
 
 */
+
+unicodebase = 0x01f300;
+
 let osc, fft,osc2,osc3;
 
 frameIndex = 0;
@@ -129,8 +132,8 @@ function setup() {
   osc2 = new p5.SinOsc(); // set frequency and type
   osc2.amp(0.2);
   fft = new p5.FFT();
-  osc.start();
-  osc2.start();
+///  osc.start();
+  //osc2.start();
   freq = 1300;
   freq2= 1000;
   osc.freq(freq);  
@@ -225,12 +228,11 @@ function draw() {
           if(glyph.length > 0 && glyph.length%2 == 0){
                 unicodeint = 16*parseInt(glyph.charAt(glyph.length - 2),16) + parseInt(glyph.charAt(glyph.length - 1),16);
             
-            
-                document.getElementById("unicode").innerHTML =  " &#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
+        
+             
+            document.getElementById("unicode").innerHTML =  " &#x" + (unicodebase + index).toString(16) + ";";
                 
-                document.getElementById("readme").innerHTML += "&#x26" + glyph.charAt(glyph.length - 2) + glyph.charAt(glyph.length - 1) + ";";
-                
-                document.getElementById("uniscroll").value += String.fromCharCode(0x2600 + unicodeint);
+            document.getElementById("uniscroll").value = String.fromCodePoint(unicodebase + index) +document.getElementById("uniscroll").value;
 
            }
       }
@@ -316,6 +318,7 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
     }
     #uniscroll{
         position:absolute;
+        font-size:16px;
         right:10px;
         top:160px;
         border:solid;
@@ -328,7 +331,6 @@ qrcode = new QRCode(document.getElementById("qrcode"), {
         font-family:courier;
         color:white;
         background-color:purple;
-        font-size:16px;
         padding:1em 1em 1em 1em;
     }
     #dtmfimage{
