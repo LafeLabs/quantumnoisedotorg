@@ -55,101 +55,41 @@
 <div class  ="qubit" id = "qubit2"><canvas id = "icon2"></canvas></div>
 <div class  ="qubit" id = "qubit3"><canvas id = "icon3"></canvas></div>
 
-<div id = "feedscroll">
+
+    <img class= "card" id = "card0" src= "https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/c1fd46f0-f805-475d-bf5f-b9258093874f/1.png.png"/>
     
-    <a href = "user.php?scroll=scrolls/blochchain">Bloch Chain Scroll</a>
+    <img class= "card" id = "card1" src= "https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/3fba8b8e-6d75-447c-b8db-cb2ad9badc4a/2.png.png"/>
+
+    <img class= "card" id = "card2" src= "https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/13054c5b-7460-40dd-84ad-e3fb184f68c3/19.png.png"/>
     
-    <h1>2 Qubit Bloch Chain</h1>
-    <p>
-        Tarot. Geometron. Trash Magic.  Quantum Tarot.
-    </p>
-    
-    <p>
-        We normalize and explore the space spanned by 2 qubits, with basis vectors $\left|00\right>$, $\left|01\right>$, $\left|10\right>$, $\left|11\right>$ as follows:
-    </p>
-    
-    <p>
-        $$
-\left|\psi\right> = 
-$$
-$$
-\cos{\left(\frac{\theta_0}{2}\right)}\left|00\right> + 
-$$
-$$
-e^{i\phi_0}\sin{\left(\frac{\theta_0}{2}\right)}\cos{\left(\frac{\theta_1}{2}\right)}\left|01\right> + 
-$$
-$$
-e^{i\phi_1}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\cos{\left(\frac{\theta_2}{2}\right)}\left|10\right> + 
-$$
-$$
-e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\right)}\sin{\left(\frac{\theta_2}{2}\right)}\left|11\right>
-$$
-    </p>
-
-<p>
-    This is represented by a sequence of three($2^2 - 1$) pairs of angles $(\theta_0,\phi_0)$, $(\theta_1,\phi_1)$, and $(\theta_2,\phi_2)$ which rotate a sequence of vectors along which we display spheres. Then angles $\phi_i$ represent complex phases, and the angles $\theta_i$ are a factor of two from the generalized "lattitude" around the surface of a three sphere $\mathbb{S}^3$ embedded in a Euclidean four dimensional space $\mathbb{R}^4$.  The factor of two in lattitude is so that a rotation of $\pi$ radians gets from one eigenstate to the next, and to make it consistent with the 1 qubit Bloch sphere.
-</p>
-
-<p>
-    
-</p>
-
-<p style = "color:red;background-color:black">
-$$
-    \alpha \equiv \left< *0\right> = \left< 00|00\right> + \left< 10|10\right>
-$$    
-</p>
-<p style = "color:green;background-color:black">
-$$
-    \beta \equiv \left< *1\right> = \left< 01|01\right> + \left< 11|11\right>
-$$    
-</p>
-<p style = "color:blue;background-color:black">
-$$
-    \gamma \equiv \left< 0*\right> = \left< 00|00\right> + \left< 01|01\right>
-$$    
-</p>
-<p style = "color:purple;background-color:black">
-$$
-    \delta \equiv \left< 1*\right> = \left< 10|10\right> + \left< 11|11\right>
-$$    
-</p>
-
-<p>These four probabilities are used to determine the opacity of four images, each representing either a one or a zero of either the first or second qubit.</p>
-
-<p>
-    $$
-    \alpha = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)} 
-    $$
-</p>
-<p>
-    $$
-    \beta = \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)} 
-    $$
-</p>
-<p>
-    $$
-    \gamma = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)}
-    $$
-</p>
-<p>
-    $$
-    \delta = \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}
-    $$
-</p>
-
-<p>
-    In a web browser each of these values determins an opacity of a Geometron symbol which represents that state. There are four of these, one for each state of each qubit.  
-</p>
-
-    <h1><a href = "https://en.wikipedia.org/wiki/Felix_Bloch">who was Felix Bloch?</a></h1>
-    
-    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "user.php?scroll=scrolls/blochchain">bloch chain scroll</a></h1>    
-    
-
-</div>
+    <img class= "card" id = "card3" src= "https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/991223e9-3fac-4cb2-8e99-d8ac71e1e142/17.png.png"/>
 
 <script>
+
+intothevoid = [
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/c1fd46f0-f805-475d-bf5f-b9258093874f/1.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/3fba8b8e-6d75-447c-b8db-cb2ad9badc4a/2.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/c08de383-cc75-4744-90eb-fb2e63e0bff0/3.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/f789f4ba-8b35-4f5f-945d-75250bd93e54/4.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/930f5776-e601-485a-8c96-4cb800be3657/5.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/a31ac4e7-7a95-4f53-bbc8-7490200ecb8f/6.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/00cd3287-078a-4d73-99c8-45a60915c8c2/7.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/8e914b4f-01d1-449b-a214-e2940a0771bd/8.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/5e6a5c35-71f5-4902-9ded-61b81eeab82c/9.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/8d6584b6-9f4a-42b1-8fbb-f9fa49240a40/10.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/b14171aa-a6a7-4662-93f8-74f9373ad916/11.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/5e47efea-4db4-4837-8805-2e94c3dbee81/12.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/e3a5d764-736b-4f0d-a254-a01460cea8a0/13.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/92758179-de53-4484-9df1-49599146f51a/14.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/cbccc799-e069-45ef-9f03-f49525251dbf/15.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/9875c7ce-9f91-41d4-bf2f-6874ea7fee7f/16.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/991223e9-3fac-4cb2-8e99-d8ac71e1e142/17.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/007096e0-6e71-46d0-b109-679298afbb24/18.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/13054c5b-7460-40dd-84ad-e3fb184f68c3/19.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/b8c2617e-3500-46e7-b16e-e9804f0f22b2/20.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/57332c65-1ac0-4e3e-a479-70b87af257b2/21.png.png",
+"https://images.squarespace-cdn.com/content/v1/5fc2c9db27a199023ac1aae0/57332c65-1ac0-4e3e-a479-70b87af257b2/21.png.png"
+];
 
 spread= [0,0,0,0];
 
@@ -180,15 +120,18 @@ GVM3 = new GVM(document.getElementById("icon3"),iconsize,iconsize);
 GVM3.importbytecode(hypercube);
 GVM3.drawGlyph(deck[spread[3]]);
 
+document.getElementById("card0").src = intothevoid[spread[0]];
+document.getElementById("card1").src = intothevoid[spread[1]];
+document.getElementById("card2").src = intothevoid[spread[2]];
+document.getElementById("card3").src = intothevoid[spread[3]];
+
 if(innerWidth > innerHeight){
     squaresize = innerHeight - 50;
-    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+
 }
 else{
     squaresize = innerWidth - 50;
     
-    document.getElementById("feedscroll").style.right =  "0px";    
-    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
 }
 
 
@@ -218,9 +161,9 @@ for(var index=  0;index< numangles;index++){
 
 function setup() {
 
-  createCanvas(squaresize, squaresize,WEBGL);    
+  createCanvas(innerWidth, innerHeight,WEBGL);    
   strokeWeight(2);  
-  background(159,135,103);
+//  background(159,135,103);
     mic = new p5.AudioIn();
   mic.start();
   fft = new p5.FFT();
@@ -232,7 +175,7 @@ function setup() {
 function draw(){
 
   frameRate(30); 
-  background(159,135,103);
+  //background(159,135,103);
  
    textSize(32);
    noFill();
@@ -303,10 +246,17 @@ function draw(){
   beta = Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.cos(angles[2]/2)*Math.cos(angles[2]/2) + Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[2]/2)*Math.sin(angles[2]/2)*Math.sin(angles[4]/2)*Math.sin(angles[4]/2);
   gamma = Math.cos(angles[0]/2)*Math.cos(angles[0]/2) + Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.cos(angles[2]/2)*Math.cos(angles[2]/2);
   delta = Math.sin(angles[0]/2)*Math.sin(angles[0]/2)*Math.sin(angles[2]/2)*Math.sin(angles[2]/2);
+
   document.getElementById("qubit0").style.opacity = (alpha).toString();
   document.getElementById("qubit1").style.opacity = (beta).toString();
   document.getElementById("qubit2").style.opacity = (gamma).toString();
   document.getElementById("qubit3").style.opacity = (delta).toString();
+
+  document.getElementById("card0").style.opacity = (alpha).toString();
+  document.getElementById("card1").style.opacity = (beta).toString();
+  document.getElementById("card2").style.opacity = (gamma).toString();
+  document.getElementById("card3").style.opacity = (delta).toString();
+
 //  text("BLOCH CHAIN",200,200);
       
 }
@@ -314,24 +264,31 @@ function draw(){
 
 
 function mouseClicked() {
-  spread[0] = Math.round(Math.random()*77);
-  spread[1] = Math.round(Math.random()*77);
+    
+    
+  spread[0] = Math.round(Math.random()*21);
+  spread[1] = Math.round(Math.random()*21);
 
     if(spread[1] == spread[0]){
-        spread[1] = Math.round(Math.random()*77);
+        spread[1] = Math.round(Math.random()*21);
     }
-    spread[2] = Math.round(Math.random()*77);
-    spread[3] = Math.round(Math.random()*77);
+    spread[2] = Math.round(Math.random()*21);
+    spread[3] = Math.round(Math.random()*21);
 
     if(spread[3] == spread[2]){
-        spread[3] = Math.round(Math.random()*77);
+        spread[3] = Math.round(Math.random()*21);
     }
 
     GVM0.drawGlyph(deck[spread[0]]);
     GVM1.drawGlyph(deck[spread[1]]);
     GVM2.drawGlyph(deck[spread[2]]);
     GVM3.drawGlyph(deck[spread[3]]);
-
+document.getElementById("card0").src = intothevoid[spread[0]];
+document.getElementById("card1").src = intothevoid[spread[1]];
+document.getElementById("card2").src = intothevoid[spread[2]];
+document.getElementById("card3").src = intothevoid[spread[3]];
+    
+    background(159,135,103);
 }
 
 
@@ -345,19 +302,8 @@ body{
 }
 main{
     position:absolute;
-    right:25px;
-    top:25px;
-    border-left:solid;
-    border-width:10px
-}
-
-
-#feedscroll img{
-    max-width:80%;
-    display:block;
-    margin:auto;
-    margin-top:1em;
-    border:solid;
+    right:0px;
+    top:0px;
 }
 
 p{
@@ -378,16 +324,8 @@ a{
     font-size:1.5em;    
     overflow:scroll;
 }
-#feedscroll{
-    position:absolute;
-    left:0px;
-    bottom:0px;
-    top:6em;
-    z-index:-2;
-    overflow:scroll;
-    background-color:#9f8767;    
-    padding:1em 1em 1em 1em;
-}
+
+
 .deletespan{
     color:red;
     border:solid;
@@ -422,19 +360,40 @@ a{
 }
 #qubit0{
     right:0px;    
-    z-index:2;
+    z-index:4;
 }
 #qubit1{
     right:0px;    
-    z-index:3;
+    z-index:5;
     
 }
 #qubit2{
-    right:400px;
-    z-index:2;
+    left:0px;
+    z-index:4;
 }
 #qubit3{
-    right:400px;
+    left:0px;
+    z-index:5;
+}
+.card{
+    position:absolute;
+    bottom:20px;
+    max-width:25%;
+}
+#card0{
+    right:20px;
+    z-index:2;
+}
+#card1{
+    right:20px;
+    z-index:3;
+}
+#card2{
+    left:20px;
+    z-index:2;
+}
+#card3{
+    left:20px;
     z-index:3;
 }
 
