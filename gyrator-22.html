@@ -27,7 +27,7 @@
     
 </head>
 <body>    
-<a href = "index.html" id = "homelink">home</a>
+<a href = "user.php?scroll=scrolls/gyrators" id = "homelink">home</a>
 
 <input id = "hebrewinput"/>
 
@@ -232,7 +232,7 @@ function setup() {
   osc = new p5.SinOsc(); // set frequency and type
   osc.amp(amp);
   fft = new p5.FFT();
-  osc.start();
+//  osc.start();
   freq = 1300;
   osc.freq(freq);  
 
@@ -267,10 +267,12 @@ function draw() {
   strokeWeight(1);
   stroke(0);
   noFill();
-  text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
-  text("fx = " + freq.toString() + " Hz",10,60);
+//  text("Sample Rate = " + sampleRate().toString() + " Hz",10,30);
+  if(oscon){
+      text("f = " + freq.toString() + " Hz",10,60);
+  }  
 
-  text("Number of Points = " + spectrum.length.toString(),10,120);
+ // text("Number of Points = " + spectrum.length.toString(),10,120);
 
 
 //  text("base 22 glyph = " + glyph,10,150);

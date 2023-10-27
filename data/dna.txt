@@ -6,6 +6,7 @@
         "blochchain2.html",
         "blochchain2d.html",
         "blochchain3.html",
+        "blockchain2-tarot.html",
         "board.html",
         "books.html",
         "classicalsquare.html",
