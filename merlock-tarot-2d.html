@@ -326,7 +326,7 @@ function draw(){
   }
 
   noFill();
-  strokeWeight(8);
+  strokeWeight(4);
   x = 0;
   y = 0;
   z = 0;
@@ -403,7 +403,7 @@ function draw(){
         stroke(color);
         fill(color);
         circle(0.5*width + x + 10,0.5*height - y + 10,6,6);
-        
+        line(0.5*width + xlast + 10,0.5*height -ylast + 10,0.5*width + x + 10,0.5*height -y + 10);        
         H = Math.round(spread[1])*360/21;
         
         z = 255*(1 - Math.abs((H/60)%2 - 1));
@@ -455,7 +455,7 @@ function draw(){
         stroke(color);
         fill(color);
         circle(0.5*width + x + 10,0.5*height - y - 10,6,6);    
-        
+        line(0.5*width + xlast + 10,0.5*height -ylast - 10,0.5*width + x + 10,0.5*height -y - 10);                
                 H = Math.round(spread[2])*360/21;
         
         z = 255*(1 - Math.abs((H/60)%2 - 1));
@@ -507,6 +507,7 @@ function draw(){
         stroke(color);
         fill(color);
         circle(0.5*width + x - 10,0.5*height - y + 10,6,6);
+        line(0.5*width + xlast - 10,0.5*height -ylast + 10,0.5*width + x - 10,0.5*height -y + 10);        
         
                 H = Math.round(spread[3])*360/21;
         
@@ -559,7 +560,7 @@ function draw(){
         stroke(color);
         fill(color);
         circle(0.5*width + x - 10,0.5*height - y - 10,6,6);
-        
+        line(0.5*width + xlast - 10,0.5*height -ylast - 10,0.5*width + x - 10,0.5*height - y - 10);        
   xlast = x;
   ylast = y;
   zlast = z;
