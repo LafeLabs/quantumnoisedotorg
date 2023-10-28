@@ -66,9 +66,11 @@ by an amount $\delta = 1/m$ where m is the number of small spheres.  Step m time
 $$
 \left|\psi\right> = 
 $$
+
 $$
 \cos{\left(\frac{\theta_0}{2}\right)}\left|00\right> + 
 $$
+
 $$
 e^{i\phi_0}\sin{\left(\frac{\theta_0}{2}\right)}\cos{\left(\frac{\theta_1}{2}\right)}\left|01\right> + 
 $$
@@ -80,7 +82,37 @@ e^{i\phi_2}\sin{\left(\frac{\theta_0}{2}\right)}\sin{\left(\frac{\theta_1}{2}\ri
 $$
 
 
-Start with a single qubit Bloch chain and then extend...
+
+$$  \alpha \equiv \left< *0\right> = \left< 00|00\right> + \left< 10|10\right> $$    
+
+$$
+    \beta \equiv \left< *1\right> = \left< 01|01\right> + \left< 11|11\right>
+$$    
+
+$$
+    \gamma \equiv \left< 0*\right> = \left< 00|00\right> + \left< 01|01\right>
+$$    
+
+$$
+    \delta \equiv \left< 1*\right> = \left< 10|10\right> + \left< 11|11\right>
+$$    
+
+These four probabilities are used to determine the opacity of four images, each representing either a one or a zero of either the first or second qubit.
+
+
+$$\alpha = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)} $$
+
+$$
+\beta = \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)}\cos^2{\left(\frac{\theta_2}{2}\right)}
+$$
+
+$$
+\gamma = \cos^2{\left(\frac{\theta_0}{2}\right)} + \sin^2{\left(\frac{\theta_0}{2}\right)}\cos^2{\left(\frac{\theta_1}{2}\right)}
+$$
+
+$$
+\delta = \sin^2{\left(\frac{\theta_0}{2}\right)}\sin^2{\left(\frac{\theta_1}{2}\right)} 
+$$    
 
 ## 3 Qubits
 

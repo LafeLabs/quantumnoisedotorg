@@ -42,6 +42,7 @@
         "label.html",
         "linkeditor.html",
         "links.html",
+        "merlock-tarot.html",
         "noise-image.html",
         "noise-spectrum.html",
         "noiseband.html",
