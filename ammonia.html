@@ -15,7 +15,7 @@
         LANGUAGE IS HOW THE MIND PARSES REALITY
 
     -->
-        <title>THE BLOCH CHAIN</title>
+        <title>AMMONIA</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -25,6 +25,7 @@
 <!--geometron javascript library-->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>    
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
@@ -40,7 +41,8 @@
 
 </head>
 <body>
-
+    <a id = "selflink" href = "https://quantumnoise.org/ammonia.html">https://quantumnoise.org/ammonia.html</a>
+    <div id = "qrcode"></div>
 <script>
 
 
@@ -66,10 +68,12 @@ h2x = -r*Math.sqrt(3)/2;
 h2y = -r/2;
 h2z = 0;
 
+polarity = 1.0;//1 or -1
+
 bigball = 50;
 let mic, fft;
 
-gain = 1.0;//multiply average by this
+gain = 0.2;//multiply average by this
 
 
 
@@ -88,8 +92,24 @@ function setup() {
 
 function draw(){
   
-  r = 0.5*mouseX;
+  r = mouseX/4;
   bigball = 0.5*mouseY;
+nx = 0;
+ny = 0;
+nz = polarity*r*Math.sin(theta);
+
+h0x = 0;
+h0y = r;
+h0z = 0;
+
+h1x = r*Math.sqrt(3)/2;
+h1y = -r/2;
+h1z = 0;
+
+h2x = -r*Math.sqrt(3)/2;
+h2y = -r/2;
+h2z = 0;
+  
   frameRate(30); 
   background(159,135,103);
  
@@ -109,7 +129,13 @@ function draw(){
   
   deltanx = randomGaussian(0,noisepower);
   deltany = randomGaussian(0,noisepower);
+  
   deltanz = randomGaussian(0,noisepower);
+
+  if(Math.abs(deltanz) > r*Math.sin(theta)){
+      polarity *= -1;   
+  }
+  
   deltah0x = randomGaussian(0,noisepower);
   deltah0y = randomGaussian(0,noisepower);
   deltah0z = randomGaussian(0,noisepower);
@@ -124,6 +150,8 @@ function draw(){
   strokeWeight(8);
   normalMaterial();
   translate(nx + deltanx,ny + deltanx,nz + deltanz);
+//  fill("red");
+  //ambientMaterial(250);
   sphere(bigball);
   translate(-nx - deltanx,-ny - deltany,-nz - deltanz);
   translate(h0x + deltah0x,h0y + deltah0y,h0z + deltah0z);
@@ -134,8 +162,12 @@ function draw(){
   translate(-h1x - deltah1x,-h1y - deltah1y,-h1z - deltah1z);
   translate(h2x + deltah2x,h2y + deltah2y,h2z + deltah2z);
   sphere(bigball);
+  translate(-h2x - deltah2x,-h2y - deltah2y,-h2z - deltah2z);
+   rotateX(-0.8*Math.PI/2);
+  stroke(0);
 
-      
+
+  
 }
 
 
@@ -148,6 +180,21 @@ function keyPressed() {
     }
 
 }
+
+
+codesquaresize = 170;
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
 
 
 </script>
@@ -163,93 +210,26 @@ main{
     border-left:solid;
     border-width:10px
 }
-
-
-#feedscroll img{
-    max-width:80%;
-    display:block;
-    margin:auto;
-    margin-top:1em;
-    border:solid;
-}
-
-p{
-    margin:1em 1em 1em 1em;
-    font-size:1.5em;
-    font-family:Comic Sans MS;
-    overflow:scroll;
-}
-h1,h2,h3{
-    font-family:Comic Sans MS;
-    text-align:center;
-        overflow:scroll;
-
-}
-a{
+#selflink{
+    position:absolute;
     color:blue;
+    left:10px;
+    top:10px;
     font-family:Comic Sans MS;
-    font-size:1.5em;    
-    overflow:scroll;
-}
-#feedscroll{
-    position:absolute;
-    left:0px;
-    bottom:0px;
-    top:6em;
-    z-index:-2;
-    overflow:scroll;
-    background-color:#9f8767;    
-    padding:1em 1em 1em 1em;
-}
-.deletespan{
-    color:red;
-    border:solid;
-    border-color:red;
-    border-radius:0.5em;
-    padding: 1em 1em 1em 1em;
-    cursor:pointer;
-}
-.deletespan:hover{
-    background-color:#ff000080;
-}
-.filelabel{
-    display:none;
-}
-.button{
-    cursor:pointer;
-}
-.button:hover{
-    background-color:green;
-}
-.button:active{
-    background-color:yellow;
-}
-.data{
-    display:none;
-}
-.qubit{
-    width:200px;
-    position:absolute;
-    top:0px;
-    display:block;
-}
-#qubit0{
-    right:0px;    
-    z-index:2;
-}
-#qubit1{
-    right:0px;    
-    z-index:3;
-    
-}
-#qubit2{
-    right:200px;
-    z-index:2;
-}
-#qubit3{
-    right:200px;
+    font-size:3em;
     z-index:3;
 }
+  #qrcode{
+        position:absolute;
+        right:50px;
+        bottom:50px;
+        z-index:200;
+        background-color:white;
+        border:solid;
+        border-width:30px;
+        border-color:white;
+    }
+
 
 </style>
 </body>
