@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>DRAW SOUND</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+            
+</head>
+<body>
+
+<table id = "displaytable">
+    <tr id = "hifreqrow">
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td><td></td>
+        <td class = "hifreqbox"></td><td>Hz</td>
+    </tr>
+    <tr id = "symbolrow">
+        <td>$x+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$x-$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$y+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$y-$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$z+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$z-$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$R+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$R-$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$G+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$G-$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$B+$</td><td class = "arrow">&#8593;</td><td></td>
+        <td>$B-$</td><td class = "arrow">&#8593;</td><td></td>
+    </tr>
+    <tr id = "lowfreqrow">
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+        <td class = "lowfreqbox"></td><td>Hz</td><td></td>
+    </tr>
+</table>
+
+
+<script>
+
+n = 12;
+binsize = 6;
+spingain = 0.025;
+colorgain = 0.0001;
+
+arrows = document.getElementsByClassName("arrow");
+hifreq = document.getElementsByClassName("hifreqbox");
+lowfreq = document.getElementsByClassName("lowfreqbox");
+
+
+red = 255;
+green = 255;
+blue = 255;
+x = innerWidth/2;
+y = innerHeight/2;
+z = 0;
+opacity = 0;
+
+xlast =x;
+ylast= y;
+zlast=z;
+r = innerHeight/8;
+
+let mic, fft;
+svgstring = "";
+
+nsmooth = 10;//number of points to average
+gain = 2.0;//multiply average by this
+
+opacity = 0;
+
+
+angles = [];
+powers = [];
+numangles = 10;
+anglespeed = 0.001;
+for(var index=  0;index < numangles;index++){
+    angles.push(0);
+}
+
+
+function setup() {
+
+  createCanvas(innerWidth, innerHeight);    
+  strokeWeight(2);  
+// background(159,135,103);
+background("#9f8767");
+//background(0);
+    mic = new p5.AudioIn();
+  mic.start();
+  fft = new p5.FFT();
+  fft.setInput(mic);
+}
+
+
+
+function draw(){
+
+  frameRate(30); 
+  strokeWeight(50);
+
+   textSize(32);
+   noFill();
+  
+
+  let spectrum = fft.analyze(); 
+  nyquistFreq = sampleRate() / 2;
+  binFreq = nyquistFreq / (spectrum.length);
+  angleIndex = 0;  
+  
+
+  powers = [];
+  for(var index = 0;index < n;index++){
+      power = 0;
+      for(var subindex = 0;subindex < binsize;subindex++){
+         power += spectrum[(index + 1)*binsize + subindex];
+      }
+      powers.push(power);
+      hifreq[index].innerHTML = (Math.round(binFreq*(binsize*(index + 1) + binsize - 1))).toString();
+      lowfreq[index].innerHTML = (Math.round(binFreq*(binsize*(index + 1)))).toString();         
+        H = Math.round(power)*360/255;
+        zeta = 255*(1 - Math.abs((H/60)%2 - 1));
+        
+        if(H < 60){
+            red = 255;
+            green = Math.round(zeta);
+            blue = 0;
+        }
+        if(H >= 60 && H < 120){
+            red = Math.round(zeta);
+            green = 255;
+            blue = 0;
+        }
+        if(H >= 120 && H < 180){
+            red = 0;
+            green = 255;
+            blue = Math.round(zeta);
+        }
+        if(H >= 180 && H < 240){
+            red = 0;    
+            green = Math.round(zeta);
+            blue = 255;
+        }
+        if(H >= 240 && H < 300){
+            red = Math.round(zeta);    
+            green = 0;
+            blue = 255;
+        }
+        if(H >= 300 && H < 360){
+            red = 255;    
+            green = 0;
+            blue = Math.round(zeta);
+        }
+            
+        redstring = red.toString(16);
+        if(redstring.length < 2){
+            redstring = "0" + redstring;    
+        }
+        greenstring = green.toString(16);
+        if(greenstring.length < 2){
+            greenstring = "0" + greenstring; 
+        }
+        bluestring = blue.toString(16);
+        if(bluestring.length < 2){
+            bluestring = "0" + bluestring; 
+        }
+        color = "#" + redstring + greenstring + bluestring;
+        arrows[index].style.backgroundColor = color; 
+  }//there are 20 bands to manipulate 10 angles
+  x += spingain*(powers[0] - powers[1]);//x
+  y += spingain*(powers[2] - powers[3]);//y
+  z += spingain*(powers[4] - powers[5]);//z
+  
+  red += colorgain*(powers[6] - powers[7]);
+  red = Math.round(red);
+  green += colorgain*(powers[8] - powers[9]);
+  green = Math.round(green);
+  blue += colorgain*(powers[10] - powers[11]);
+  blue = Math.round(blue);
+
+  if(red > 255){
+      red = 0;
+  }
+  if(red < 0){
+      red = 255;
+  }
+  if(green > 255){
+      green = 0;
+  }
+  if(green < 0){
+      green = 255;
+  }
+  if(blue > 255){
+      blue = 0;
+  }
+  if(blue < 0){
+      blue = 255;
+  }
+
+
+  noFill();
+
+    redstring = red.toString(16);
+    if(redstring.length < 2){
+        redstring = "0" + redstring;    
+    }
+    greenstring = green.toString(16);
+    if(greenstring.length < 2){
+        greenstring = "0" + greenstring; 
+    }
+    bluestring = blue.toString(16);
+    if(bluestring.length < 2){
+        bluestring = "0" + bluestring; 
+    }
+    color = "#" + redstring + greenstring + bluestring;  
+    if(Math.abs(z) < 256){
+        opacity = 255 - Math.abs(z);
+    }
+    else{
+        opactiy = 0;
+    }
+    opacitystring = (Math.round(opacity)).toString(16);
+    if(opacitystring.length < 2){
+        opacitystring = "0" + opacitystring;
+    }
+    color  = color + opacitystring;
+    stroke(color);
+    fill(color);
+    line(xlast,ylast,x,y);
+        
+  if(x > innerWidth){
+      x = 0;
+  }        
+  if(x < 0){
+      x = innerWidth;
+  }
+  if(y > innerHeight){
+      y = 0;
+  }
+  if(y < 0){
+      y = innerHeight;
+  }
+        
+  if(z > 255){
+      z = 0;
+  }
+  if(z < 0){
+      z = 255;
+  }
+        
+  xlast = x;
+  ylast = y;
+  zlast = z;
+  
+
+}
+
+
+
+function mouseClicked() {
+    
+    background("#9f8767");
+    red = 255;
+    green = 255;
+    blue = 255;
+    x = innerWidth/2;
+    y = innerHeight/2;
+    z = 0;
+    opacity = 0;
+    
+    xlast =x;
+    ylast= y;
+    zlast=z;
+
+}
+
+
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;
+/*    background-color:black;*/
+    font-family:Comic Sans MS;
+/*    color:#00ff00;*/
+
+}
+main{
+    position:absolute;
+    right:0px;
+    top:0px;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Comic Sans MS;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Comic Sans MS;
+    text-align:center;
+        overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Comic Sans MS;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+
+
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+.card{
+    position:absolute;
+    bottom:20px;
+    max-width:30%;
+}
+#card0{
+    right:20px;
+    z-index:2;
+}
+#card1{
+    right:20px;
+    z-index:3;
+}
+#card2{
+    left:20px;
+    z-index:2;
+}
+#card3{
+    left:20px;
+    z-index:3;
+}
+#displaytable{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:5;
+}
+.arrow{
+    text-align:center;
+    color:black;
+}
+.lowfreqbox{
+  text-align:right;
+}
+</style>
+</body>
+</html>

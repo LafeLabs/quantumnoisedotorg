@@ -7,9 +7,11 @@
  - [blochchain2.html](https://quantumnoise.org/blochchain2.html)
  - [MERLOCK Tarot](https://quantumnoise.org/merlock-tarot.html)
  - [MERLOCK Tarot 2d](https://quantumnoise.org/merlock-tarot-2d.html)
+ - [MERLOCK Tarot 2d II](https://quantumnoise.org/merlock-tarot-2d-2.html)
  - [2 qubit blochchain tarot](https://quantumnoise.org/blockchain2-tarot.html)
  - [bloch chain 2d](https://quantumnoise.org/blochchain2D.html)
  - [blochchain3.html](https://quantumnoise.org/blochchain3.html)
+ - [web code editor](webeditor.html)
 
 
 The Bloch Chain is a way of visualizing states of Hilbert spaces of sets of qubits.  We normalize states and reduce to a set of angles in a higher dimensional space.  For n qubits, there are $2^n$ basis states.  Each state can has a complex coefficient, and the sums of the squares of the magnitudes of all the components of the state vector are always 1. We remove the global phase of the wave function and end up with coordinates which represent a generalization of latitude and longitude into higher dimensional spheres.  
