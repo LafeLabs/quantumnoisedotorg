@@ -21,6 +21,7 @@
         "funding",
         "geometron",
         "guerilla_seeds",
+        "gyrators",
         "hilbertspaces",
         "home",
         "hypercube",

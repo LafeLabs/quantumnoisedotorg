@@ -42,11 +42,17 @@
 </head>
 <body>
     <a id = "selflink" href = "https://quantumnoise.org/ammonia.html">https://quantumnoise.org/ammonia.html</a>
-    <div id = "qrcode"></div>
+    <div id = "arrow">&#8593;</div>
+    <div id = "f0"></div>
+</div>    <div id = "qrcode"></div>
 <script>
 
 
 theta = Math.PI/6;
+phi = 0;
+spingain = 0.01;
+f0 = 666;//Hz
+findex = 29;
 x = innerWidth/2;
 y = 0;
 z = innerHeight/2;;
@@ -71,6 +77,7 @@ h2z = 0;
 polarity = 1.0;//1 or -1
 
 bigball = 50;
+h2n = 120.0/155.0;//ratio of hydrogen to nitrogen radius, in pm
 let mic, fft;
 
 gain = 0.2;//multiply average by this
@@ -92,24 +99,26 @@ function setup() {
 
 function draw(){
   
-  r = mouseX/4;
-  bigball = 0.5*mouseY;
-nx = 0;
-ny = 0;
-nz = polarity*r*Math.sin(theta);
+  r = mouseX/4;//pixels per angstrom
+  bigball = r*1.55;//van der waals radius in Angstroms 
+  gain = 2*mouseY/innerHeight;
 
-h0x = 0;
-h0y = r;
-h0z = 0;
-
-h1x = r*Math.sqrt(3)/2;
-h1y = -r/2;
-h1z = 0;
-
-h2x = -r*Math.sqrt(3)/2;
-h2y = -r/2;
-h2z = 0;
-  
+    nx = 0;
+    ny = 0;
+    nz = polarity*r*Math.sin(theta);
+    
+    h0x = 0;
+    h0y = r;
+    h0z = 0;
+    
+    h1x = r*Math.sqrt(3)/2;
+    h1y = -r/2;
+    h1z = 0;
+    
+    h2x = -r*Math.sqrt(3)/2;
+    h2y = -r/2;
+    h2z = 0;
+      
   frameRate(30); 
   background(159,135,103);
  
@@ -119,7 +128,68 @@ h2z = 0;
     rotateX(0.8*Math.PI/2);
 
   let spectrum = fft.analyze(); 
-  
+  nyquistFreq = sampleRate() / 2;
+  binFreq = nyquistFreq / (spectrum.length);
+  f0 = binFreq*findex;
+  document.getElementById("f0").innerHTML = "f0 = " + f0.toString() + " Hz";
+  phi += spingain*spectrum[findex];
+  if(phi > 2*Math.PI){
+      phi = 0;
+      polarity = -polarity;
+  }
+
+  H = Math.round(spectrum[findex])*360/255;
+        
+    zeta = 255*(1 - Math.abs((H/60)%2 - 1));
+    
+    if(H < 60){
+        red = 255;
+        green = Math.round(zeta);
+        blue = 0;
+    }
+    if(H >= 60 && H < 120){
+        red = Math.round(zeta);
+        green = 255;
+        blue = 0;
+    }
+    if(H >= 120 && H < 180){
+        red = 0;
+        green = 255;
+        blue = Math.round(zeta);
+    }
+    if(H >= 180 && H < 240){
+        red = 0;    
+        green = Math.round(zeta);
+        blue = 255;
+    }
+    if(H >= 240 && H < 300){
+        red = Math.round(zeta);    
+        green = 0;
+        blue = 255;
+    }
+    if(H >= 300 && H < 360){
+        red = 255;    
+        green = 0;
+        blue = Math.round(zeta);
+    }
+        
+    redstring = red.toString(16);
+    if(redstring.length < 2){
+        redstring = "0" + redstring;    
+    }
+    greenstring = green.toString(16);
+    if(greenstring.length < 2){
+        greenstring = "0" + greenstring; 
+    }
+    bluestring = blue.toString(16);
+    if(bluestring.length < 2){
+        bluestring = "0" + bluestring; 
+    }
+    color = "#" + redstring + greenstring + bluestring;
+    document.getElementById("arrow").style.backgroundColor = color; 
+
+  document.getElementById("arrow").style.transform = "rotate(" + phi.toString() +  "rad)";
+
   power = 0;
   for(var index = 0;index < spectrum.length;index++){
     power += spectrum[index];      
@@ -152,16 +222,16 @@ h2z = 0;
   translate(nx + deltanx,ny + deltanx,nz + deltanz);
 //  fill("red");
   //ambientMaterial(250);
-  sphere(bigball);
+  sphere(bigball);//nitrogen
   translate(-nx - deltanx,-ny - deltany,-nz - deltanz);
   translate(h0x + deltah0x,h0y + deltah0y,h0z + deltah0z);
-  sphere(bigball);
+  sphere(bigball*h2n);//hydrogen
   translate(-h0x - deltah0x,-h0y - deltah0y,-h0z - deltah0z);
   translate(h1x + deltah1x,h1y + deltah1y,h1z + deltah1z);
-  sphere(bigball);
+  sphere(bigball*h2n);
   translate(-h1x - deltah1x,-h1y - deltah1y,-h1z - deltah1z);
   translate(h2x + deltah2x,h2y + deltah2y,h2z + deltah2z);
-  sphere(bigball);
+  sphere(bigball*h2n);
   translate(-h2x - deltah2x,-h2y - deltah2y,-h2z - deltah2z);
    rotateX(-0.8*Math.PI/2);
   stroke(0);
@@ -229,8 +299,23 @@ main{
         border-width:30px;
         border-color:white;
     }
-
-
+#arrow{
+    position:absolute;
+    right:0px;
+    top:0px;
+    font-size:100px;
+    z-index:6;
+    width:2em;
+    text-align:center;
+}
+#f0{
+    position:absolute;
+    right:0px;
+    top:0px;
+    font-size:30px;
+    z-index:10;
+    width:10em;
+}
 </style>
 </body>
 </html>
