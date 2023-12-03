@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+
+        EVERYTHING IS PHYSICAL 
+        EVERYTHING IS FRACTAL
+        EVERYTHING IS RECURSIVE
+        NO MONEY 
+        MO MINING 
+        NO PROPERTY
+        LOOK AT THE INSECTS
+        LOOK AT THE FUNGI
+        LANGUAGE IS HOW THE MIND PARSES REALITY
+
+    -->
+        <title>ROCK-N-ROLL</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+
+    <!--Stop Google:-->
+    <META NAME="robots" CONTENT="noindex,nofollow">
+<!--geometron javascript library-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true,
+                processClass: "mathjax",
+                ignoreClass: "no-mathjax"
+                }
+            });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
+        </script>
+
+</head>
+<body>
+<img id = "mainimage" src= "https://raw.githubusercontent.com/LafeLabs/squares/main/trashmagic/rock-n-roll-schematic.svg"/>
+
+<div id = "feedscroll">
+
+    <h1><a style = "color:blue;text-align:center;font-family:Comic Sans MS;margin:auto" href = "index.html">HOME</a></h1>
+    
+    
+    <p>
+
+    </p>
+    <pre>int outpin0 = 5;
+int outpin1 = 6;
+
+int y0 = 0;//value of analog pin A0
+int y1 = 0;//value of analog pin A1
+int vout = 0;
+int deltaprev = 0;
+
+int vmin = 500;//upper voltage trigger to toggle digital LOW
+int vmax = 600;//lower voltage trigger to toggle digital HIGH
+int delta = 0;
+int loopIndex = 0;
+boolean pos1 = true;
+
+void setup() {
+
+    pinMode(outpin0,OUTPUT);
+    pinMode(outpin1,OUTPUT);
+
+    digitalWrite(outpin0,LOW);
+    digitalWrite(outpin1,HIGH);
+
+    Serial.begin(9600);
+
+}
+
+void loop() {
+  y0 = analogRead(A0);
+  y1 = analogRead(A1);
+  vout = analogRead(A2);
+
+  delta = y1-y0;
+ 
+//  Serial.println(delta);
+
+    Serial.print(y0);
+    Serial.print(",");
+    Serial.print(y1);
+    Serial.print(",");
+    Serial.println(vout);
+
+
+   loopIndex++;
+   if(loopIndex > 200){
+      loopIndex = 0;
+      pos1 = !pos1;
+      if(pos1){
+        digitalWrite(outpin0,LOW);
+        digitalWrite(outpin1,HIGH);
+      }
+      else{
+        digitalWrite(outpin0,HIGH);
+        digitalWrite(outpin1,LOW);        
+      }
+   }
+//  delay(1);
+  
+}</pre>
+</div>
+
+<script>
+
+
+
+if(innerWidth > innerHeight){
+    squaresize = innerHeight - 50;
+    document.getElementById("feedscroll").style.right =  squaresize.toString()+ "px";    
+}
+else{
+    squaresize = innerWidth - 50;
+    
+    document.getElementById("feedscroll").style.right =  "0px";    
+    document.getElementById("feedscroll").style.top = squaresize.toString() + "px";
+}
+
+document.getElementById("mainimage").style.width =  squaresize.toString()+ "px";    
+
+noiseon = false;
+let noise;
+let fft;
+
+function setup() {
+
+  createCanvas(squaresize, squaresize);    
+  strokeWeight(2);  
+  background(159,135,103);
+   noise = new p5.Noise();   
+     fft = new p5.FFT();
+     
+     
+       noise.start();
+    
+}
+
+
+T = 20;
+tau = 100;
+frameIndex = 0;
+delta = 50;
+amplitude = 1;
+
+reverse = false;
+function draw(){
+
+  frameRate(30);
+  
+  //delta = mouseY/10;
+//  T = 10 + mouseX/10;
+
+  background(159,135,103);
+
+//  translate(width/2, 0.5*(height - margin));
+  noFill();
+  // plot hyperbolic tangent functions
+  strokeWeight(8);
+
+  strokeWeight(20);
+  v0 = height - 10 - 0.5*((height - 10) - 0.5*height);
+  if(!reverse){
+      stroke("yellow");
+      line(10,height - 10,0.25*width,height - 10);
+      stroke("green");
+      line(0.75*width,0.5*height,width-10,0.5*height);
+
+      stroke("red");
+      deltafire = delta*(2*frameIndex/T  - 1);
+      line(0.25*width + 10,v0 + deltafire,0.5*width - 10,v0 + deltafire);
+      stroke("blue");
+      deltawater = delta*(1 - 2*frameIndex/T);
+      line(0.5*width + 10,v0 + deltawater,0.75*width - 10,v0 + deltawater);
+      stroke("purple");
+      circle(0.5*width + 2*deltafire,v0,10);    
+      amplitude = Math.abs(deltafire/delta); 
+      noise.amp(amplitude);
+    
+  }
+  else{
+      stroke("yellow");
+      line(10,0.5*height,0.25*width,0.5*height);
+      stroke("green");
+      line(0.75*width,height - 10,width-10,height - 10);
+      stroke("red");
+      deltafire = -delta*(2*frameIndex/T  - 1);
+      line(0.25*width + 10,v0 + deltafire,0.5*width - 10,v0 + deltafire);
+      stroke("blue");
+      deltawater = -delta*(1 - 2*frameIndex/T);
+      line(0.5*width + 10,v0 + deltawater,0.75*width - 10,v0 + deltawater);
+      stroke("purple");
+      circle(0.5*width + 2*deltafire,v0,10);    
+      amplitude = Math.abs(deltafire/delta); 
+      noise.amp(amplitude);
+
+  }
+  frameIndex++;
+  if(frameIndex > T){
+      frameIndex = 0;
+      reverse  = !reverse;
+  }
+  
+}
+
+
+document.body.onclick = function(){
+    if(noiseon == false){
+        noise.start();
+        noiseon = true;
+    }
+    else{
+        noise.stop();
+        noiseon = false;
+        
+    }
+}
+
+
+
+function keyPressed() {
+
+    if(key == 's'){
+
+    }
+
+}
+
+
+</script>
+<style>
+body{
+    overflow:hidden;
+    background-color:#9f8767;    
+}
+main{
+    position:absolute;
+    right:25px;
+    top:25px;
+    border-width:10px
+}
+
+
+#feedscroll img{
+    max-width:80%;
+    display:block;
+    margin:auto;
+    margin-top:1em;
+    border:solid;
+}
+
+p{
+    margin:1em 1em 1em 1em;
+    font-size:1.5em;
+    font-family:Comic Sans MS;
+    overflow:scroll;
+}
+h1,h2,h3{
+    font-family:Comic Sans MS;
+    text-align:center;
+        overflow:scroll;
+
+}
+a{
+    color:blue;
+    font-family:Comic Sans MS;
+    font-size:1.5em;    
+    overflow:scroll;
+}
+#feedscroll{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+    top:6em;
+    z-index:-2;
+    overflow:scroll;
+    background-color:#9f8767;    
+    padding:1em 1em 1em 1em;
+}
+.deletespan{
+    color:red;
+    border:solid;
+    border-color:red;
+    border-radius:0.5em;
+    padding: 1em 1em 1em 1em;
+    cursor:pointer;
+}
+.deletespan:hover{
+    background-color:#ff000080;
+}
+.filelabel{
+    display:none;
+}
+.button{
+    cursor:pointer;
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+.data{
+    display:none;
+}
+#mainimage{
+    position:absolute;
+    z-index:2;
+    right:0px;
+    top:0px;
+}
+</style>
+</body>
+</html>
