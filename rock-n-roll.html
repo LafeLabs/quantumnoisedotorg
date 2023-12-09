@@ -48,66 +48,129 @@
     
     
     <p>
+<img  src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rock-n-roll-plots.png"/>
+
+<img  src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rock-n-roll-plots2.png"/>
+
+<img  src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rock-n-roll-square-mud.png"/>
+
+<img src= "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/rock-n-roll-schematic-2.svg"/>
 
     </p>
-    <pre>int outpin0 = 5;
-int outpin1 = 6;
+    <pre>
 
-int y0 = 0;//value of analog pin A0
-int y1 = 0;//value of analog pin A1
-int vout = 0;
-int deltaprev = 0;
-
-int vmin = 500;//upper voltage trigger to toggle digital LOW
-int vmax = 600;//lower voltage trigger to toggle digital HIGH
-int delta = 0;
-int loopIndex = 0;
-boolean pos1 = true;
-
-void setup() {
-
-    pinMode(outpin0,OUTPUT);
-    pinMode(outpin1,OUTPUT);
-
-    digitalWrite(outpin0,LOW);
-    digitalWrite(outpin1,HIGH);
-
-    Serial.begin(9600);
-
-}
-
-void loop() {
-  y0 = analogRead(A0);
-  y1 = analogRead(A1);
-  vout = analogRead(A2);
-
-  delta = y1-y0;
- 
-//  Serial.println(delta);
-
-    Serial.print(y0);
-    Serial.print(",");
-    Serial.print(y1);
-    Serial.print(",");
-    Serial.println(vout);
-
-
-   loopIndex++;
-   if(loopIndex > 200){
-      loopIndex = 0;
-      pos1 = !pos1;
-      if(pos1){
-        digitalWrite(outpin0,LOW);
-        digitalWrite(outpin1,HIGH);
-      }
-      else{
-        digitalWrite(outpin0,HIGH);
-        digitalWrite(outpin1,LOW);        
-      }
-   }
-//  delay(1);
+int air = 5;
+  int earth = 6;
   
-}</pre>
+  int fire = 0;//value of analog pin A0
+  int water = 0;//value of analog pin A1
+  int aether = 0;
+  
+  int loopIndex = 0;
+  boolean pos1 = true;
+  
+  void setup() {
+  
+      pinMode(air,OUTPUT);
+      pinMode(earth,OUTPUT);
+  
+      digitalWrite(air,LOW);
+      digitalWrite(earth,HIGH);
+  
+      Serial.begin(9600);
+  
+  }
+  
+  void loop() {
+    fire = analogRead(A0);
+    water = analogRead(A1);
+    aether = analogRead(A2);
+  
+      Serial.print(fire);
+      Serial.print(",");
+      Serial.print(water);
+      Serial.print(",");
+      Serial.println(aether);
+  
+  
+     loopIndex++;
+     if(loopIndex > 100){
+        loopIndex = 0;
+        pos1 = !pos1;
+        if(pos1){
+          digitalWrite(air,LOW);
+          digitalWrite(earth,HIGH);
+        }
+        else{
+          digitalWrite(air,HIGH);
+          digitalWrite(earth,LOW);        
+        }
+     }
+  // delay(1);
+    
+  }
+
+</pre>
+
+<h1>no amplifier version</h1>
+
+
+<pre>
+      int air = 5;
+  int earth = 6;
+  
+  int fire = 0;//value of analog pin A0
+  int water = 0;//value of analog pin A1
+  int aether = 0;
+  int sun = 0;
+  int moon = 0;
+  
+  int loopIndex = 0;
+  boolean pos1 = true;
+  
+  void setup() {
+  
+      pinMode(air,OUTPUT);
+      pinMode(earth,OUTPUT);
+  
+      digitalWrite(air,LOW);
+      digitalWrite(earth,HIGH);
+  
+      Serial.begin(115200);
+  
+  }
+  
+  void loop() {
+    fire = analogRead(A0);
+    water = analogRead(A1);
+    sun = analogRead(A2);
+    moon = analogRead(A3);
+    aether = sun - moon; 
+      Serial.print(fire);
+      Serial.print(",");
+      Serial.print(water);
+      Serial.print(",");
+      Serial.println(aether);
+  
+  
+     loopIndex++;
+     if(loopIndex > 200){
+        loopIndex = 0;
+        pos1 = !pos1;
+        if(pos1){
+          digitalWrite(air,LOW);
+          digitalWrite(earth,HIGH);
+        }
+        else{
+          digitalWrite(air,HIGH);
+          digitalWrite(earth,LOW);        
+        }
+     }
+  // delay(1);
+    
+  }
+  
+</pre>
 </div>
 
 <script>
