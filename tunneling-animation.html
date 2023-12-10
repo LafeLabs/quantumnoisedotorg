@@ -6,7 +6,7 @@
 
        
     -->
-        <title>noise modulator</title>
+        <title>tunneling animation</title>
 
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAZ4efAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREREREREREREREREREREREAAAAAAAAREQEREREREBERAREREREQEREBEAAAARAREQEQEREBEBERARAQAQEQEREBEBABARAREQEQEREBEBERARAAAAEQEREBERERERAREQEREREREBERAAAAAAAAEREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
 
@@ -34,19 +34,44 @@
 <div id = "scroll">
 
 <p>
-<a href = "index.html">HOME</a>
-    
+    <a href = "index.html">HOME</a>
+</p>
+<p>
+Speed slowed down by 1 quadrillion times, 1 second on the screen is 1 femtosecond in the metal. Barrier is 1 nanometer wide.  Electrons are "observed" by the tunnel barrier and become like bullets, traveling out at the Fermi velocity.  
 </p>
 
-    <img src = "https://raw.githubusercontent.com/LafeLabs/quantumnoisedotorg/master/trashmagic/schematic-qns.svg"/>
+<P>
+    $$
+    v_{fermi}(Al) = 2\times 10^{8} \textrm{cm/s}
+    $$
+    $$
+    2\times 10^{8} \textrm{cm/s}\left(\frac{10^{7} \textrm{nm}}{1 \textrm{cm}}\right)\left(\frac{1 \textrm{s}}{10^{15} \textrm{fs}}\right)
+    $$
+    $$
+     = 2 \textrm{ nm/fs}
+    $$
+</P>
 
+<P>
+    $$
+    I = 1 \textrm{mA} = 
+    $$
+    $$
+    10^{-3} C/s\left(\frac{1 \textrm{e}^-}{1.602\times 10^{-19}\textrm{C}}\right)\left(\frac{1 s}{10^{15} fs}\right)
+    $$
+    $$
+    \approx 6.25 \textrm{ e}^{-}\textrm{/fs}
+    $$
+    $$
+    \tau = \frac{1}{I}\left(\frac{20 \textrm{ frames}}{1 \textrm{fs}}\right)
+    $$
+    $$
+    \tau \approx \frac{3.2 \textrm{ frames}}{I [mA]}
+    $$
+</P>
 
 </div>
-<div id = "equation1">
-$$
-P = G\left(P_{sys} + \left( \frac{eV_{audio} + hf_{RF}}{4}\right)\coth{\left( \frac{eV_{audio} + hf_{RF}}{2k_B T}\right)} + \left( \frac{eV_{audio} - hf_{RF}}{4}\right)\coth{\left( \frac{eV_{audio} - hf_{RF}}{2k_B T}\right)}\right)
-$$    
-</div>
+
 
 
 
@@ -59,7 +84,7 @@ graphsize = 100;
 
 if(innerWidth > innerHeight){
     squaresize = innerHeight;
-    document.getElementById("equation1").style.width = (innerHeight).toString() + "px";
+
     document.getElementById("scroll").style.width = (innerWidth - innerHeight).toString() + "px";
     document.getElementById("scroll").style.top = "0px";
 }
@@ -92,106 +117,66 @@ function setup() {
 
   createCanvas(squaresize, squaresize);    
    strokeWeight(2);  
-   background("#F8F0E3");
-   background("black");
-   noise = new p5.Noise();   
-   fft = new p5.FFT();
-     
-     textSize(30);
-   noise.start();
-//       document.getElementById("squarebox").style.width = "1000px";
+   background("#303030");
+
+   textSize(30);
+    
 }
 
 
 timeindex = 0;
 
+nanometer = squaresize/8;//nanometer in pixels
+femtosecond = 20;//in frames, 1 second = 1 femtosecond, 20 frames per second
+tau = 20;//number of frames until next electron tunneling event
+
+fermi_velocity = 2*nanometer/femtosecond;//2 nanometers per femtosecond in pixels per frame
+
+electrons = [];
+
+
 function draw(){
+    frameRate(20);
+       background("#303030");
+       nanometer = mouseX/4;
+       fermi_velocity = 2*nanometer/femtosecond;//2 nanometers per femtosecond in pixels per frame
+
+    tau = 20*mouseY/height;
+    fill("red");
+    stroke("red");
+    for(var index = 0;index < electrons.length;index++){
+        circle(electrons[index].x,electrons[index].y,10);
+    }
+    for(var index = 0;index < electrons.length;index++){
+        electrons[index].x += electrons[index].polarity*fermi_velocity;
+    }
+    var tempelectrons = [];
+    for(var index = 0;index < electrons.length;index++){
+        if(electrons[index].x < width && electrons[index].x > 0){
+            tempelectrons.push(electrons[index]);
+        }
+    }
+    electrons = tempelectrons;
     
-  photonenergy = Math.abs((squaresize - mouseY)/4);
-//  T = Math.abs(mouseX/20); 
-//  period = Math.abs(40*mouseX/squaresize);
-  frameRate(20);
-  clear();
-  strokeWeight(6);
-  noFill();
-  
-  if(mouseX > 0){
-      v = Math.abs((mouseX - mustachex0))*Math.cos(2*Math.PI*timeindex/period);
-  }
-  else{
-      v = vmax*Math.cos(2*Math.PI*timeindex/period);
-  }
 
-  stroke("purple");
-  beginShape();
-  for (var mustachex = -vmax; mustachex < vmax; mustachex++)  {
-    
-      mustachey =   mustachey0 - 4*0.5*(((0.5*mustachex + photonenergy)/Math.tanh((0.5*mustachex + photonenergy)/(2*T)))  + ((0.5*mustachex - photonenergy)/Math.tanh((0.5*mustachex - photonenergy)/(2*T))));
+    fill("#ff2cb4");
+    stroke("#ff2cb4");
 
-      vertex(mustachex0 + mustachex,mustachey);
-  }
-  endShape(); 
+    rect(width/2 - 0.5*nanometer,0,nanometer,height);
 
-    strokeWeight(1);
-
-  stroke("red");
-  
-  sigma = 0.25*(((0.5*v + photonenergy)/Math.tanh((0.5*v + photonenergy)/(2*T)))  + ((0.5*v - photonenergy)/Math.tanh((0.5*v - photonenergy)/(2*T))));
-  beginShape();
-  for (var mustachex = -vmax; mustachex < vmax; mustachex++)  {
-      vertex(mustachex0 + mustachex,randomGaussian(0.5*graphsize, sigma));
-  }
-  endShape();   
-    strokeWeight(6);
-
-  fill("blue");
-  stroke("blue");
-    
-    
-  mustachey =  mustachey0 - 4*0.5*(((0.5*v + photonenergy)/Math.tanh((0.5*v + photonenergy)/(2*T)))  + ((0.5*v - photonenergy)/Math.tanh((0.5*v - photonenergy)/(2*T))));    
-  ellipse(mustachex + v,mustachey,20,20);
-  
-  amplitude = (height - mustachey)/height;
-  if(isNaN(amplitude) || amplitude <  0){
-      amplitude = 0;
-  }
-  noise.amp(amplitude);
-
-  noFill();
-
-  stroke("black");
-
-  strokeWeight(1);
-
-  text("hf/kT = " + (Math.round(10*photonenergy/T)/10).toString(),50,height- 50);
-
- // text("-V_max",margin-32,margin+graphsize+32);
- // text("0",margin-32,margin + 0.5*graphsize);
- // text("V_max",margin-32,margin-32);
- // text("sweep time",graphsize-32,margin+graphsize+32);
-
-    
     timeindex++;
-    if(timeindex>1e5){
-        timeindex =0 ;
+    if(timeindex > tau){
+        timeindex = 0 ;
+        var newelectron = {};
+        newelectron.x = squaresize/2;
+        newelectron.polarity = 2*Math.round(random(1))  - 1;// +1 or -1
+        newelectron.y = random(squaresize);
+        electrons.push(newelectron);
     }
 }
 
 
 
-
-
-document.body.onclick = function(){
-    if(noiseon == false){
-        noise.start();
-        noiseon = true;
-    }
-    else{
-        noise.stop();
-        noiseon = false;
-        
-    }
-}
 
 
 </script>
@@ -199,8 +184,9 @@ document.body.onclick = function(){
 body{
     overflow:hidden;
 /*    background-color:#F8F0E3;*/
-    background-color:#b0b0b0;
+    background-color:black;
     font-family:Arial;
+    color:#00ff00;
 }
 main{
     position:absolute;
@@ -241,7 +227,7 @@ h1,h2,h3{
 
 }
 a{
-    color:blue;
+    color:#ff2cb4;
     font-family:Arial;
     font-size:1.5em;    
     overflow:scroll;
